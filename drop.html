@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘의 발굴 — 옥동샵 oaktongshop</title>
+<meta name="description" content="전 세계에서 검토한 것 중, 오늘 감정을 통과한 발굴품. 등급·스탯·고른 이유까지 감정서로 보여드립니다.">
+<meta property="og:title" content="오늘의 발굴 — 옥동샵">
+<meta name="theme-color" content="#0b0d12">
+<style>
+  :root{--bg:#0b0d12;--ink:#f1f3f7;--muted:#969eac;--line:#1e222c;--card:#12151d;--gold:#ffd57a;--purp:#aeb6ff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(11,13,18,.85);border-bottom:1px solid var(--line)}
+  .nav .inner{display:flex;align-items:center;justify-content:space-between;height:62px}
+  .brand{font-weight:900;font-size:19px;letter-spacing:-.5px}.brand small{color:var(--muted);font-weight:600;font-size:12px;margin-left:6px}
+  .back{font-size:14px;color:var(--muted)}.back:hover{color:var(--ink)}
+  /* hero */
+  .dhero{text-align:center;padding:64px 22px 34px}
+  .eyebrow{font-size:12px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+  .dhero h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-1px;margin:12px 0 6px}
+  .dhero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),#ffb35c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .dsub{color:var(--muted);font-size:15px}
+  .demo{display:inline-block;margin-top:10px;font-size:12px;color:var(--muted);border:1px dashed #2a3040;border-radius:999px;padding:4px 12px}
+  /* counter + timer */
+  .meta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px 0 8px}
+  .mbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:150px}
+  .mbox .n{font-size:26px;font-weight:900;letter-spacing:-.5px}.mbox .n.gold{color:var(--gold)}
+  .mbox .l{font-size:12px;color:var(--muted)}
+  .rate{color:var(--muted);font-size:13px;margin-top:6px}
+  #timer{font-variant-numeric:tabular-nums}
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:34px 0 10px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s}
+  .card:hover{transform:translateY(-6px)}
+  .card.gS{border-color:rgba(255,213,122,.45);box-shadow:0 0 34px rgba(255,190,80,.09)}
+  .card.gS:hover{box-shadow:0 10px 44px rgba(255,190,80,.16)}
+  .card.gA{border-color:rgba(174,182,255,.3)}
+  .card.gA:hover{box-shadow:0 10px 34px rgba(140,150,255,.12)}
+  .card.gS::after{content:"";position:absolute;inset:0;border-radius:18px;pointer-events:none;
+    background:linear-gradient(115deg,transparent 30%,rgba(255,220,150,.07) 45%,transparent 60%);
+    background-size:250% 100%;animation:shine 4.2s ease-in-out infinite}
+  @keyframes shine{0%,100%{background-position:120% 0}50%{background-position:-30% 0}}
+  .chead{display:flex;justify-content:space-between;align-items:center}
+  .gbadge{font-size:12px;font-weight:900;letter-spacing:1px;border-radius:999px;padding:4px 12px}
+  .gS .gbadge{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
+  .gA .gbadge{background:rgba(174,182,255,.16);color:var(--purp);border:1px solid rgba(174,182,255,.35)}
+  .corigin{font-size:12px;color:var(--muted)}
+  .cicon{font-size:54px;text-align:center;margin:18px 0 6px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+  .card h3{font-size:18px;letter-spacing:-.3px;text-align:center}
+  .cspec{font-size:12px;color:var(--muted);text-align:center;margin:4px 0 14px}
+  .stats{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+  .stat{display:flex;align-items:center;gap:8px;font-size:12px}
+  .sk{width:38px;color:var(--muted)}
+  .bar{flex:1;height:7px;border-radius:99px;background:#1a1e29;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8a93ff,#ffd57a);transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .show .bar i{width:var(--w)}
+  .sv{width:24px;text-align:right;font-size:12px}
+  .ctotal{text-align:center;font-size:13px;color:var(--muted);border-top:1px dashed #232836;padding-top:10px}
+  .ctotal b{font-size:22px;color:var(--ink);margin-left:6px}.ctotal span{font-size:12px}
+  .cwhy{font-size:13px;color:#c6cbd8;background:rgba(255,255,255,.03);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:10px 12px;margin:12px 0;flex:1}
+  .gA .cwhy{border-left-color:var(--purp)}
+  .csig{display:block;margin-top:6px;color:var(--muted);font-size:12px}
+  .cfoot{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .cprice{font-weight:900;font-size:16px}
+  .btn{display:inline-block;border-radius:999px;padding:10px 16px;font-weight:800;font-size:13px;transition:transform .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  /* vote */
+  .vsec{padding:56px 0 30px;text-align:center}
+  .h2{font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.6px}
+  .lead{color:var(--muted);margin:8px 0 24px}
+  .votes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .vote{cursor:pointer;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 16px;color:var(--ink);font-family:inherit;font-size:14px;display:flex;flex-direction:column;gap:6px;align-items:center;transition:border-color .2s,transform .2s}
+  .vote:hover{transform:translateY(-4px);border-color:#3a4156}
+  .vic{font-size:36px}.vnote{font-size:12px;color:var(--muted)}
+  .vmark{margin-top:8px;font-size:12px;font-weight:800;border:1px solid #2a3040;border-radius:999px;padding:6px 14px;color:var(--muted)}
+  .vote.picked{border-color:var(--gold);box-shadow:0 0 24px rgba(255,190,80,.1)}
+  .vote.picked .vmark{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05;border-color:transparent}
+  .vdone{margin-top:16px;font-size:13px;color:var(--muted);display:none}
+  /* cta + footer */
+  .cta{padding:40px 0 70px;text-align:center}
+  .cta .box{background:linear-gradient(180deg,rgba(255,213,122,.05),transparent),var(--card);border:1px solid #2a2f3d;border-radius:20px;padding:36px 20px}
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center;padding:26px 0 40px}
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+  .reveal.show{opacity:1;transform:none}
+  @media(max-width:820px){.cards,.votes{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.card.gS::after{animation:none}.bar i{transition:none}}
+</style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.bar i{width:var(--w)!important}</style></noscript>
+</head>
+<body>
+  <nav class="nav"><div class="wrap inner">
+    <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div></nav>
+
+  <header class="dhero">
+    <div class="eyebrow">TODAY'S DIG · 감정 완료</div>
+    <h1>오늘의 <em>발굴</em></h1>
+    <p class="dsub">전 세계에서 검토한 것 중, 오늘 감정을 통과한 것들.</p>
+    <span class="demo">🧪 오픈 전 미리보기 — 실제 큐레이션은 오픈과 함께 공개됩니다</span>
+    <div class="meta">
+      <div class="mbox"><div class="n" id="cnt-r">0</div><div class="l">이번 주 검토</div></div>
+      <div class="mbox"><div class="n gold" id="cnt-p">0</div><div class="l">감정 통과</div></div>
+      <div class="mbox"><div class="n" id="timer">--:--:--</div><div class="l">다음 발굴까지</div></div>
+    </div>
+    <p class="rate">통과율 0.2% — 통과 못 하면, 안 올립니다.</p>
+  </header>
+
+  <main class="wrap">
+    <section class="cards"><article class="card gS reveal" style="transition-delay:0ms">
+      <div class="chead"><span class="gbadge">S급 발굴</span><span class="corigin">🇯🇵 일본</span></div>
+      <div class="cicon">🫖</div>
+      <h3>접이식 트래블 전기포트</h3>
+      <p class="cspec">실리콘 폴딩 · 600ml · 100-240V 프리볼트</p>
+      <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:95%"></i></div><b class="sv">95</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:92%"></i></div><b class="sv">92</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:94%"></i></div><b class="sv">94</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div></div>
+      <div class="ctotal">감정 총점 <b>93</b><span>/100</span></div>
+      <blockquote class="cwhy">숙소 포트, 찜찜해서 못 쓰는 사람이 생각보다 많습니다. 반으로 접혀 파우치에 들어가는 순간 이건 여행템이 아니라 위생템이 됩니다. 국내에 비슷한 건 있는데, 이 접힘 구조는 없습니다.<span class="csig">— 옥동샵 감정단</span></blockquote>
+      <div class="cfoot"><span class="cprice">₩38,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+    </article><article class="card gA reveal" style="transition-delay:90ms">
+      <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇩🇪 독일 디자인</span></div>
+      <div class="cicon">🧲</div>
+      <h3>마그네틱 케이블 정리 클립 세트</h3>
+      <p class="cspec">네오디뮴 자석 · 데스크 베이스 + 클립 6개</p>
+      <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:82%"></i></div><b class="sv">82</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:86%"></i></div><b class="sv">86</b></div></div>
+      <div class="ctotal">감정 총점 <b>87</b><span>/100</span></div>
+      <blockquote class="cwhy">책상 위 케이블 지옥은 만국 공통. 자석으로 착 붙는 순간의 손맛 때문에 리뷰마다 '하나 더 샀다'가 반복됩니다. 평범해 보여서 오히려 통과시켰습니다 — 매일 쓰는 물건이니까.<span class="csig">— 옥동샵 감정단</span></blockquote>
+      <div class="cfoot"><span class="cprice">₩12,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+    </article><article class="card gA reveal" style="transition-delay:180ms">
+      <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇺🇸 미국</span></div>
+      <div class="cicon">🥄</div>
+      <h3>초경량 티타늄 캠핑 스포크</h3>
+      <p class="cspec">순티타늄 · 17g · 케이스 포함</p>
+      <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:84%"></i></div><b class="sv">84</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:93%"></i></div><b class="sv">93</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:85%"></i></div><b class="sv">85</b></div></div>
+      <div class="ctotal">감정 총점 <b>88</b><span>/100</span></div>
+      <blockquote class="cwhy">숟가락+포크 17g. 백패커들 사이에선 '평생템'으로 불립니다. 티타늄이라 녹슬 걱정이 없고, 10년을 써도 그대로. 소모품이 아니라 장비를 판다는 마음으로 골랐습니다.<span class="csig">— 옥동샵 감정단</span></blockquote>
+      <div class="cfoot"><span class="cprice">₩19,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+    </article></section>
+
+    <section class="vsec">
+      <div class="h2 reveal">다음 발굴, 당신이 정하세요 🗳️</div>
+      <p class="lead reveal">후보 셋 중 표를 가장 많이 받은 것을 다음에 감정대에 올립니다. 결과는 오픈과 함께 공개.</p>
+      <div class="votes"><button class="vote reveal" data-v="0" style="transition-delay:0ms">
+      <span class="vic">👔</span><b>휴대용 미니 스팀 다리미</b><span class="vnote">출장·여행 가방 속 구김 해결</span>
+      <span class="vmark">투표하기</span>
+    </button><button class="vote reveal" data-v="1" style="transition-delay:90ms">
+      <span class="vic">🔦</span><b>클립형 LED 북라이트</b><span class="vnote">옆사람 안 깨우는 독서등</span>
+      <span class="vmark">투표하기</span>
+    </button><button class="vote reveal" data-v="2" style="transition-delay:180ms">
+      <span class="vic">🧊</span><b>스테인리스 아이스볼 몰드</b><span class="vnote">하이볼 얼음이 근사해지는</span>
+      <span class="vmark">투표하기</span>
+    </button></div>
+      <p class="vdone" id="vdone">✅ 투표 완료! 오픈하면 결과와 함께 알려드릴게요. <a href="index.html#signup" style="color:var(--gold);font-weight:800">오픈 알림 받기 →</a></p>
+    </section>
+
+    <section class="cta">
+      <div class="box reveal">
+        <div class="h2">발굴 소식, 가장 먼저 🚀</div>
+        <p class="lead" style="margin-bottom:18px">오픈하면 매일의 발굴이 시작됩니다. 놓치지 마세요.</p>
+        <a class="btn primary" href="index.html#signup" style="font-size:15px;padding:13px 26px">오픈 알림 받기</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>옥동샵 oaktongshop — 고른 것만 보여드립니다. © 2026 oaktongshop.</footer>
+
+  <script>
+    // reveal
+    const reveals=document.querySelectorAll('.reveal');
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}}),{threshold:.12});
+      reveals.forEach(el=>io.observe(el));
+      setTimeout(()=>reveals.forEach(el=>el.classList.add('show')),5000);
+    } else { reveals.forEach(el=>el.classList.add('show')); }
+    // stat bars animate with card reveal
+    document.querySelectorAll('.card').forEach(c=>{
+      new MutationObserver(()=>{ if(c.classList.contains('show')) c.querySelectorAll('.bar i').forEach(b=>b.style.width=b.style.getPropertyValue('--w')); }).observe(c,{attributes:true});
+    });
+    // count-up
+    const up=(el,to,ms)=>{const t0=performance.now();const f=(t)=>{const p=Math.min(1,(t-t0)/ms);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+    up(document.getElementById('cnt-r'),1247,1400); up(document.getElementById('cnt-p'),3,1400);
+    // countdown to midnight (다음 발굴)
+    const tEl=document.getElementById('timer');
+    const tick=()=>{const n=new Date();const m=new Date(n);m.setHours(24,0,0,0);const s=Math.max(0,(m-n)/1000|0);
+      tEl.textContent=String(s/3600|0).padStart(2,'0')+':'+String(s/60%60|0).padStart(2,'0')+':'+String(s%60|0).padStart(2,'0')};
+    tick(); setInterval(tick,1000);
+    // vote (1인 1표, localStorage) — 가짜 수치 없이 "선택 완료"만 정직하게
+    const KEY='oaktong_vote';
+    const mark=(i)=>{document.querySelectorAll('.vote').forEach((b,j)=>{b.classList.toggle('picked',j===i);b.querySelector('.vmark').textContent=j===i?'✓ 내 선택':'투표하기'});document.getElementById('vdone').style.display='block'};
+    const saved=localStorage.getItem(KEY); if(saved!==null) mark(+saved);
+    document.querySelectorAll('.vote').forEach((b,i)=>b.addEventListener('click',()=>{localStorage.setItem(KEY,i);mark(i)}));
+  </script>
+</body>
+</html>

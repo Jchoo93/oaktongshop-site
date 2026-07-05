@@ -17,6 +17,7 @@
   .nav .inner{display:flex;align-items:center;justify-content:space-between;height:62px}
   .brand{font-weight:900;font-size:19px;letter-spacing:-.5px}.brand small{color:var(--muted);font-weight:600;font-size:12px;margin-left:6px}
   .back{font-size:14px;color:var(--muted)}.back:hover{color:var(--ink)}
+  .bagchip{font-size:13px;font-weight:800;border:1px solid #2a3040;border-radius:999px;padding:5px 12px;color:var(--gold)}
   /* hero */
   .dhero{text-align:center;padding:64px 22px 34px}
   .eyebrow{font-size:12px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
@@ -94,7 +95,10 @@
 <body>
   <nav class="nav"><div class="wrap inner">
     <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
-    <a class="back" href="index.html">← 홈으로</a>
+    <div style="display:flex;align-items:center;gap:14px">
+      <span class="bagchip" id="bag" hidden>🎒 <b id="bagn">0</b></span>
+      <a class="back" href="index.html">← 홈으로</a>
+    </div>
   </div></nav>
 
   <header class="dhero">
@@ -113,31 +117,31 @@
   <main class="wrap">
     <section class="cards"><article class="card gS reveal" style="transition-delay:0ms">
       <div class="chead"><span class="gbadge">S급 발굴</span><span class="corigin">🇯🇵 일본</span></div>
-      <div class="cicon">🫖</div>
-      <h3>접이식 트래블 전기포트</h3>
+      <a href="item-kettle.html" style="display:block"><div class="cicon">🫖</div>
+      <h3>접이식 트래블 전기포트</h3></a>
       <p class="cspec">실리콘 폴딩 · 600ml · 100-240V 프리볼트</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:95%"></i></div><b class="sv">95</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:92%"></i></div><b class="sv">92</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:94%"></i></div><b class="sv">94</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div></div>
       <div class="ctotal">감정 총점 <b>93</b><span>/100</span></div>
       <blockquote class="cwhy">숙소 포트, 찜찜해서 못 쓰는 사람이 생각보다 많습니다. 반으로 접혀 파우치에 들어가는 순간 이건 여행템이 아니라 위생템이 됩니다. 국내에 비슷한 건 있는데, 이 접힘 구조는 없습니다.<span class="csig">— 옥동샵 감정단</span></blockquote>
-      <div class="cfoot"><span class="cprice">₩38,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+      <div class="cfoot"><span class="cprice">₩38,000대</span><a class="btn primary" href="item-kettle.html">감정서 보기 →</a></div>
     </article><article class="card gA reveal" style="transition-delay:90ms">
       <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇩🇪 독일 디자인</span></div>
-      <div class="cicon">🧲</div>
-      <h3>마그네틱 케이블 정리 클립 세트</h3>
+      <a href="item-magclip.html" style="display:block"><div class="cicon">🧲</div>
+      <h3>마그네틱 케이블 정리 클립 세트</h3></a>
       <p class="cspec">네오디뮴 자석 · 데스크 베이스 + 클립 6개</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:82%"></i></div><b class="sv">82</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:86%"></i></div><b class="sv">86</b></div></div>
       <div class="ctotal">감정 총점 <b>87</b><span>/100</span></div>
       <blockquote class="cwhy">책상 위 케이블 지옥은 만국 공통. 자석으로 착 붙는 순간의 손맛 때문에 리뷰마다 '하나 더 샀다'가 반복됩니다. 평범해 보여서 오히려 통과시켰습니다 — 매일 쓰는 물건이니까.<span class="csig">— 옥동샵 감정단</span></blockquote>
-      <div class="cfoot"><span class="cprice">₩12,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+      <div class="cfoot"><span class="cprice">₩12,000대</span><a class="btn primary" href="item-magclip.html">감정서 보기 →</a></div>
     </article><article class="card gA reveal" style="transition-delay:180ms">
       <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇺🇸 미국</span></div>
-      <div class="cicon">🥄</div>
-      <h3>초경량 티타늄 캠핑 스포크</h3>
+      <a href="item-spork.html" style="display:block"><div class="cicon">🥄</div>
+      <h3>초경량 티타늄 캠핑 스포크</h3></a>
       <p class="cspec">순티타늄 · 17g · 케이스 포함</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:84%"></i></div><b class="sv">84</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:93%"></i></div><b class="sv">93</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:85%"></i></div><b class="sv">85</b></div></div>
       <div class="ctotal">감정 총점 <b>88</b><span>/100</span></div>
       <blockquote class="cwhy">숟가락+포크 17g. 백패커들 사이에선 '평생템'으로 불립니다. 티타늄이라 녹슬 걱정이 없고, 10년을 써도 그대로. 소모품이 아니라 장비를 판다는 마음으로 골랐습니다.<span class="csig">— 옥동샵 감정단</span></blockquote>
-      <div class="cfoot"><span class="cprice">₩19,000대</span><a class="btn primary" href="index.html#signup">입고 알림 받기</a></div>
+      <div class="cfoot"><span class="cprice">₩19,000대</span><a class="btn primary" href="item-spork.html">감정서 보기 →</a></div>
     </article></section>
 
     <section class="vsec">
@@ -192,6 +196,8 @@
     const mark=(i)=>{document.querySelectorAll('.vote').forEach((b,j)=>{b.classList.toggle('picked',j===i);b.querySelector('.vmark').textContent=j===i?'✓ 내 선택':'투표하기'});document.getElementById('vdone').style.display='block'};
     const saved=localStorage.getItem(KEY); if(saved!==null) mark(+saved);
     document.querySelectorAll('.vote').forEach((b,i)=>b.addEventListener('click',()=>{localStorage.setItem(KEY,i);mark(i)}));
+    // 발굴함(가방) 뱃지
+    try{const bag=JSON.parse(localStorage.getItem('oaktong_bag')||'[]');if(bag.length){document.getElementById('bagn').textContent=bag.length;document.getElementById('bag').hidden=false}}catch(e){}
   </script>
 </body>
 </html>

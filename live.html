@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>옥동 라이브 — AI 감정 극장 | 옥동샵</title>
+<meta name="description" content="AI 감정사 옥동이가 진행하는 라이브 발굴 무대. 실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께 보세요.">
+<meta property="og:title" content="🔴 옥동 라이브 — AI 감정 극장">
+<meta name="theme-color" content="#0b0d12">
+<style>
+  :root{--bg:#0b0d12;--ink:#f1f3f7;--muted:#969eac;--line:#1e222c;--card:#12151d;--gold:#ffd57a;--purp:#aeb6ff;--red:#ff5a5a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:560px;margin:0 auto;padding:0 16px}
+  /* top bar */
+  .top{position:sticky;top:0;z-index:50;background:rgba(11,13,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .top .inner{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:560px;margin:0 auto;padding:0 16px}
+  .brand{font-weight:900;font-size:17px}
+  .badges{display:flex;gap:8px;align-items:center}
+  .live-badge{display:none;align-items:center;gap:6px;font-size:12px;font-weight:900;background:rgba(255,90,90,.14);border:1px solid rgba(255,90,90,.5);color:var(--red);border-radius:999px;padding:4px 12px}
+  body.live .live-badge{display:flex}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--red);animation:pulse 1.2s infinite}
+  @keyframes pulse{50%{opacity:.25}}
+  .ai-badge{font-size:11px;font-weight:800;color:var(--muted);border:1px dashed #2a3040;border-radius:999px;padding:4px 10px}
+  /* waiting room */
+  #waiting{text-align:center;padding:56px 0 60px}
+  .eyebrow{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+  #waiting h1{font-size:clamp(30px,7vw,42px);font-weight:900;letter-spacing:-1px;margin:12px 0 8px}
+  #waiting h1 em{font-style:normal;color:var(--red)}
+  .wsub{color:var(--muted);font-size:14px}
+  .cd{display:flex;gap:10px;justify-content:center;margin:30px 0 10px;font-variant-numeric:tabular-nums}
+  .cd div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 0;width:78px}
+  .cd b{font-size:30px;font-weight:900;display:block}
+  .cd span{font-size:11px;color:var(--muted)}
+  .wline{margin:26px 0 10px;font-size:13px;color:var(--muted)}
+  .lineup{display:flex;gap:12px;justify-content:center;margin:12px 0 30px}
+  .slot{width:76px;height:76px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:34px}
+  .slot .q{color:var(--muted);font-weight:900;font-size:26px}
+  .slot.done{border-color:rgba(255,213,122,.45)}
+  .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;border-radius:999px;padding:14px 26px;font-weight:800;font-size:15px;transition:transform .15s}
+  .btn:active{transform:scale(.95)}
+  .btn.primary{background:var(--ink);color:var(--bg)}
+  .btn.red{background:linear-gradient(100deg,#ff7a6b,#ff5a8a);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid #2a3040}
+  .wnote{font-size:12px;color:var(--muted);margin-top:14px}
+  /* show */
+  #show{display:none}
+  body.live #show{display:block}
+  body.live #waiting{display:none}
+  /* stage */
+  .stage{position:relative;margin:18px 0 12px;border-radius:22px;border:1px solid var(--line);overflow:hidden;text-align:center;padding:34px 16px 26px;
+    background:radial-gradient(420px 300px at 50% 0%,rgba(255,220,150,.09),transparent 65%),radial-gradient(300px 200px at 50% 100%,rgba(140,150,255,.05),transparent 60%),#0d0f16}
+  .stage::before{content:"";position:absolute;inset:0;background:conic-gradient(from 180deg at 50% -10%,transparent 42%,rgba(255,235,190,.05) 50%,transparent 58%);pointer-events:none}
+  .epno{font-size:11px;letter-spacing:3px;color:var(--muted)}
+  .sicon{position:relative;display:inline-block;font-size:96px;margin:14px 0 4px;transition:filter .3s,transform .3s}
+  .sicon.hidden-item{filter:brightness(0) contrast(0) opacity(.85)}
+  .sicon .qmark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:900;color:#3a4156}
+  .sicon.hidden-item.breathe{animation:breathe 2.4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.05)}}
+  .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(255,245,220,.95),transparent 60%);opacity:0;pointer-events:none;z-index:6}
+  .flash.go{animation:flashgo .7s ease-out}
+  @keyframes flashgo{15%{opacity:1}100%{opacity:0}}
+  .sname{font-size:20px;font-weight:900;letter-spacing:-.3px;min-height:28px}
+  .sorigin{font-size:12px;color:var(--muted);min-height:18px}
+  .stamp{position:absolute;top:16px;right:16px;transform:scale(3) rotate(20deg);opacity:0;font-size:13px;font-weight:900;letter-spacing:1px;border-radius:12px;padding:8px 12px;z-index:7;
+    box-shadow:0 8px 30px rgba(0,0,0,.5)}
+  .stamp.gS{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
+  .stamp.gA{background:rgba(174,182,255,.9);color:#141830}
+  .stamp.slam{animation:slam .5s cubic-bezier(.2,1.4,.3,1) forwards}
+  @keyframes slam{to{transform:scale(1) rotate(-9deg);opacity:1}}
+  .sstats{max-width:340px;margin:14px auto 0;display:flex;flex-direction:column;gap:7px;text-align:left}
+  .stat{display:flex;align-items:center;gap:9px;font-size:12px;opacity:0;transition:opacity .4s}
+  .stat.on{opacity:1}
+  .sk{width:38px;color:var(--muted)}
+  .bar{flex:1;height:7px;border-radius:99px;background:#1a1e29;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8a93ff,#ffd57a);transition:width .9s cubic-bezier(.2,.7,.2,1)}
+  .stat.on .bar i{width:var(--w)}
+  .sv{width:24px;text-align:right;font-size:12px}
+  .sprice{font-size:22px;font-weight:900;margin-top:14px;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+  .sprice.on{opacity:1;transform:none}
+  .sctas{display:flex;gap:8px;justify-content:center;margin-top:12px;opacity:0;transition:opacity .5s}
+  .sctas.on{opacity:1}
+  .sctas .btn{padding:11px 18px;font-size:13px}
+  .btn.get{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
+  .btn.get.got{background:#1b2130;color:var(--gold);border:1px solid rgba(255,213,122,.4)}
+  /* lineup mini + timer */
+  .meta-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
+  .mini-lineup{display:flex;gap:8px}
+  .ms{width:40px;height:40px;border-radius:11px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px}
+  .ms .q{color:#3a4156;font-weight:900}
+  .ms.now{border-color:var(--red);box-shadow:0 0 14px rgba(255,90,90,.15)}
+  .ms.done{border-color:rgba(255,213,122,.4)}
+  .seg{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .seg b{color:var(--ink)}
+  /* host feed */
+  .feed{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+  .msg{display:flex;gap:9px;align-items:flex-start;animation:msgin .35s ease-out}
+  @keyframes msgin{from{opacity:0;transform:translateY(8px)}}
+  .mavatar{font-size:20px;flex:none;background:#1a1e29;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+  .mbody{font-size:13.5px;background:#171b25;border-radius:4px 14px 14px 14px;padding:9px 12px;color:#dde1ec}
+  .mname{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:2px}
+  .msg.me{flex-direction:row-reverse}
+  .msg.me .mbody{background:#243044;border-radius:14px 4px 14px 14px}
+  .msg.me .mavatar{background:#243044}
+  /* bottom bar */
+  .actions{display:flex;gap:8px;margin:12px 0 8px;align-items:center}
+  .rx{flex:none;background:var(--card);border:1px solid var(--line);border-radius:999px;font-size:17px;padding:9px 14px;cursor:pointer;position:relative;transition:transform .12s}
+  .rx:active{transform:scale(1.25)}
+  .qform{flex:1;display:flex;gap:8px}
+  .qform input{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:11px 16px;color:var(--ink);font-size:13px;font-family:inherit}
+  .qform button{flex:none}
+  .float{position:fixed;font-size:22px;pointer-events:none;z-index:80;animation:floatup 1.3s ease-out forwards}
+  @keyframes floatup{to{transform:translateY(-130px) scale(1.4);opacity:0}}
+  .subnote{text-align:center;font-size:11px;color:var(--muted);margin:8px 0 40px}
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center;padding:22px 0 36px}
+  @media(prefers-reduced-motion:reduce){.dot,.sicon.hidden-item.breathe{animation:none}}
+</style>
+</head>
+<body>
+  <div class="top"><div class="inner">
+    <a class="brand" href="index.html">옥동샵</a>
+    <div class="badges">
+      <span class="live-badge"><span class="dot"></span>LIVE</span>
+      <span class="ai-badge">🤖 AI 호스트 · 사전 제작 방송</span>
+    </div>
+  </div></div>
+
+  <main class="wrap">
+    <!-- 대기실 -->
+    <section id="waiting">
+      <div class="eyebrow">OAKTONG LIVE · 감정 극장</div>
+      <h1>옥동 <em>라이브</em></h1>
+      <p class="wsub">AI 감정사 옥동이 🦉 가 진행하는 발굴 무대.<br>실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께.</p>
+      <div class="cd"><div><b id="cd-d">0</b><span>일</span></div><div><b id="cd-h">00</b><span>시간</span></div><div><b id="cd-m">00</b><span>분</span></div><div><b id="cd-s">00</b><span>초</span></div></div>
+      <p class="wsub" style="font-size:13px">다음 방송 · <b id="next-when"></b></p>
+      <div class="wline">EP.1 라인업 — 정체는 방송에서 공개</div>
+      <div class="lineup"><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div></div>
+      <button class="btn red" id="demo-btn">▶ 리허설 방송 보기 (데모)</button>
+      <div style="margin-top:10px"><a class="btn ghost" href="index.html#signup">🔔 방송 알림 받기</a></div>
+      <p class="wnote">🧪 오픈 전 미리보기 — 정식 방송은 스토어 오픈과 함께 시작됩니다</p>
+    </section>
+
+    <!-- 쇼 -->
+    <section id="show">
+      <div class="stage">
+        <div class="flash" id="flash"></div>
+        <div class="stamp" id="stamp"></div>
+        <div class="epno">EP.1 · 옥동 감정 무대</div>
+        <div class="sicon hidden-item breathe" id="sicon"><span id="sicon-e">🎁</span><span class="qmark" id="qmark">?</span></div>
+        <div class="sname" id="sname">･･････</div>
+        <div class="sorigin" id="sorigin"></div>
+        <div class="sstats" id="sstats"></div>
+        <div class="sprice" id="sprice"></div>
+        <div class="sctas" id="sctas">
+          <button class="btn get" id="live-get">🎒 발굴함에 담기</button>
+          <a class="btn ghost" id="live-cert" href="#">감정서 보기</a>
+        </div>
+      </div>
+      <div class="meta-row">
+        <div class="mini-lineup" id="mini-lineup"></div>
+        <div class="seg" id="seg"></div>
+      </div>
+      <div class="feed" id="feed"></div>
+      <div class="actions">
+        <button class="rx" data-e="🔥">🔥</button>
+        <button class="rx" data-e="❤️">❤️</button>
+        <button class="rx" data-e="👀">👀</button>
+        <form class="qform" id="qform">
+          <input id="qinput" placeholder="옥동이에게 물어보기 (가격·배송·왜 골랐어?)" maxlength="80">
+          <button class="btn ghost" type="submit" style="padding:10px 16px;font-size:13px">전송</button>
+        </form>
+      </div>
+      <p class="subnote">🤖 옥동이는 AI 호스트입니다 · 답변은 감정 데이터 기반 자동 응답(데모) · 실시간 Claude 응대는 오픈 후</p>
+    </section>
+  </main>
+
+  <footer>옥동샵 oaktongshop — 고른 것만 보여드립니다. © 2026 oaktongshop. <a href="drop.html" style="color:var(--gold)">⚡ 오늘의 발굴</a></footer>
+
+  <script>
+  const EP={"no":1,"items":[{"slug":"kettle","icon":"🫖","name":"접이식 트래블 전기포트","origin":"🇯🇵 일본","price":"₩38,000대","grade":"S","stats":{"수요":95,"평점":92,"희소":94,"스토리":90},"spec":"실리콘 폴딩 · 600ml · 100-240V 프리볼트","appraisal":"숙소 포트, 찜찜해서 못 쓰는 사람이 생각보다 많습니다. 반으로 접혀 파우치에 들어가는 순간 이건 여행템이 아니라 위생템이 됩니다. 국내에 비슷한 건 있는데, 이 접힘 구조는 없습니다."},{"slug":"magclip","icon":"🧲","name":"마그네틱 케이블 정리 클립 세트","origin":"🇩🇪 독일 디자인","price":"₩12,000대","grade":"A","stats":{"수요":88,"평점":90,"희소":82,"스토리":86},"spec":"네오디뮴 자석 · 데스크 베이스 + 클립 6개","appraisal":"책상 위 케이블 지옥은 만국 공통. 자석으로 착 붙는 순간의 손맛 때문에 리뷰마다 '하나 더 샀다'가 반복됩니다. 평범해 보여서 오히려 통과시켰습니다 — 매일 쓰는 물건이니까."},{"slug":"spork","icon":"🥄","name":"초경량 티타늄 캠핑 스포크","origin":"🇺🇸 미국","price":"₩19,000대","grade":"A","stats":{"수요":84,"평점":93,"희소":88,"스토리":85},"spec":"순티타늄 · 17g · 케이스 포함","appraisal":"숟가락+포크 17g. 백패커들 사이에선 '평생템'으로 불립니다. 티타늄이라 녹슬 걱정이 없고, 10년을 써도 그대로. 소모품이 아니라 장비를 판다는 마음으로 골랐습니다."}],"script":{"intro":["안녕하세요, 옥동샵 수석 감정사 옥동이입니다 🦉","오늘도 전 세계에서 건너온 후보들 중, 감정을 통과한 것들만 무대에 올립니다. 오늘의 라인업은 세 가지 — 정체는 하나씩 공개할게요."],"tease":{"kettle":["첫 번째. 여행 가서 이것 때문에 찜찜했던 분들, 많으실 겁니다…","힌트: 반으로 접힙니다. 그리고 위생템입니다."],"magclip":["두 번째는 아주 평범해 보이는 물건입니다. 그런데 리뷰마다 '하나 더 샀다'가 반복돼요.","힌트: 책상 위의 지옥을 정리합니다. 착— 붙는 손맛."],"spork":["마지막은 '평생템' 소리를 듣는 물건입니다. 무게가 겨우 17g.","힌트: 10년을 써도 그대로인 금속."]},"statLine":"감정 스탯 공개합니다. 편집 기준 네 가지, 하나씩 보시죠.","outro":["오늘 무대는 여기까지. 다음 발굴, 어떤 게 올라올지는 여러분 투표로 정해집니다 🗳️","발굴함에 담아두시면 오픈 때 가장 먼저 알려드릴게요. 저는 다음 방송에서, 더 깐깐하게 감정하고 올게요. 🦉"]}};
+  const ITEM_DUR=48, INTRO=14, EP_DUR=INTRO+EP.items.length*48+16;
+
+  // ── 방송 시각: 매주 토요일 21:00 KST (시계 동기 → 모두 같은 장면)
+  function nextShow(){
+    const now=new Date(); const kstNow=new Date(now.getTime()+9*3600e3); // UTC+9 기준 계산
+    const d=new Date(kstNow); d.setUTCHours(12,0,0,0); // 21:00 KST == 12:00 UTC
+    let add=(6-d.getUTCDay()+7)%7; // 토요일
+    d.setUTCDate(d.getUTCDate()+add);
+    if(d.getTime()<=now.getTime()) d.setUTCDate(d.getUTCDate()+7);
+    return d;
+  }
+  const show=nextShow(); const prevShow=new Date(show.getTime()-7*86400e3);
+  let startAt=null; // 재생 기준 시각(ms)
+  if(Date.now()-prevShow.getTime() < EP_DUR*1000) startAt=prevShow.getTime(); // 지금이 방송 중
+
+  document.getElementById('next-when').textContent=show.toLocaleString('ko-KR',{month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
+
+  // 대기실 카운트다운
+  const cdt=()=>{const s=Math.max(0,(show.getTime()-Date.now())/1000|0);
+    document.getElementById('cd-d').textContent=s/86400|0;
+    document.getElementById('cd-h').textContent=String(s/3600%24|0).padStart(2,'0');
+    document.getElementById('cd-m').textContent=String(s/60%60|0).padStart(2,'0');
+    document.getElementById('cd-s').textContent=String(s%60|0).padStart(2,'0');
+    if(startAt===null && Date.now()>=show.getTime()){startAt=show.getTime();boot();}
+  };
+  cdt(); setInterval(cdt,1000);
+
+  // ── 타임라인 빌드
+  function timeline(){
+    const T=[]; let t=0;
+    EP.script.intro.forEach(l=>{T.push({t,a:'host',l});t+=7});
+    EP.items.forEach((it,idx)=>{
+      const base=INTRO+idx*ITEM_DUR;
+      const tz=EP.script.tease[it.slug]||[];
+      T.push({t:base,a:'seg',idx});
+      tz.forEach((l,j)=>T.push({t:base+j*7,a:'host',l}));
+      T.push({t:base+14,a:'reveal',idx});
+      T.push({t:base+17,a:'host',l:EP.script.statLine});
+      Object.keys(it.stats).forEach((k,j)=>T.push({t:base+18+j*3,a:'stat',idx,k}));
+      T.push({t:base+31,a:'host',l:it.appraisal});
+      T.push({t:base+38,a:'price',idx});
+      T.push({t:base+39,a:'host',l:'가격 공개 — '+it.price+'. 담아두시면 오픈 때 먼저 알려드립니다 🎒'});
+    });
+    const oBase=INTRO+EP.items.length*ITEM_DUR;
+    EP.script.outro.forEach((l,j)=>T.push({t:oBase+j*7,a:'host',l}));
+    return T.sort((a,b)=>a.t-b.t);
+  }
+
+  // ── 렌더러
+  const $=id=>document.getElementById(id);
+  const feed=$('feed'); let curIdx=-1, revealed=false;
+  function host(l,instant){const m=document.createElement('div');m.className='msg';
+    m.innerHTML='<div class="mavatar">🦉</div><div><div class="mname">옥동이 · AI</div><div class="mbody"></div></div>';
+    feed.appendChild(m);const b=m.querySelector('.mbody');
+    if(instant){b.textContent=l}else{let i=0;const iv=setInterval(()=>{b.textContent=l.slice(0,++i);feed.scrollTop=feed.scrollHeight;if(i>=l.length)clearInterval(iv)},22)}
+    feed.scrollTop=feed.scrollHeight;}
+  function me(l){const m=document.createElement('div');m.className='msg me';
+    m.innerHTML='<div class="mavatar">🙂</div><div><div class="mname" style="text-align:right">나</div><div class="mbody"></div></div>';
+    m.querySelector('.mbody').textContent=l;feed.appendChild(m);feed.scrollTop=feed.scrollHeight;}
+  function setSeg(idx,instant){curIdx=idx;revealed=false;const it=EP.items[idx];
+    $('sicon-e').textContent=it.icon;$('sicon').classList.add('hidden-item','breathe');$('qmark').style.display='flex';
+    $('sname').textContent='･･････';$('sorigin').textContent='감정 대기 중';
+    $('sstats').innerHTML=Object.entries(it.stats).map(([k,v])=>'<div class="stat" data-k="'+k+'"><span class="sk">'+k+'</span><div class="bar"><i style="--w:'+v+'%"></i></div><b class="sv">'+v+'</b></div>').join('');
+    $('sprice').className='sprice';$('sprice').textContent='';$('sctas').className='sctas';
+    const st=$('stamp');st.className='stamp';st.textContent='';
+    mini();}
+  function reveal(idx,instant){revealed=true;const it=EP.items[idx];
+    if(!instant){$('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');
+      if(navigator.vibrate)navigator.vibrate([30,40,30]);}
+    $('sicon').classList.remove('hidden-item','breathe');$('qmark').style.display='none';
+    $('sname').textContent=it.name;$('sorigin').textContent=it.origin+' · '+it.spec;
+    const st=$('stamp');st.textContent=it.grade+'급 판정';st.className='stamp g'+it.grade+(instant?'':' slam');
+    if(instant){st.style.transform='scale(1) rotate(-9deg)';st.style.opacity='1';}
+    $('live-cert').href='item-'+it.slug+'.html';
+    const b=load();$('live-get').classList.toggle('got',b.includes(it.slug));
+    $('live-get').textContent=b.includes(it.slug)?'✓ 담김':'🎒 발굴함에 담기';
+    mini();}
+  function statOn(idx,k){const el=document.querySelector('.stat[data-k="'+k+'"]');if(el)el.classList.add('on');}
+  function priceOn(idx){const it=EP.items[idx];$('sprice').textContent=it.price;$('sprice').classList.add('on');$('sctas').classList.add('on');}
+  function mini(){$('mini-lineup').innerHTML=EP.items.map((it,i)=>{
+    const done=i<curIdx||(i===curIdx&&revealed);
+    return '<div class="ms'+(i===curIdx?' now':'')+(done?' done':'')+'">'+(done?it.icon:'<span class="q">?</span>')+'</div>'}).join('');}
+
+  // ── 재생 엔진 (시계 동기: elapsed 기준으로 과거 이벤트는 즉시, 미래는 예약)
+  let booted=false;
+  function boot(){ if(booted)return; booted=true;
+    document.body.classList.add('live');
+    const T=timeline();
+    const el=()=> (Date.now()-startAt)/1000;
+    T.forEach(ev=>{const run=()=>apply(ev,false), past=ev.t<=el();
+      if(past) apply(ev,true); else setTimeout(run,(ev.t-el())*1000);});
+    setInterval(()=>{ // 세그먼트 타이머
+      const e=el(); if(e>EP_DUR){$('seg').innerHTML='방송 종료 · <b>다음 주 토요일 21:00</b>';return}
+      let nxt=null; const T2=[INTRO,...EP.items.map((_,i)=>INTRO+(i+1)*ITEM_DUR)];
+      for(const t of T2){if(t>e){nxt=t;break}}
+      const rvT=INTRO+Math.max(0,curIdx)*ITEM_DUR+14;
+      if(curIdx>=0&&!revealed&&rvT>e){$('seg').innerHTML='정체 공개까지 <b>'+fmt(rvT-e)+'</b>'}
+      else if(nxt){$('seg').innerHTML='다음 무대까지 <b>'+fmt(nxt-e)+'</b>'}
+    },500);
+  }
+  const fmt=s=>{s=s|0;return String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0')};
+  function apply(ev,instant){
+    if(ev.a==='host')host(ev.l,instant);
+    else if(ev.a==='seg')setSeg(ev.idx,instant);
+    else if(ev.a==='reveal')reveal(ev.idx,instant);
+    else if(ev.a==='stat')statOn(ev.idx,ev.k);
+    else if(ev.a==='price')priceOn(ev.idx);
+  }
+
+  // 리허설(데모): 지금부터 재생
+  $('demo-btn').addEventListener('click',()=>{startAt=Date.now();boot();host('(리허설 모드입니다 — 정식 방송은 매주 토요일 밤 9시!)',false);});
+  if(startAt!==null) boot(); // 접속 시 이미 방송 중이면 합류
+
+  // ── 리액션 (내 탭만, 가짜 수치 없음)
+  document.querySelectorAll('.rx').forEach(b=>b.addEventListener('click',e=>{
+    const s=document.createElement('span');s.className='float';s.textContent=b.dataset.e;
+    const r=b.getBoundingClientRect();s.style.left=(r.left+r.width/2-11+((Math.random()*24)-12))+'px';s.style.top=(r.top-6)+'px';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),1300);
+    if(navigator.vibrate)navigator.vibrate(12);
+  }));
+
+  // ── 발굴함
+  const load=()=>{try{return JSON.parse(localStorage.getItem('oaktong_bag')||'[]')}catch(e){return[]}};
+  $('live-get').addEventListener('click',()=>{
+    if(curIdx<0||!revealed)return; const it=EP.items[curIdx]; const b=load();
+    if(b.includes(it.slug))return; b.push(it.slug);localStorage.setItem('oaktong_bag',JSON.stringify(b));
+    $('live-get').classList.add('got');$('live-get').textContent='✓ 담김';
+    host(it.name+' — 발굴함에 담으셨네요. 안목 있으십니다 🦉✨',false);
+    if(navigator.vibrate)navigator.vibrate(35);
+  });
+
+  // ── Q&A: 감정 데이터 기반 자동 응답(데모) — 못 답하면 저장
+  $('qform').addEventListener('submit',e=>{
+    e.preventDefault();const q=$('qinput').value.trim();if(!q)return;$('qinput').value='';me(q);
+    const it=curIdx>=0?EP.items[curIdx]:null;
+    setTimeout(()=>{
+      let a=null,ql=q.toLowerCase();
+      if(it&&revealed){
+        if(/배송|도착|기간|걸려|걸리/.test(ql))a='해외 구매대행이라 평균 7~14영업일 걸립니다. 추적 가능한 물류로 보내드려요 📦';
+        else if(/가격|얼마|비싸|price/.test(ql))a=it.name+'은(는) '+it.price+' 예정입니다. 관부가세·배송비 조건은 오픈 때 확정돼요.';
+        else if(/왜|이유|골랐|추천/.test(ql))a='제 감정 코멘트를 다시 읽어드리면 — "'+it.appraisal.slice(0,60)+'…" 이래서 통과시켰습니다.';
+        else if(/스펙|크기|무게|재질|사양/.test(ql))a='스펙은 이렇습니다: '+it.spec;
+        else if(/등급|점수|s급|a급/.test(ql))a='이 아이템은 '+it.grade+'급 판정입니다. 스탯 바 보이시죠? 네 기준 모두 통과예요.';
+      }
+      if(!a){
+        if(/언제|오픈|시작/.test(ql))a='정식 오픈은 준비 중입니다! 알림 신청해두시면 가장 먼저 알려드릴게요 🔔';
+        else{a='좋은 질문인데, 지금 제 지식(데모)으로는 못 답하겠네요. 저장해뒀다가 오픈 후 진짜 라이브에서 답해드릴게요 🦉';
+          try{const qs=JSON.parse(localStorage.getItem('oaktong_liveq')||'[]');qs.push({q,at:new Date().toISOString()});localStorage.setItem('oaktong_liveq',JSON.stringify(qs));}catch(err){}}
+      }
+      host(a,false);
+    },700+Math.random()*600);
+  });
+  </script>
+</body>
+</html>

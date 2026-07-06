@@ -49,6 +49,9 @@
   .fcap{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:7px;padding:22px 14px 10px;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(transparent,rgba(5,7,12,.85));pointer-events:none}
   .fcap-p{font-weight:700;color:#dfe3f0}
   .fdot{width:7px;height:7px;border-radius:50%;background:#ff5a5a;animation:pulse 1.2s infinite;flex:none}
+  .sndbtn{position:absolute;top:10px;right:10px;z-index:6;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:17px;background:rgba(8,10,16,.65);border:1px solid rgba(255,255,255,.15);border-radius:50%;backdrop-filter:blur(6px);cursor:pointer;transition:transform .15s,border-color .2s}
+  .sndbtn:hover{transform:scale(1.1);border-color:var(--gold)}
+  .sndbtn.on{border-color:var(--gold);color:var(--gold)}
   .glare{position:absolute;inset:0;z-index:5;border-radius:20px;opacity:0;transition:opacity .3s;pointer-events:none;mix-blend-mode:screen}
   /* 언어 토글 */
   .langs{display:flex;gap:4px;margin-right:10px}
@@ -109,7 +112,7 @@
       <div class="fighters">
     <button class="fighter reveal" data-slug="host1" style="--hc:#ffd57a;--fd:0s;transition-delay:0ms">
       <span class="glare"></span>
-      <div class="fimg"><video src="assets/hosts/jun-intro.mp4" muted loop playsinline preload="metadata" poster="assets/hosts/host1.jpg"></video><div class="fcap"><span class="fdot"></span><b>JUN</b> · <span class="fcap-p">에이스</span></div></div>
+      <div class="fimg"><video src="assets/hosts/jun-intro.mp4" muted loop playsinline preload="metadata" poster="assets/hosts/host1.jpg"></video><div class="fcap"><span class="fdot"></span><b>JUN</b> · <span class="fcap-p">에이스</span></div><span class="sndbtn" role="button" aria-label="소리 켜기">🔇</span></div>
       <div class="fbody">
         <div class="fname">🇰🇷 준 <small>JUN</small></div>
         <div class="fpersona">에이스</div>
@@ -120,7 +123,7 @@
     </button>
     <button class="fighter reveal" data-slug="host2" style="--hc:#ff9d5c;--fd:0.55s;transition-delay:80ms">
       <span class="glare"></span>
-      <div class="fimg"><video src="assets/hosts/mateo-intro.mp4" muted loop playsinline preload="metadata" poster="assets/hosts/host2.jpg"></video><div class="fcap"><span class="fdot"></span><b>MATEO</b> · <span class="fcap-p">감성 스토리텔러</span></div></div>
+      <div class="fimg"><video src="assets/hosts/mateo-intro.mp4" muted loop playsinline preload="metadata" poster="assets/hosts/host2.jpg"></video><div class="fcap"><span class="fdot"></span><b>MATEO</b> · <span class="fcap-p">감성 스토리텔러</span></div><span class="sndbtn" role="button" aria-label="소리 켜기">🔇</span></div>
       <div class="fbody">
         <div class="fname">🔥 마테오 <small>MATEO</small></div>
         <div class="fpersona">감성 스토리텔러</div>
@@ -247,6 +250,14 @@
       }),{threshold:.3});
       vids.forEach(v=>vio.observe(v));
     } else { vids.forEach(v=>v.play().catch(()=>{})) }
+    // 🔊 소리 토글 — 자동재생은 음소거 필수라, 탭(유저 제스처)으로 해제. 한 번에 한 영상만 소리.
+    document.querySelectorAll('.sndbtn').forEach(btn=>btn.addEventListener('click',e=>{
+      e.stopPropagation(); // 응원 픽과 분리
+      const v=btn.parentElement.querySelector('video'); const wasMuted=v.muted;
+      document.querySelectorAll('.fimg video').forEach(o=>{o.muted=true});
+      document.querySelectorAll('.sndbtn').forEach(o=>{o.textContent='🔇';o.classList.remove('on')});
+      if(wasMuted){v.muted=false;v.play().catch(()=>{});btn.textContent='🔊';btn.classList.add('on');}
+    }));
     // 3D 홀로카드 틸트 — 커서를 따라 카드가 기울고, 인물이 떠오르고, 빛이 스침
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
       document.querySelectorAll('.fighter').forEach(c=>{

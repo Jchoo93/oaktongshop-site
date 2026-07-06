@@ -112,6 +112,23 @@
   .ticker b{color:var(--gold,#ffd57a)}
   .ticker em{font-style:normal;color:#ff8a8a}
   @keyframes tick{to{transform:translateX(-50%)}}
+  /* 팔아남기 배너 */
+  .bb-wrap{max-width:1040px;margin:26px auto 0;padding:0 22px}
+  .battle-banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+    background:linear-gradient(120deg,rgba(255,90,90,.09),rgba(255,179,92,.05) 50%,rgba(140,150,255,.07)),var(--card);
+    border:1px solid rgba(255,140,90,.35);border-radius:20px;padding:24px 28px;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
+  .battle-banner:hover{transform:translateY(-4px);border-color:rgba(255,140,90,.65);box-shadow:0 14px 44px rgba(255,110,70,.14)}
+  .battle-banner::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,180,120,.06) 45%,transparent 60%);background-size:250% 100%;animation:shineb 4.5s ease-in-out infinite;pointer-events:none}
+  @keyframes shineb{0%,100%{background-position:120% 0}50%{background-position:-30% 0}}
+  .bb-eyebrow{font-size:11px;letter-spacing:3px;color:#ffb35c;font-weight:900}
+  .bb-title{font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.8px;margin:4px 0 2px}
+  .bb-sub{font-size:13.5px;color:var(--muted)}
+  .bb-cta{display:inline-block;margin-top:12px;font-size:13px;font-weight:800;color:#ffd57a}
+  .bb-faces{display:flex;padding-right:6px}
+  .bb-faces img{width:58px;height:58px;border-radius:50%;object-fit:cover;border:2px solid #1a1e2b;margin-left:-16px;box-shadow:0 6px 18px rgba(0,0,0,.5);animation:bob 3.6s ease-in-out infinite;animation-delay:var(--bd)}
+  .bb-faces img:first-child{margin-left:0}
+  @keyframes bob{50%{transform:translateY(-7px)}}
+  @media(max-width:620px){.battle-banner{padding:20px}.bb-faces img{width:46px;height:46px;margin-left:-13px}}
   /* 옥동 AI 오브 (자비스) */
   #ai{padding-top:26px}
   #ai [hidden]{display:none!important}
@@ -195,6 +212,16 @@
   </header>
 
   <div class="ticker"><div class="ticker-track"><span>⚡ 오늘의 발굴 <b>3종</b> 공개 중</span><span>🫖 🧲 🥄</span><span>이번 주 검토 <b>1,247</b> → 통과 <b>3</b></span><span><em>🔴 옥동 라이브</em> 매주 토 21:00</span><span>🚫 부풀린 광고는 안 올립니다</span><span>통과 못 하면, 안 올립니다</span><span>🎒 발굴함에 담으면 오픈 소식 먼저</span><span>⚡ 오늘의 발굴 <b>3종</b> 공개 중</span><span>🫖 🧲 🥄</span><span>이번 주 검토 <b>1,247</b> → 통과 <b>3</b></span><span><em>🔴 옥동 라이브</em> 매주 토 21:00</span><span>🚫 부풀린 광고는 안 올립니다</span><span>통과 못 하면, 안 올립니다</span><span>🎒 발굴함에 담으면 오픈 소식 먼저</span></div></div>
+
+  <div class="bb-wrap"><a class="battle-banner reveal" href="battle.html">
+    <div>
+      <div class="bb-eyebrow">NEW SHOW · COMING SOON</div>
+      <div class="bb-title">🔥 팔아남기</div>
+      <p class="bb-sub">팔지 못하면, 사라집니다 — AI 쇼호스트 6인의 판매 서바이벌</p>
+      <span class="bb-cta">생존자 후보 6인 보러가기 →</span>
+    </div>
+    <div class="bb-faces"><img src="assets/hosts/host1.jpg" alt="준" loading="lazy" style="--bd:0s"><img src="assets/hosts/host2.jpg" alt="마테오" loading="lazy" style="--bd:0.35s"><img src="assets/hosts/host3.jpg" alt="나오미" loading="lazy" style="--bd:0.7s"><img src="assets/hosts/host4.jpg" alt="유나" loading="lazy" style="--bd:1.0499999999999998s"><img src="assets/hosts/host5.jpg" alt="에릭" loading="lazy" style="--bd:1.4s"><img src="assets/hosts/host6.jpg" alt="프리야" loading="lazy" style="--bd:1.75s"></div>
+  </a></div>
 
   <section id="ai"><div class="wrap" style="text-align:center">
     <div class="h2 reveal">무엇이든 물어보세요</div>

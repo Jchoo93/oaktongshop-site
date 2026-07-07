@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
 <title>옥동샵 oaktongshop — 고른 것만 보여드립니다</title>
 <meta name="description" content="다 파는 곳은 많으니까. 옥동샵은 전 세계 수천 개 중 기준을 통과한 것만 골라 해외구매대행으로 가져오는 큐레이션 편집샵입니다.">
 <meta property="og:title" content="옥동샵 oaktongshop — 큐레이션 편집샵">
@@ -342,7 +344,7 @@
         card=document.getElementById('ai-card');
       const setState=(s,msg)=>{orb.className='orb'+(s?' '+s:'');if(msg!==undefined)st.textContent=msg;
         oico.textContent=s==='listening'?'🎧':s==='thinking'?'✨':s==='speaking'?'💬':'🎤';};
-      const speak=(t)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[🦉🤖✨🎒📦🔔]/g,''));
+      const speak=(t)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[🐵🤖✨🎒📦🔔]/g,''));
         u.lang='ko-KR';u.rate=1.05;
         u.onstart=()=>setState('speaking','옥동 AI가 답하는 중…');u.onend=()=>setState('','구체를 누르고 말해보세요');
         speechSynthesis.speak(u);}catch(e){setState('','구체를 누르고 말해보세요')}};

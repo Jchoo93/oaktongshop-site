@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
 <title>옥동 라이브 — AI 감정 극장 | 옥동샵</title>
 <meta name="description" content="AI 감정사 옥동이가 진행하는 라이브 발굴 무대. 실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께 보세요.">
 <meta property="og:title" content="🔴 옥동 라이브 — AI 감정 극장">
@@ -34,6 +36,8 @@
   #waiting{position:relative;overflow:hidden;text-align:center;padding:80px 0 60px}
   #waiting::after{content:"";position:absolute;inset:0;z-index:0;background:url(assets/og/og-live.jpg) center 20%/cover no-repeat;opacity:.32;-webkit-mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%);mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%)}
   #waiting>*{position:relative;z-index:2}
+  .whost{position:relative;z-index:2;width:108px;height:108px;margin:0 auto 10px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,213,122,.55);box-shadow:0 10px 34px rgba(0,0,0,.45)}
+  .whost img{width:100%;height:100%;object-fit:cover}
   .eyebrow{font-size:11px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
   #waiting h1{font-size:clamp(30px,7vw,42px);font-weight:900;letter-spacing:-1px;margin:12px 0 8px}
   #waiting h1 em{font-style:normal;color:var(--red)}
@@ -106,7 +110,8 @@
   .feed{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
   .msg{display:flex;gap:9px;align-items:flex-start;animation:msgin .35s ease-out}
   @keyframes msgin{from{opacity:0;transform:translateY(8px)}}
-  .mavatar{font-size:20px;flex:none;background:#1a1e29;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
+  .mavatar{font-size:20px;flex:none;background:#1a1e29;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .mavatar img{width:100%;height:100%;object-fit:cover}
   .mbody{font-size:13.5px;background:#171b25;border-radius:4px 14px 14px 14px;padding:9px 12px;color:#dde1ec}
   .mname{font-size:11px;color:var(--muted);font-weight:800;margin-bottom:2px}
   .msg.me{flex-direction:row-reverse}
@@ -138,9 +143,10 @@
   <main class="wrap">
     <!-- 대기실 -->
     <section id="waiting">
+      <div class="whost"><img src="assets/mascot/oaktong.png" alt="옥동이 마스코트"></div>
       <div class="eyebrow">OAKTONG LIVE · 감정 극장</div>
       <h1>옥동 <em>라이브</em></h1>
-      <p class="wsub">AI 감정사 옥동이 🦉 가 진행하는 발굴 무대.<br>실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께.</p>
+      <p class="wsub">AI 감정사 옥동이 🐵 가 진행하는 발굴 무대.<br>실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께.</p>
       <div class="cd"><div><b id="cd-d">0</b><span>일</span></div><div><b id="cd-h">00</b><span>시간</span></div><div><b id="cd-m">00</b><span>분</span></div><div><b id="cd-s">00</b><span>초</span></div></div>
       <p class="wsub" style="font-size:13px">다음 방송 · <b id="next-when"></b></p>
       <div class="wline">EP.1 라인업 — 정체는 방송에서 공개</div>
@@ -187,7 +193,7 @@
   <footer>옥동샵 oaktongshop — 고른 것만 보여드립니다. © 2026 oaktongshop. <a href="drop.html" style="color:var(--gold)">⚡ 오늘의 발굴</a></footer>
 
   <script>
-  const EP={"no":1,"items":[{"slug":"kettle","icon":"🫖","name":"접이식 트래블 전기포트","origin":"🇯🇵 일본","price":"₩38,000대","grade":"S","stats":{"수요":95,"평점":92,"희소":94,"스토리":90},"spec":"실리콘 폴딩 · 600ml · 100-240V 프리볼트","appraisal":"숙소 포트, 찜찜해서 못 쓰는 사람이 생각보다 많습니다. 반으로 접혀 파우치에 들어가는 순간 이건 여행템이 아니라 위생템이 됩니다. 국내에 비슷한 건 있는데, 이 접힘 구조는 없습니다."},{"slug":"magclip","icon":"🧲","name":"마그네틱 케이블 정리 클립 세트","origin":"🇩🇪 독일 디자인","price":"₩12,000대","grade":"A","stats":{"수요":88,"평점":90,"희소":82,"스토리":86},"spec":"네오디뮴 자석 · 데스크 베이스 + 클립 6개","appraisal":"책상 위 케이블 지옥은 만국 공통. 자석으로 착 붙는 순간의 손맛 때문에 리뷰마다 '하나 더 샀다'가 반복됩니다. 평범해 보여서 오히려 통과시켰습니다 — 매일 쓰는 물건이니까."},{"slug":"spork","icon":"🥄","name":"초경량 티타늄 캠핑 스포크","origin":"🇺🇸 미국","price":"₩19,000대","grade":"A","stats":{"수요":84,"평점":93,"희소":88,"스토리":85},"spec":"순티타늄 · 17g · 케이스 포함","appraisal":"숟가락+포크 17g. 백패커들 사이에선 '평생템'으로 불립니다. 티타늄이라 녹슬 걱정이 없고, 10년을 써도 그대로. 소모품이 아니라 장비를 판다는 마음으로 골랐습니다."}],"script":{"intro":["안녕하세요, 옥동샵 수석 감정사 옥동이입니다 🦉","오늘도 전 세계에서 건너온 후보들 중, 감정을 통과한 것들만 무대에 올립니다. 오늘의 라인업은 세 가지 — 정체는 하나씩 공개할게요."],"tease":{"kettle":["첫 번째. 여행 가서 이것 때문에 찜찜했던 분들, 많으실 겁니다…","힌트: 반으로 접힙니다. 그리고 위생템입니다."],"magclip":["두 번째는 아주 평범해 보이는 물건입니다. 그런데 리뷰마다 '하나 더 샀다'가 반복돼요.","힌트: 책상 위의 지옥을 정리합니다. 착— 붙는 손맛."],"spork":["마지막은 '평생템' 소리를 듣는 물건입니다. 무게가 겨우 17g.","힌트: 10년을 써도 그대로인 금속."]},"statLine":"감정 스탯 공개합니다. 편집 기준 네 가지, 하나씩 보시죠.","outro":["오늘 무대는 여기까지. 다음 발굴, 어떤 게 올라올지는 여러분 투표로 정해집니다 🗳️","발굴함에 담아두시면 오픈 때 가장 먼저 알려드릴게요. 저는 다음 방송에서, 더 깐깐하게 감정하고 올게요. 🦉"]}};
+  const EP={"no":1,"items":[{"slug":"kettle","icon":"🫖","name":"접이식 트래블 전기포트","origin":"🇯🇵 일본","price":"₩38,000대","grade":"S","stats":{"수요":95,"평점":92,"희소":94,"스토리":90},"spec":"실리콘 폴딩 · 600ml · 100-240V 프리볼트","appraisal":"숙소 포트, 찜찜해서 못 쓰는 사람이 생각보다 많습니다. 반으로 접혀 파우치에 들어가는 순간 이건 여행템이 아니라 위생템이 됩니다. 국내에 비슷한 건 있는데, 이 접힘 구조는 없습니다."},{"slug":"magclip","icon":"🧲","name":"마그네틱 케이블 정리 클립 세트","origin":"🇩🇪 독일 디자인","price":"₩12,000대","grade":"A","stats":{"수요":88,"평점":90,"희소":82,"스토리":86},"spec":"네오디뮴 자석 · 데스크 베이스 + 클립 6개","appraisal":"책상 위 케이블 지옥은 만국 공통. 자석으로 착 붙는 순간의 손맛 때문에 리뷰마다 '하나 더 샀다'가 반복됩니다. 평범해 보여서 오히려 통과시켰습니다 — 매일 쓰는 물건이니까."},{"slug":"spork","icon":"🥄","name":"초경량 티타늄 캠핑 스포크","origin":"🇺🇸 미국","price":"₩19,000대","grade":"A","stats":{"수요":84,"평점":93,"희소":88,"스토리":85},"spec":"순티타늄 · 17g · 케이스 포함","appraisal":"숟가락+포크 17g. 백패커들 사이에선 '평생템'으로 불립니다. 티타늄이라 녹슬 걱정이 없고, 10년을 써도 그대로. 소모품이 아니라 장비를 판다는 마음으로 골랐습니다."}],"script":{"intro":["안녕하세요, 옥동샵 수석 감정사 옥동이입니다 🐵","오늘도 전 세계에서 건너온 후보들 중, 감정을 통과한 것들만 무대에 올립니다. 오늘의 라인업은 세 가지 — 정체는 하나씩 공개할게요."],"tease":{"kettle":["첫 번째. 여행 가서 이것 때문에 찜찜했던 분들, 많으실 겁니다…","힌트: 반으로 접힙니다. 그리고 위생템입니다."],"magclip":["두 번째는 아주 평범해 보이는 물건입니다. 그런데 리뷰마다 '하나 더 샀다'가 반복돼요.","힌트: 책상 위의 지옥을 정리합니다. 착— 붙는 손맛."],"spork":["마지막은 '평생템' 소리를 듣는 물건입니다. 무게가 겨우 17g.","힌트: 10년을 써도 그대로인 금속."]},"statLine":"감정 스탯 공개합니다. 편집 기준 네 가지, 하나씩 보시죠.","outro":["오늘 무대는 여기까지. 다음 발굴, 어떤 게 올라올지는 여러분 투표로 정해집니다 🗳️","발굴함에 담아두시면 오픈 때 가장 먼저 알려드릴게요. 저는 다음 방송에서, 더 깐깐하게 감정하고 올게요. 🐵"]}};
   const ITEM_DUR=48, INTRO=14, EP_DUR=INTRO+EP.items.length*48+16;
 
   // ── 방송 시각: 매주 토요일 21:00 KST (시계 동기 → 모두 같은 장면)
@@ -240,7 +246,7 @@
   const $=id=>document.getElementById(id);
   const feed=$('feed'); let curIdx=-1, revealed=false;
   function host(l,instant){const m=document.createElement('div');m.className='msg';
-    m.innerHTML='<div class="mavatar">🦉</div><div><div class="mname">옥동이 · AI</div><div class="mbody"></div></div>';
+    m.innerHTML='<div class="mavatar"><img src="assets/mascot/oaktong.png" alt="옥동이"></div><div><div class="mname">옥동이 · AI</div><div class="mbody"></div></div>';
     feed.appendChild(m);const b=m.querySelector('.mbody');
     if(instant){b.textContent=l}else{let i=0;const iv=setInterval(()=>{b.textContent=l.slice(0,++i);feed.scrollTop=feed.scrollHeight;if(i>=l.length)clearInterval(iv)},22)}
     feed.scrollTop=feed.scrollHeight;}
@@ -315,7 +321,7 @@
     if(curIdx<0||!revealed)return; const it=EP.items[curIdx]; const b=load();
     if(b.includes(it.slug))return; b.push(it.slug);localStorage.setItem('oaktong_bag',JSON.stringify(b));
     $('live-get').classList.add('got');$('live-get').textContent='✓ 담김';
-    host(it.name+' — 발굴함에 담으셨네요. 안목 있으십니다 🦉✨',false);
+    host(it.name+' — 발굴함에 담으셨네요. 안목 있으십니다 🐵✨',false);
     if(navigator.vibrate)navigator.vibrate(35);
   });
 
@@ -334,7 +340,7 @@
       }
       if(!a){
         if(/언제|오픈|시작/.test(ql))a='정식 오픈은 준비 중입니다! 알림 신청해두시면 가장 먼저 알려드릴게요 🔔';
-        else{a='좋은 질문인데, 지금 제 지식(데모)으로는 못 답하겠네요. 저장해뒀다가 오픈 후 진짜 라이브에서 답해드릴게요 🦉';
+        else{a='좋은 질문인데, 지금 제 지식(데모)으로는 못 답하겠네요. 저장해뒀다가 오픈 후 진짜 라이브에서 답해드릴게요 🐵';
           try{const qs=JSON.parse(localStorage.getItem('oaktong_liveq')||'[]');qs.push({q,at:new Date().toISOString()});localStorage.setItem('oaktong_liveq',JSON.stringify(qs));}catch(err){}}
       }
       host(a,false);

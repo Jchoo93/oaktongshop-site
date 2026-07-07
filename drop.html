@@ -26,7 +26,9 @@
   .back{font-size:14px;color:var(--muted)}.back:hover{color:var(--ink)}
   .bagchip{font-size:13px;font-weight:800;border:1px solid #2a3040;border-radius:999px;padding:5px 12px;color:var(--gold)}
   /* hero */
-  .dhero{text-align:center;padding:64px 22px 34px}
+  .dhero{position:relative;overflow:hidden;text-align:center;padding:88px 22px 34px}
+  .dhero::after{content:"";position:absolute;inset:0;z-index:0;background:url(assets/og/og-drop.jpg) center 25%/cover no-repeat;opacity:.30;-webkit-mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%);mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.5) 55%,transparent 100%)}
+  .dhero>*{position:relative;z-index:2}
   .eyebrow{font-size:12px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
   .dhero h1{font-size:clamp(34px,6vw,52px);font-weight:900;letter-spacing:-1px;margin:12px 0 6px}
   .dhero h1 em{font-style:normal;background:linear-gradient(100deg,var(--gold),#ffb35c);-webkit-background-clip:text;background-clip:text;color:transparent}

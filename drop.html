@@ -61,6 +61,10 @@
   .gA .gbadge{background:rgba(174,182,255,.16);color:var(--purp);border:1px solid rgba(174,182,255,.35)}
   .corigin{font-size:12px;color:var(--muted)}
   .cicon{font-size:54px;text-align:center;margin:18px 0 6px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+  .cthumb{position:relative;margin:16px 0 10px;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#0d0f15;border:1px solid #1e222c}
+  .cthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+  .card:hover .cthumb img{transform:scale(1.05)}
+  .cthumb-i{position:absolute;left:10px;bottom:8px;font-size:26px;filter:drop-shadow(0 3px 8px rgba(0,0,0,.7))}
   .card h3{font-size:18px;letter-spacing:-.3px;text-align:center}
   .cspec{font-size:12px;color:var(--muted);text-align:center;margin:4px 0 14px}
   .stats{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
@@ -128,7 +132,7 @@
   <main class="wrap">
     <section class="cards"><article class="card gS reveal" style="transition-delay:0ms">
       <div class="chead"><span class="gbadge">S급 발굴</span><span class="corigin">🇯🇵 일본</span></div>
-      <a href="item-kettle.html" style="display:block"><div class="cicon">🫖</div>
+      <a href="item-kettle.html" style="display:block"><div class="cthumb"><img src="assets/products/kettle.jpg" alt="접이식 트래블 전기포트" loading="lazy"><span class="cthumb-i">🫖</span></div>
       <h3>접이식 트래블 전기포트</h3></a>
       <p class="cspec">실리콘 폴딩 · 600ml · 100-240V 프리볼트</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:95%"></i></div><b class="sv">95</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:92%"></i></div><b class="sv">92</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:94%"></i></div><b class="sv">94</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div></div>
@@ -137,7 +141,7 @@
       <div class="cfoot"><span class="cprice">₩38,000대</span><a class="btn primary" href="item-kettle.html">감정서 보기 →</a></div>
     </article><article class="card gA reveal" style="transition-delay:90ms">
       <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇩🇪 독일 디자인</span></div>
-      <a href="item-magclip.html" style="display:block"><div class="cicon">🧲</div>
+      <a href="item-magclip.html" style="display:block"><div class="cthumb"><img src="assets/products/magclip.jpg" alt="마그네틱 케이블 정리 클립 세트" loading="lazy"><span class="cthumb-i">🧲</span></div>
       <h3>마그네틱 케이블 정리 클립 세트</h3></a>
       <p class="cspec">네오디뮴 자석 · 데스크 베이스 + 클립 6개</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:90%"></i></div><b class="sv">90</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:82%"></i></div><b class="sv">82</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:86%"></i></div><b class="sv">86</b></div></div>
@@ -146,7 +150,7 @@
       <div class="cfoot"><span class="cprice">₩12,000대</span><a class="btn primary" href="item-magclip.html">감정서 보기 →</a></div>
     </article><article class="card gA reveal" style="transition-delay:180ms">
       <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇺🇸 미국</span></div>
-      <a href="item-spork.html" style="display:block"><div class="cicon">🥄</div>
+      <a href="item-spork.html" style="display:block"><div class="cthumb"><img src="assets/products/spork.jpg" alt="초경량 티타늄 캠핑 스포크" loading="lazy"><span class="cthumb-i">🥄</span></div>
       <h3>초경량 티타늄 캠핑 스포크</h3></a>
       <p class="cspec">순티타늄 · 17g · 케이스 포함</p>
       <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:84%"></i></div><b class="sv">84</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:93%"></i></div><b class="sv">93</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:88%"></i></div><b class="sv">88</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:85%"></i></div><b class="sv">85</b></div></div>

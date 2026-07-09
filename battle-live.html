@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="https://oaktongshop.com/assets/icons/favicon-32.png">
+<title>🔥 팔아남기 LIVE — 실시간 배틀</title>
+<meta name="theme-color" content="#0b0d12">
+<style>
+  :root{--bg:#0b0d12;--card:#12151d;--line:#1e222c;--ink:#f1f3f7;--muted:#969eac;--gold:#ffd57a;--red:#ff6b6b;--green:#7fd4a0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:520px;margin:0 auto;padding:0 16px 40px;position:relative}
+  header{text-align:center;padding:22px 0 14px}
+  .live{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:900;letter-spacing:1px;color:var(--red);border:1px solid rgba(255,107,107,.4);border-radius:999px;padding:4px 12px}
+  .live .dot{width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 1.2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  h1{font-size:clamp(26px,7vw,36px);font-weight:900;letter-spacing:-1.5px;margin:12px 0 4px}
+  h1 em{font-style:normal;background:linear-gradient(100deg,#ff7a6b,#ffd57a);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:13px;color:var(--muted)}
+  .timer{margin:14px auto 4px;display:inline-flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}
+  .timer b{font-size:34px;font-weight:900;color:var(--gold);letter-spacing:-1px}
+  .timer span{font-size:13px;color:var(--muted)}
+  .round{font-size:12px;color:var(--muted);letter-spacing:1px}
+  #board{position:relative;margin:18px 0 6px}
+  .hrow{position:absolute;left:0;right:0;height:88px;transition:transform .55s cubic-bezier(.34,1.3,.4,1);will-change:transform}
+  .hcard{display:flex;align-items:center;gap:12px;height:78px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;overflow:hidden;position:relative}
+  .hcard.lead{border-color:rgba(255,213,122,.55);box-shadow:0 6px 24px rgba(255,213,122,.10)}
+  .hcard.last{border-color:rgba(255,107,107,.35)}
+  .rank{width:26px;text-align:center;font-size:20px;font-weight:900;color:var(--muted);flex:none}
+  .lead .rank{color:var(--gold)}
+  .ava{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
+  .lead .ava{border-color:var(--gold)}
+  .info{flex:1;min-width:0}
+  .nm{font-size:15px;font-weight:800;display:flex;align-items:center;gap:6px}
+  .pz{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .barwrap{height:7px;border-radius:99px;background:#1a1e29;overflow:hidden;margin-top:7px}
+  .bar{height:100%;border-radius:99px;transition:width .5s ease}
+  .sc{font-size:13px;font-weight:800;color:var(--gold);min-width:44px;text-align:right;flex:none;font-variant-numeric:tabular-nums}
+  .cheer{flex:none;border:none;border-radius:12px;padding:0 14px;height:52px;font-weight:900;font-size:14px;cursor:pointer;background:#1e2330;color:var(--ink);transition:transform .12s,background .15s}
+  .cheer:active{transform:scale(.9)}
+  .cheer.lead{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
+  .cheer:disabled{opacity:.4;cursor:not-allowed}
+  .fly{position:absolute;pointer-events:none;font-size:15px;font-weight:900;color:var(--gold);animation:fly .7s ease-out forwards;z-index:5}
+  @keyframes fly{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-34px)}}
+  .power{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--bg) 30%);padding:14px 0 6px;text-align:center}
+  .pcount{font-size:13px;color:var(--muted)}
+  .pcount b{color:var(--gold)}
+  .labels{margin-top:10px;font-size:11px;color:var(--muted);line-height:1.7}
+  .badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 9px;margin:0 3px}
+  .mode{font-weight:800}
+  .mode.demo{color:#ffb35c}.mode.live{color:var(--green)}
+  #ov{position:fixed;inset:0;background:rgba(6,7,11,.9);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:20;text-align:center;padding:24px;backdrop-filter:blur(4px)}
+  #ov.show{display:flex;animation:fade .4s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  #ov .win-ava{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);box-shadow:0 10px 40px rgba(255,213,122,.3)}
+  #ov h2{font-size:30px;font-weight:900;margin:16px 0 4px}
+  #ov .surv{color:var(--gold)}
+  #ov .elim{color:var(--red);font-size:15px;margin-top:10px}
+  #ov .next{margin-top:18px;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="live"><span class="dot"></span>LIVE</span>
+    <h1>🔥 <em>팔아남기</em></h1>
+    <div class="sub">AI 쇼호스트 판매 서바이벌 · 당신의 응원이 순위를 바꿉니다</div>
+    <div class="timer"><b id="t">--</b><span>초 후 라운드 종료</span></div>
+    <div class="round" id="rd">ROUND 1</div>
+  </header>
+
+  <div id="board"></div>
+
+  <div class="power">
+    <div class="pcount">남은 응원 <b id="pw">--</b> · 탭할수록 그 호스트 순위가 올라갑니다</div>
+    <div class="labels">
+      <span class="badge">🤖 AI 가상 인물</span>
+      <span class="badge">🧪 오픈 전 프로토타입</span>
+      <span class="badge">모드: <span id="mode" class="mode demo">데모(탭 간)</span></span><br>
+      가짜 수치 없음 — 표시되는 점수는 실제 응원 집계입니다.
+    </div>
+  </div>
+</div>
+
+<div id="ov">
+  <img class="win-ava" id="ov-ava" alt="">
+  <h2><span class="surv">생존</span> — <span id="ov-name"></span></h2>
+  <div class="sub" id="ov-line"></div>
+  <div class="elim" id="ov-elim"></div>
+  <div class="next">잠시 후 다음 라운드가 시작됩니다…</div>
+</div>
+
+<script>
+/* ─────────────────────────────────────────────
+   설정 — 비우면 데모 모드(같은 브라우저 탭끼리 실시간).
+   Supabase URL + anon key 를 넣고 supabase-setup.sql 을 실행하면
+   전세계 다기기 실시간(점수·라운드·타이머 전부 공유)으로 전환됩니다.
+   ───────────────────────────────────────────── */
+const SUPABASE_URL = "https://kejqwajzbjurpoceyged.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlanF3YWp6Ymp1cnBvY2V5Z2VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MDc3MzEsImV4cCI6MjA5OTE4MzczMX0.Ew3OmzuL40gQNyjpFVoPvqHQld9g4I6zLJhiHmYjg80";
+
+const HOSTS = [
+  {id:"host1", nm:"준",   pz:"에이스",        img:"1", color:"#ffd57a"},
+  {id:"host2", nm:"마테오", pz:"감성 스토리텔러", img:"2", color:"#ff9d5c"},
+  {id:"host3", nm:"나오미", pz:"시크한 심미안",   img:"3", color:"#c9a0ff"},
+  {id:"host4", nm:"유나",  pz:"트렌드 헌터",     img:"4", color:"#7fd4ff"},
+  {id:"host5", nm:"에릭",  pz:"데이터 저격수",   img:"5", color:"#9fb6ff"},
+  {id:"host6", nm:"프리야", pz:"럭셔리 감정사",   img:"6", color:"#ffb3c7"},
+];
+const IMG = i => `https://oaktongshop.com/assets/hosts/host${i}.jpg`;
+const ROUND_SECS = 45;
+const CHEER_BUDGET = 25;
+const ROW = 88;
+const LIVE = !!(SUPABASE_URL && SUPABASE_ANON_KEY);
+
+let scores = {}, budget = CHEER_BUDGET, roundEndsAt = 0, roundNo = 1, ended = false, advancing = false;
+const zero = () => { const o={}; HOSTS.forEach(h=>o[h.id]=0); return o; };
+scores = zero();
+
+/* ── 데모 트랜스포트: BroadcastChannel + localStorage (같은 브라우저 탭 간) ── */
+function demoTransport(){
+  const KEY="paranamgi_battle_v2";
+  const bc = ("BroadcastChannel" in window) ? new BroadcastChannel(KEY) : null;
+  const load = () => { try{return JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){return {}} };
+  const save = (s) => localStorage.setItem(KEY, JSON.stringify(s));
+  let onUpd = ()=>{};
+  function pull(){
+    const s = load();
+    if(!s.roundEndsAt || Date.now() > s.roundEndsAt + 6000){
+      const fresh = {scores:zero(), roundEndsAt: Date.now()+ROUND_SECS*1000, roundNo:(s.roundNo||0)+1};
+      save(fresh); return fresh;
+    }
+    return s;
+  }
+  if(bc) bc.onmessage = () => onUpd(load());
+  return {
+    init(cb){ onUpd=cb; cb(pull()); },
+    cheer(id){ const s=load(); s.scores=s.scores||zero(); s.scores[id]=(s.scores[id]||0)+1; save(s); if(bc)bc.postMessage(1); onUpd(s); },
+    newRound(){ const s={scores:zero(), roundEndsAt:Date.now()+ROUND_SECS*1000, roundNo:(load().roundNo||1)+1}; save(s); if(bc)bc.postMessage(1); onUpd(s); },
+  };
+}
+
+/* ── Supabase 트랜스포트: battle_scores + battle_state 공유, 양쪽 realtime 구독 ── */
+function supabaseTransport(){
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let onUpd=()=>{}, cur={scores:zero(), roundEndsAt:Date.now()+ROUND_SECS*1000, roundNo:1};
+  async function refresh(){
+    const [scRes, stRes] = await Promise.all([
+      sb.from('battle_scores').select('*'),
+      sb.from('battle_state').select('*').eq('id',1).single()
+    ]);
+    const s=zero(); (scRes.data||[]).forEach(r=>{ if(s[r.host_id]!=null) s[r.host_id]=r.score; });
+    cur.scores=s;
+    if(stRes.data){ cur.roundEndsAt=new Date(stRes.data.round_ends_at).getTime(); cur.roundNo=stRes.data.round; }
+    onUpd(cur);
+  }
+  return {
+    async init(cb){ onUpd=cb; await refresh();
+      sb.channel('battle')
+        .on('postgres_changes',{event:'*',schema:'public',table:'battle_scores'},refresh)
+        .on('postgres_changes',{event:'*',schema:'public',table:'battle_state'},refresh)
+        .subscribe();
+    },
+    async cheer(id){ try{ await sb.rpc('cheer',{h:id}); }catch(e){ console.warn(e); } },
+    async newRound(){ try{ await sb.rpc('advance_round',{dur:ROUND_SECS}); }catch(e){ console.warn(e); } },
+  };
+}
+
+let transport;
+
+/* ── 렌더 ── */
+const board = document.getElementById('board');
+const rowEls = {};
+board.style.height = (HOSTS.length*ROW - 10)+"px";
+HOSTS.forEach(h=>{
+  const row=document.createElement('div'); row.className='hrow'; row.id='row-'+h.id;
+  row.innerHTML=`<div class="hcard">
+    <div class="rank"></div>
+    <img class="ava" src="${IMG(h.img)}" alt="${h.nm}">
+    <div class="info"><div class="nm">${h.nm}</div><div class="pz">${h.pz}</div>
+      <div class="barwrap"><div class="bar" style="background:${h.color}"></div></div></div>
+    <div class="sc">0</div>
+    <button class="cheer" data-id="${h.id}">응원</button>
+  </div>`;
+  board.appendChild(row); rowEls[h.id]=row;
+});
+
+function render(){
+  const max = Math.max(1, ...HOSTS.map(h=>scores[h.id]||0));
+  const ranked = [...HOSTS].sort((a,b)=> ((scores[b.id]||0)-(scores[a.id]||0)) || HOSTS.indexOf(a)-HOSTS.indexOf(b));
+  ranked.forEach((h,i)=>{
+    const row=rowEls[h.id]; row.style.transform=`translateY(${i*ROW}px)`;
+    const card=row.firstElementChild;
+    card.className='hcard'+(i===0?' lead':'')+(i===ranked.length-1?' last':'');
+    card.querySelector('.rank').textContent=i+1;
+    card.querySelector('.sc').textContent=scores[h.id]||0;
+    card.querySelector('.bar').style.width=((scores[h.id]||0)/max*100)+"%";
+    const btn=card.querySelector('.cheer'); btn.className='cheer'+(i===0?' lead':''); btn.disabled=budget<=0;
+  });
+}
+
+/* 라운드 전환 감지 → 모든 기기에서 오버레이/예산 동기화 */
+function applyState(s){
+  if(s.scores) scores = s.scores;
+  if(s.roundEndsAt) roundEndsAt = s.roundEndsAt;
+  if(s.roundNo && s.roundNo !== roundNo){
+    roundNo = s.roundNo;
+    document.getElementById('rd').textContent='ROUND '+roundNo;
+    ended=false; advancing=false;
+    budget=CHEER_BUDGET; document.getElementById('pw').textContent=budget;
+    document.getElementById('ov').classList.remove('show');
+  }
+  render();
+}
+
+document.getElementById('board').addEventListener('click', e=>{
+  const btn=e.target.closest('.cheer'); if(!btn||ended) return;
+  if(budget<=0) return;
+  budget--; document.getElementById('pw').textContent=budget;
+  render();
+  transport.cheer(btn.dataset.id);
+  const r=btn.getBoundingClientRect();
+  const fly=document.createElement('div'); fly.className='fly'; fly.textContent='+1';
+  fly.style.left=(r.left+r.width/2-8)+'px'; fly.style.top=(r.top-6)+'px';
+  document.body.appendChild(fly); setTimeout(()=>fly.remove(),700);
+});
+
+/* ── 타이머 & 라운드 종료 ── */
+function tick(){
+  const left = Math.max(0, Math.ceil((roundEndsAt-Date.now())/1000));
+  document.getElementById('t').textContent = left;
+  if(left<=0 && !ended) endRound();
+}
+function endRound(){
+  ended=true;
+  const ranked=[...HOSTS].sort((a,b)=>(scores[b.id]||0)-(scores[a.id]||0)||HOSTS.indexOf(a)-HOSTS.indexOf(b));
+  const win=ranked[0], lose=ranked[ranked.length-1];
+  const total=HOSTS.reduce((s,h)=>s+(scores[h.id]||0),0);
+  document.getElementById('ov-ava').src=IMG(win.img);
+  document.getElementById('ov-name').textContent=win.nm;
+  document.getElementById('ov-line').textContent = total>0
+    ? `${win.nm}(${win.pz}) — 응원 ${scores[win.id]}표로 이번 라운드 생존!`
+    : `이번 라운드는 응원이 없었어요. 다음 라운드에 응원해보세요!`;
+  document.getElementById('ov-elim').textContent = total>0 ? `⬇ ${lose.nm} 탈락 위기` : '';
+  document.getElementById('ov').classList.add('show');
+  // 5초 뒤 라운드 넘김(멱등: 여러 기기가 불러도 서버가 1회만 반영)
+  setTimeout(()=>{ if(!advancing){ advancing=true; transport.newRound(); if(!LIVE){/* 데모는 즉시 onUpd로 전환됨 */} } }, 5000);
+}
+
+/* ── 부팅 ── */
+async function boot(){
+  document.getElementById('pw').textContent=budget;
+  if(LIVE){
+    document.getElementById('mode').textContent='전세계 실시간(Supabase)';
+    document.getElementById('mode').className='mode live';
+    await new Promise((res,rej)=>{ const s=document.createElement('script');
+      s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+    transport=supabaseTransport();
+  } else {
+    transport=demoTransport();
+  }
+  await transport.init(applyState);
+  setInterval(tick, 250); tick();
+}
+boot();
+</script>
+</body>
+</html>

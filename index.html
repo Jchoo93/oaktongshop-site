@@ -2,13 +2,13 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
-<title>옥동몰 oaktongmall — 고른 것만 파는 몰</title>
-<meta name="description" content="재밌게 구경하고, 간편하게 담는다. 기준을 통과한 글로벌 잇템만 파는 큐레이션 몰, 옥동몰. 네이버페이 안전결제.">
-<meta property="og:title" content="옥동몰 oaktongmall — 고른 것만 파는 몰">
-<meta property="og:description" content="재밌게 구경하고, 간편하게 담는다.">
+<title>옥동몰 oaktongmall — 고른 것만, 한 장씩</title>
+<meta name="description" content="쇼핑몰 같지 않은 쇼핑. 기준을 통과한 발굴품을 한 화면에 하나씩 — 넘기고, 담고, 끝. 큐레이션 몰 옥동몰.">
+<meta property="og:title" content="옥동몰 oaktongmall — 고른 것만, 한 장씩">
+<meta property="og:description" content="넘기고, 담고, 끝. 쇼핑몰 같지 않은 쇼핑.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://oaktongshop.com/assets/og/og-index.jpg">
 <meta property="og:image:width" content="1200">
@@ -17,40 +17,56 @@
 <meta name="twitter:image" content="https://oaktongshop.com/assets/og/og-index.jpg">
 <meta name="theme-color" content="#0b0d12">
 <style>
-  :root{--bg:#0b0d12;--bg2:#0e1119;--ink:#f1f3f7;--muted:#969eac;--line:#1e222c;--card:#12151d;--accent:#aeb6ff;--gold:#ffd57a}
+  :root{--bg:#0b0d12;--ink:#f1f3f7;--muted:#aeb6c4;--line:#1e222c;--card:#12151d;--gold:#ffd57a}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  html,body{height:100%}
+  body{background:#07080c;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
-  /* ── 몰 헤더: 로고 + 검색 + 발굴함 ── */
-  .mhead{position:sticky;top:0;z-index:50;background:rgba(11,13,18,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .mh1{display:flex;align-items:center;gap:14px;padding:12px 0;flex-wrap:wrap}
-  .brand{font-weight:900;font-size:21px;letter-spacing:-.5px;white-space:nowrap}
+  /* ── 피드: 모바일 풀스크린, 데스크톱은 폰 폭 중앙 ── */
+  .stage{position:relative;height:100dvh;max-width:520px;margin:0 auto}
+  @media(min-width:640px){.stage{border-left:1px solid var(--line);border-right:1px solid var(--line)}}
+  .feed{height:100dvh;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;overscroll-behavior-y:contain}
+  .feed::-webkit-scrollbar{display:none}
+  .slide{position:relative;height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;display:flex;align-items:flex-end;background:var(--bg)}
+  .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .iconbg{display:flex;align-items:center;justify-content:center;background:radial-gradient(700px 500px at 50% 30%,rgba(174,182,255,.16),transparent 65%),var(--bg)}
+  .iconbg span{font-size:clamp(110px,34vw,180px);filter:drop-shadow(0 18px 44px rgba(0,0,0,.6))}
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,12,.42) 0%,transparent 26%,transparent 42%,rgba(7,8,12,.94) 88%)}
+  .exlabel{position:absolute;top:calc(env(safe-area-inset-top) + 64px);right:16px;z-index:3;font-size:10px;font-weight:800;letter-spacing:.5px;background:rgba(11,13,18,.72);color:#cdd3df;border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:2px 7px;backdrop-filter:blur(4px)}
+  .aibadge{position:absolute;top:calc(env(safe-area-inset-top) + 64px);left:16px;z-index:3;font-size:11px;font-weight:800;background:rgba(11,13,18,.72);color:#cdd3df;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:4px 11px;backdrop-filter:blur(4px)}
+  /* 슬라이드 본문 */
+  .meta{position:relative;z-index:2;width:100%;padding:0 22px calc(env(safe-area-inset-bottom) + 96px)}
+  .pg{display:inline-block;font-size:11.5px;font-weight:900;letter-spacing:1px;border-radius:999px;padding:4px 12px;margin-bottom:10px}
+  .pg.gS{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
+  .pg.gA{background:rgba(174,182,255,.9);color:#10122b}
+  .pg.gshow{background:rgba(255,140,90,.16);color:#ffb35c;border:1px solid rgba(255,140,90,.45)}
+  .pg.glive{background:rgba(255,90,90,.14);color:#ff8a8a;border:1px solid rgba(255,90,90,.45)}
+  .pg.glive i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ff5b5b;margin-right:6px;animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  .meta h2{font-size:clamp(24px,6.4vw,32px);font-weight:900;letter-spacing:-.8px;line-height:1.16;text-shadow:0 2px 18px rgba(0,0,0,.55)}
+  .why{font-size:15px;color:var(--muted);margin-top:6px;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+  .price{font-size:clamp(21px,5.4vw,26px);font-weight:900;letter-spacing:-.4px;margin-top:12px}
+  .price small{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+  .btns{display:flex;gap:10px;margin-top:16px}
+  .addbtn{flex:1;background:rgba(255,213,122,.13);border:1.5px solid rgba(255,213,122,.5);border-radius:14px;color:var(--gold);font-size:15px;font-weight:800;padding:14px 6px;cursor:pointer;font-family:inherit;backdrop-filter:blur(6px);transition:background .15s,transform .1s}
+  .addbtn:active{transform:scale(.97)}
+  .addbtn.got{background:rgba(255,213,122,.2)}
+  .buy{flex:1;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);border-radius:14px;font-size:15px;font-weight:800;padding:14px 6px;transition:filter .15s,transform .1s}
+  .buy:active{transform:scale(.97)}
+  .buy.soon{background:rgba(255,255,255,.1);color:#e6e9f0;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px)}
+  .buy.golink{flex:0 1 auto;padding:14px 26px}
+  .cert{display:inline-block;margin-top:14px;font-size:13px;font-weight:700;color:var(--gold);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+  /* ── 상단 오버레이: 브랜드 + 발굴함 ── */
+  .top{position:absolute;top:0;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 14px) 18px 10px;pointer-events:none;background:linear-gradient(180deg,rgba(7,8,12,.55),transparent)}
+  .top>*{pointer-events:auto}
+  .brand{font-weight:900;font-size:19px;letter-spacing:-.5px;text-shadow:0 1px 10px rgba(0,0,0,.5)}
   .brand small{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:1px;margin-left:5px}
-  .msearch{flex:1;display:flex;min-width:220px;background:var(--card);border:1.5px solid #2a3040;border-radius:999px;overflow:hidden;transition:border-color .2s}
-  .msearch:focus-within{border-color:var(--gold)}
-  .msearch input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--ink);font-size:14px;padding:10px 18px;font-family:inherit}
-  .msearch button{background:none;border:none;color:var(--muted);font-size:16px;padding:0 12px;cursor:pointer;font-family:inherit;transition:color .15s}
-  .msearch button:hover{color:var(--ink)}
-  #micbtn.on{color:#ff8a8a}
-  .msearch.listening{border-color:#ff8a8a;animation:srpulse 1.4s ease-in-out infinite}
-  @keyframes srpulse{50%{box-shadow:0 0 0 6px rgba(255,138,138,.1)}}
-  .pcard.hit{border-color:rgba(255,213,122,.55);box-shadow:0 0 0 3px rgba(255,213,122,.1)}
   .bagbtn{position:relative;font-size:22px;background:none;border:none;cursor:pointer;padding:4px 6px;color:var(--ink);font-family:inherit}
   .bagbtn .n{position:absolute;top:-2px;right:-4px;min-width:17px;height:17px;border-radius:999px;background:var(--gold);color:#231a05;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;padding:0 4px}
   .bagbtn .n[hidden]{display:none}
   .bagbtn.bump .n{animation:bump .5s}
   @keyframes bump{30%{transform:scale(1.4)}}
-  .cats{display:flex;gap:8px;overflow-x:auto;padding:0 0 11px;scrollbar-width:none}
-  .cats::-webkit-scrollbar{display:none}
-  .chip{flex:0 0 auto;background:var(--card);border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;font-weight:700;padding:7px 15px;cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s}
-  .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-  .chip:not(.on):hover{color:var(--ink);border-color:#2e3340}
-  .cats .div{flex:0 0 1px;background:var(--line);margin:4px 4px}
-  .cats a.chip{color:#ffb35c}
-  /* 발굴함 드롭다운 */
-  .bagdrop{position:absolute;right:18px;top:60px;width:min(300px,calc(100vw - 36px));background:var(--bg2);border:1px solid #262b3a;border-radius:16px;padding:14px;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:msgin .2s ease-out;z-index:60}
+  .bagdrop{position:absolute;right:12px;top:calc(env(safe-area-inset-top) + 56px);width:min(290px,calc(100vw - 24px));background:#0e1119;border:1px solid #262b3a;border-radius:16px;padding:14px;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:msgin .2s ease-out;z-index:20}
   .bagdrop[hidden]{display:none}
   .bagdrop h5{font-size:13px;margin-bottom:8px}.bagdrop h5 small{color:var(--muted);font-weight:600}
   .bagitem{display:flex;align-items:center;gap:8px;font-size:13px;padding:7px 4px;border-bottom:1px solid rgba(255,255,255,.05)}
@@ -58,369 +74,181 @@
   .bagitem .rm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:2px 4px}
   .bagempty{font-size:13px;color:var(--muted);padding:10px 4px}
   .bagnote{display:block;margin-top:10px;font-size:12px;color:var(--gold);font-weight:700;text-align:center;background:rgba(255,213,122,.08);border:1px solid rgba(255,213,122,.25);border-radius:10px;padding:8px}
-  /* ── 배너 캐러셀 ── */
-  .caro{position:relative;margin:16px 0 6px;border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-  .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:26px 30px;opacity:0;pointer-events:none;transition:opacity .55s}
-  .slide.on{opacity:1;pointer-events:auto;position:relative}
-  .s1{background:linear-gradient(115deg,#1a1706,#0e1119 65%)}
-  .s2{background:linear-gradient(115deg,rgba(255,90,90,.14),#0e1119 70%)}
-  .s3{background:linear-gradient(115deg,rgba(174,182,255,.14),#0e1119 70%)}
-  .stxt .eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:900;color:var(--gold)}
-  .s2 .eyebrow{color:#ffb35c}.s3 .eyebrow{color:var(--accent)}
-  .stxt h2{font-size:clamp(21px,3.6vw,30px);font-weight:900;letter-spacing:-.7px;line-height:1.2;margin:6px 0 4px}
-  .stxt p{font-size:13.5px;color:var(--muted)}
-  .stxt .go{display:inline-block;margin-top:12px;font-size:13px;font-weight:800;color:var(--gold)}
-  .simg{flex:0 0 auto}
-  .simg img{width:clamp(110px,18vw,170px);aspect-ratio:1;object-fit:cover;border-radius:14px;box-shadow:0 12px 34px rgba(0,0,0,.5)}
-  .simg .big{font-size:clamp(54px,9vw,86px);filter:drop-shadow(0 10px 26px rgba(0,0,0,.55))}
-  .sfaces{display:flex}
-  .sfaces img{width:clamp(40px,7vw,62px);height:clamp(40px,7vw,62px);border-radius:50%;object-fit:cover;border:2px solid #1a1e2b;margin-left:-14px}
-  .sfaces img:first-child{margin-left:0}
-  .dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:7px;z-index:3}
-  .dots button{width:7px;height:7px;border-radius:50%;border:none;background:rgba(255,255,255,.3);cursor:pointer;padding:0;transition:background .2s,width .2s}
-  .dots button.on{background:var(--gold);width:20px;border-radius:999px}
-  /* ── 섹션 공통 ── */
-  section{padding:30px 0 8px}
-  .shead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
-  .shead h2{font-size:clamp(18px,2.8vw,23px);font-weight:800;letter-spacing:-.4px}
-  .shead a{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap}
-  .shead a:hover{color:var(--ink)}
-  .previewnote{font-size:12px;color:var(--muted);margin-bottom:14px;opacity:.85}
-  /* ── 상품 그리드 (쿠팡식 카드) ── */
-  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
-  .pcard{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
-  .pcard:hover{transform:translateY(-3px);border-color:#2e3340;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  .pimg{position:relative;display:block;aspect-ratio:1;background:#0e1118}
-  .pimg img{width:100%;height:100%;object-fit:cover;display:block}
-  .pico{display:flex;align-items:center;justify-content:center;height:100%;font-size:56px}
-  .pgrade{position:absolute;top:8px;left:8px;font-size:11px;font-weight:900;letter-spacing:.5px;border-radius:999px;padding:3px 10px}
-  .pgrade.gS{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
-  .pgrade.gA{background:rgba(174,182,255,.85);color:#10122b}
-  .exlabel{position:absolute;top:8px;right:8px;font-size:9px;font-weight:800;letter-spacing:.5px;background:rgba(11,13,18,.72);color:#cdd3df;border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:2px 6px;backdrop-filter:blur(4px)}
-  .pinfo{display:flex;flex-direction:column;gap:2px;padding:11px 12px 4px}
-  .pname{font-size:13.5px;font-weight:600;letter-spacing:-.2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em}
-  .pprice{font-size:16.5px;font-weight:900;letter-spacing:-.3px}
-  .pmeta{font-size:11px;color:var(--muted)}
-  .pact{display:flex;gap:7px;padding:9px 11px 12px}
-  .addbtn{flex:1;background:rgba(255,213,122,.1);border:1px solid rgba(255,213,122,.35);border-radius:10px;color:var(--gold);font-size:12.5px;font-weight:800;padding:8px 4px;cursor:pointer;font-family:inherit;transition:background .15s}
-  .addbtn:hover{background:rgba(255,213,122,.18)}
-  .addbtn.got{background:rgba(255,213,122,.16);cursor:default}
-  .buy{flex:1;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bg);border-radius:10px;font-size:12.5px;font-weight:800;padding:8px 4px;transition:filter .15s}
-  .buy:hover{filter:brightness(.9)}
-  .buy.soon{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--line)}
-  .noresult{display:none;text-align:center;color:var(--muted);font-size:14px;padding:36px 0}
-  .noresult.show{display:block}
-  .noresult b{color:var(--ink)}
-  /* ── 콘텐츠 레일: 보다가, 담기 ── */
-  .rail{display:flex;gap:12px;overflow-x:auto;padding:4px 0 10px;scroll-snap-type:x mandatory;scrollbar-width:none}
-  .rail::-webkit-scrollbar{display:none}
-  .rcard{flex:0 0 148px;scroll-snap-align:start;display:flex;flex-direction:column;gap:3px}
-  .rcard b{font-size:13px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .rcard .rsub{font-size:11.5px;color:var(--muted)}
-  .rthumb{position:relative;width:148px;height:148px;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:5px;transition:transform .2s,border-color .2s}
-  .rcard:hover .rthumb{transform:translateY(-3px);border-color:#2e3340}
-  .rthumb img{width:100%;height:100%;object-fit:cover}
-  .rico{font-size:44px}
-  .rplay{position:absolute;right:8px;bottom:8px;width:26px;height:26px;border-radius:50%;background:rgba(11,13,18,.75);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2)}
-  .rlive .rthumb{border-color:rgba(255,107,107,.5);background:linear-gradient(135deg,rgba(255,107,107,.12),var(--card))}
-  .livedot{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:5px}
-  .livedot::before{content:"";width:8px;height:8px;border-radius:50%;background:#ff5b5b;animation:pulse 1.6s ease-in-out infinite}
-  .livedot::after{content:"LIVE";font-size:10px;font-weight:900;letter-spacing:1px;color:#ff8a8a}
-  @keyframes pulse{50%{opacity:.35}}
-  .rjt{background:linear-gradient(135deg,rgba(255,213,122,.1),var(--card))}
-  /* ── 편집 기준 스트립 ── */
-  .editline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 18px;margin:22px 0 4px;font-size:13px;color:var(--muted)}
-  .editline b{color:var(--ink)}
-  .editline .ck{color:var(--gold);font-weight:900}
-  .editline a{margin-left:auto;color:var(--gold);font-weight:800;font-size:12.5px;white-space:nowrap}
-  /* ── FAQ ── */
-  .faqs{max-width:760px}
-  .faq{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card);overflow:hidden}
-  .faq-q{width:100%;text-align:left;background:none;border:none;color:var(--ink);font-size:14.5px;font-weight:600;padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit}
-  .faq-q span{color:var(--muted);font-size:21px;transition:transform .2s}
-  .faq.open .faq-q span{transform:rotate(45deg);color:var(--ink)}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;color:var(--muted);font-size:13.5px;padding:0 18px}
-  .faq.open .faq-a{max-height:260px;padding:0 18px 16px}
-  /* ── 가입 ── */
-  .signup{background:radial-gradient(700px 300px at 50% 0%,rgba(255,255,255,.05),transparent),var(--bg2);border:1px solid var(--line);border-radius:22px;padding:40px 22px;text-align:center;max-width:760px;margin:26px auto 10px}
-  .signup h2{font-size:clamp(20px,3vw,26px);font-weight:800;letter-spacing:-.4px}
-  .signup p{color:var(--muted);font-size:14px;margin-top:4px}
-  .signup form{display:flex;gap:10px;max-width:440px;margin:20px auto 0}
-  .signup input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:13px 20px;color:var(--ink);font-size:15px}
-  .signup button{background:var(--ink);color:var(--bg);border:none;border-radius:999px;padding:13px 22px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit}
-  .signup .ok{color:var(--muted);margin-top:12px;font-weight:700;display:none}
-  .promises{margin-top:18px;font-size:12.5px;color:var(--muted);line-height:2}
-  /* ── 푸터 ── */
-  footer{border-top:1px solid var(--line);margin-top:34px;padding:42px 0 60px;color:var(--muted);font-size:13px}
-  .fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;margin-bottom:24px}
-  footer b{color:var(--ink)}
-  footer a{color:var(--muted)}footer a:hover{color:var(--ink)}
-  .fcol h4{color:var(--ink);font-size:14px;margin-bottom:10px}.fcol a{display:block;margin:6px 0}
-  .notice{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12px;line-height:1.7}
   @keyframes msgin{from{opacity:0;transform:translateY(8px)}}
-  /* ── 옥동 AI 플로팅 ── */
-  .ai-fab{position:fixed;right:18px;bottom:18px;z-index:70;width:56px;height:56px;border-radius:50%;border:1px solid rgba(174,182,255,.5);cursor:pointer;font-size:24px;
-    background:radial-gradient(circle at 35% 28%,#8a93ff,#4b3aa8 70%);box-shadow:0 8px 30px rgba(80,90,220,.4);transition:transform .2s;-webkit-tap-highlight-color:transparent}
-  .ai-fab:hover{transform:translateY(-3px)}
-  .ai-panel{position:fixed;right:14px;bottom:86px;z-index:70;width:min(340px,calc(100vw - 28px));max-height:calc(100vh - 110px);overflow-y:auto;
-    background:#0e1119;border:1px solid #262b3a;border-radius:20px;padding:16px 16px 18px;text-align:center;box-shadow:0 24px 70px rgba(0,0,0,.6);animation:msgin .25s ease-out}
-  .ai-panel[hidden]{display:none}
-  .ai-head{display:flex;align-items:center;gap:8px;text-align:left}
-  .ai-head b{font-size:15px}.ai-head span{font-size:12px;color:var(--muted);flex:1}
-  .ai-close{background:none;border:none;color:var(--muted);font-size:15px;cursor:pointer;padding:4px 6px;font-family:inherit}
-  .ai-panel [hidden]{display:none!important}
-  .sat{position:absolute;left:50%;top:50%;width:7px;height:7px;margin:-3.5px;border-radius:50%;background:#ffd57a;box-shadow:0 0 10px rgba(255,213,122,.8);animation:orbit 5s linear infinite;z-index:2;pointer-events:none}
-  .sat.s2{width:5px;height:5px;background:#aeb6ff;box-shadow:0 0 8px rgba(174,182,255,.8);animation:orbit 8s linear infinite reverse}
-  @keyframes orbit{from{transform:rotate(0) translateX(74px)}to{transform:rotate(360deg) translateX(74px)}}
-  .orb-wrap{display:flex;justify-content:center;margin:18px 0 6px}
-  .orb{position:relative;width:118px;height:118px;border-radius:50%;border:none;cursor:pointer;background:transparent;-webkit-tap-highlight-color:transparent}
-  .orb .core{position:absolute;inset:16px;border-radius:50%;
-    background:radial-gradient(circle at 35% 28%,#d6dcff,#8a93ff 38%,#4b3aa8 68%,#141426 100%);
-    box-shadow:0 0 44px rgba(140,150,255,.4),0 0 90px rgba(140,150,255,.15),inset 0 0 26px rgba(255,255,255,.14);
-    animation:orbbreathe 4.2s ease-in-out infinite;transition:box-shadow .4s}
-  .orb .core::after{content:"";position:absolute;inset:-2px;border-radius:50%;
-    background:conic-gradient(from 0deg,transparent 65%,rgba(255,213,122,.35) 78%,transparent 90%);
-    animation:orbspin 6s linear infinite}
-  @keyframes orbbreathe{50%{transform:scale(1.045)}}
-  @keyframes orbspin{to{transform:rotate(360deg)}}
-  .oico{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;z-index:3;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
-  .ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(150,160,255,.5);opacity:0;pointer-events:none}
-  .orb.listening .ring{animation:ringout 1.5s linear infinite}
-  .orb.listening .r2{animation-delay:.5s}.orb.listening .r3{animation-delay:1s}
-  .orb.listening .core{box-shadow:0 0 60px rgba(140,150,255,.65),0 0 120px rgba(140,150,255,.25),inset 0 0 26px rgba(255,255,255,.2)}
-  @keyframes ringout{0%{transform:scale(.82);opacity:.9}100%{transform:scale(1.55);opacity:0}}
-  .orb.thinking .core::after{animation:orbspin .9s linear infinite}
-  .orb.thinking .core{filter:hue-rotate(20deg) brightness(1.1)}
-  .orb.speaking .core{background:radial-gradient(circle at 35% 28%,#ffe9bd,#ffd57a 36%,#b07a2e 68%,#241a08 100%);
-    box-shadow:0 0 60px rgba(255,190,80,.5),0 0 120px rgba(255,190,80,.18),inset 0 0 26px rgba(255,255,255,.2)}
-  .ai-status{font-size:13px;color:var(--muted);min-height:20px}
-  .ai-tr{font-size:15px;font-weight:700;min-height:24px;margin-top:4px;color:#c9d1ff}
-  .ai-reply{max-width:520px;margin:14px auto 0;background:var(--card);border:1px solid #262b3a;border-left:3px solid var(--accent);border-radius:0 14px 14px 14px;padding:13px 16px;text-align:left;font-size:14px;color:#d6dae6;animation:msgin .35s ease-out}
-  .ai-card{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;max-width:280px;margin:14px auto 0;animation:msgin .4s ease-out}
-  .ai-card .dg{font-size:11px;font-weight:900;letter-spacing:1px;border-radius:999px;padding:3px 10px}
-  .ai-card.gS .dg{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
-  .ai-card.gA .dg{background:rgba(174,182,255,.16);color:#aeb6ff;border:1px solid rgba(174,182,255,.35)}
-  .ai-card .di{font-size:36px}.ai-card b{font-size:14px}.ai-card .dp{font-size:13px;color:var(--muted);font-weight:700}
-  .ai-form{display:flex;gap:8px;max-width:460px;margin:16px auto 0}
-  .ai-form input{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:11px 16px;color:var(--ink);font-size:14px;font-family:inherit}
-  .ai-form button{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:13px;font-weight:800;padding:0 18px;cursor:pointer;font-family:inherit}
-  .ai-note{font-size:11px;color:var(--muted);margin-top:12px}
-  @media(max-width:640px){
-    .mh1{gap:10px}
-    .msearch{order:3;min-width:100%}
-    .slide{padding:20px 18px}
-    .fgrid{grid-template-columns:1fr}
-  }
-  @media(prefers-reduced-motion:reduce){.sat,.livedot::before,.orb .core,.orb .core::after{animation:none}}
+  /* ── 진행 표시 + 스와이프 힌트 ── */
+  .idx{position:absolute;right:14px;top:50%;transform:translateY(-50%);z-index:10;font-size:11.5px;font-weight:800;color:rgba(255,255,255,.75);background:rgba(11,13,18,.5);border-radius:999px;padding:5px 10px;backdrop-filter:blur(4px)}
+  .hint{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 152px);transform:translateX(-50%);z-index:10;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.85);background:rgba(11,13,18,.55);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 16px;backdrop-filter:blur(6px);animation:hintbob 1.8s ease-in-out infinite;pointer-events:none;transition:opacity .4s}
+  .hint.off{opacity:0}
+  @keyframes hintbob{50%{transform:translate(-50%,-7px)}}
+  /* ── 🎤 말로 찾기 ── */
+  .vpill{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 22px);transform:translateX(-50%);z-index:10;display:flex;align-items:center;gap:8px;
+    background:rgba(14,17,25,.86);border:1.5px solid rgba(174,182,255,.5);border-radius:999px;color:var(--ink);font-size:14px;font-weight:800;padding:12px 22px;cursor:pointer;font-family:inherit;backdrop-filter:blur(10px);box-shadow:0 10px 34px rgba(0,0,0,.5);transition:border-color .2s,transform .15s}
+  .vpill:active{transform:translateX(-50%) scale(.96)}
+  .vpill.listening{border-color:#ff8a8a;animation:srpulse 1.4s ease-in-out infinite}
+  @keyframes srpulse{50%{box-shadow:0 0 0 9px rgba(255,138,138,.1)}}
+  .vtoast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom) + 82px);transform:translateX(-50%);z-index:10;width:min(360px,calc(100vw - 44px));
+    background:rgba(14,17,25,.94);border:1px solid #2a3040;border-left:3px solid var(--gold);border-radius:14px;padding:12px 15px;font-size:13.5px;color:#e2e6ef;box-shadow:0 14px 44px rgba(0,0,0,.55);animation:msgin .25s ease-out}
+  .vtoast[hidden]{display:none}
+  .vtoast b{color:var(--gold)}
+  .slide.flash{animation:flash .9s ease-out}
+  @keyframes flash{0%{box-shadow:inset 0 0 0 3px rgba(255,213,122,.85)}100%{box-shadow:inset 0 0 0 3px transparent}}
+  /* ── 마지막 슬라이드 ── */
+  .slide.end{align-items:stretch}
+  .endin{width:100%;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 76px) 24px calc(env(safe-area-inset-bottom) + 110px);text-align:center;scrollbar-width:none}
+  .endin::-webkit-scrollbar{display:none}
+  .brandmark{font-weight:900;font-size:20px}.brandmark small{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:1px;margin-left:5px}
+  .endin h2{font-size:clamp(24px,6vw,30px);font-weight:900;letter-spacing:-.8px;margin-top:18px}
+  .endsub{font-size:14px;color:var(--muted);margin-top:8px}
+  .mail{display:flex;gap:8px;max-width:400px;margin:22px auto 0}
+  .mail input{flex:1;min-width:0;background:var(--card);border:1px solid #2a3040;border-radius:999px;padding:13px 18px;color:var(--ink);font-size:14px}
+  .mail button{background:var(--ink);color:var(--bg);border:none;border-radius:999px;padding:13px 18px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;white-space:nowrap}
+  .mail .ok{display:none;color:var(--muted);font-weight:700;margin-top:10px;font-size:13px}
+  .promises{margin-top:16px;font-size:12px;color:var(--muted);line-height:2}
+  .endlinks{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:18px}
+  .endlinks a{font-size:12.5px;font-weight:700;color:#cdd3df;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+  .endlinks.sns a{color:var(--muted)}
+  .legal{margin-top:22px;font-size:11px;color:#7e8696;line-height:1.8;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .legal b{color:#aeb6c4}.legal a{color:#aeb6c4}
+  @media(prefers-reduced-motion:reduce){.hint,.pg.glive i,.vpill.listening{animation:none}}
 </style>
 </head>
 <body>
-  <header class="mhead"><div class="wrap">
-    <div class="mh1">
+  <div class="stage">
+    <div class="top">
       <a class="brand" href="index.html">옥동몰<small>oaktongmall</small></a>
-      <form class="msearch" id="msf"><input id="msq" placeholder="발굴품 검색 — 예: 정수 필터, 티타늄 펜" maxlength="60" autocomplete="off"><button type="button" id="micbtn" aria-label="음성으로 검색">🎤</button><button type="submit" aria-label="검색">🔍</button></form>
       <button class="bagbtn" id="bagbtn" aria-label="발굴함 열기"><span>🎒</span><span class="n" id="bagn" hidden>0</span></button>
-    </div>
-    <div class="cats" id="cats">
-      <button class="chip on" data-cat="all">전체</button><button class="chip" data-cat="edc">🖊️ EDC·문구</button><button class="chip" data-cat="water">💧 정수·물</button><button class="chip" data-cat="outdoor">🏕️ 아웃도어</button>
-      <span class="div"></span>
-      <a class="chip" href="battle.html">🔥 팔아남기</a>
-      <a class="chip" href="live.html" style="color:#ff8a8a">🔴 라이브</a>
-      <a class="chip" href="drop.html" style="color:var(--gold)">⚡ 감정서 보기</a>
-      <a class="chip" href="about.html" style="color:var(--muted)">이야기</a>
     </div>
     <div class="bagdrop" id="bagdrop" hidden>
       <h5>🎒 발굴함 <small id="bagcnt"></small></h5>
       <div id="baglist"></div>
-      <a class="bagnote" href="#signup">오픈하면 이 목록부터 알려드려요 — 알림 신청 →</a>
+      <a class="bagnote" href="#last">오픈하면 이 목록부터 알려드려요 — 알림 신청 →</a>
     </div>
-  </div></header>
-
-  <main class="wrap">
-    <div class="caro" id="caro">
-      <a class="slide s1 on" href="item-tiarto.html">
-        <div class="stxt"><div class="eyebrow">오늘의 발굴 · S급</div><h2>볼펜의 종착지</h2><p>무한심 티타늄 EDC 펜 (Ti Arto) — ₩198,900</p><span class="go">감정서 보기 →</span></div>
-        <div class="simg"><img src="assets/products/tiarto.jpg" alt="무한심 티타늄 EDC 펜"></div>
-      </a>
-      <a class="slide s2" href="battle.html">
-        <div class="stxt"><div class="eyebrow">NEW SHOW</div><h2>🔥 팔아남기</h2><p>AI 쇼호스트 6인의 판매 서바이벌 — 팔지 못하면, 사라집니다</p><span class="go">후보 6인 보러가기 →</span></div>
-        <div class="simg sfaces"><img src="assets/hosts/host1.jpg" alt="준"><img src="assets/hosts/host2.jpg" alt="마테오"><img src="assets/hosts/host3.jpg" alt="나오미"><img src="assets/hosts/host4.jpg" alt="유나"></div>
-      </a>
-      <a class="slide s3" href="live.html">
-        <div class="stxt"><div class="eyebrow">🔴 옥동 라이브</div><h2>매주 토 21:00</h2><p>AI 감정 극장 — 실루엣이 공개되는 순간, 모두가 같은 장면을 봅니다</p><span class="go">대기실 입장 →</span></div>
-        <div class="simg"><span class="big">📺</span></div>
-      </a>
-      <div class="dots" id="dots"><button class="on" aria-label="배너 1"></button><button aria-label="배너 2"></button><button aria-label="배너 3"></button></div>
+    <main class="feed" id="feed"><section class="slide prod" id="s-tiarto" data-q="무한심 티타늄 edc 펜 (ti arto) 그레이드5 티타늄 · 37g · 800종+ 리필심 호환 · 길이 조절 펜 볼펜 필기 edc 티타늄 선물 문구 리필">
+      <img class="bg" src="assets/products/tiarto.jpg" alt="무한심 티타늄 EDC 펜 (Ti Arto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gS">S급 발굴</span>
+        <h2>무한심 티타늄 EDC 펜 (Ti Arto)</h2>
+        <p class="why">볼펜의 종착지.</p>
+        <div class="price">₩198,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="tiarto">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-tiarto.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide prod" id="s-ursack" data-q="야생동물 방지 식량 보관백 (ursack major) uhmwpe 원단 · 약 10.65l · 곰 저항 인증(igbc) · 215g 캠핑 백패킹 곰 식량 보관 아웃도어 등산 종주">
+      <img class="bg" src="assets/products/ursack.jpg" alt="야생동물 방지 식량 보관백 (Ursack Major) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gS">S급 발굴</span>
+        <h2>야생동물 방지 식량 보관백 (Ursack Major)</h2>
+        <p class="why">방탄조끼에 쓰는 원단으로 만든 자루.</p>
+        <div class="price">₩464,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="ursack">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-ursack.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide show">
+    <video class="bg" src="assets/hosts/jun-intro.mp4" muted loop playsinline preload="metadata"></video>
+    <div class="shade"></div>
+    <span class="aibadge">🤖 AI 가상 인물 · 사전 제작</span>
+    <div class="meta">
+      <span class="pg gshow">NEW SHOW</span>
+      <h2>🔥 팔아남기</h2>
+      <p class="why">팔지 못하면, 사라집니다 — AI 쇼호스트 6인의 판매 서바이벌.</p>
+      <div class="btns"><a class="buy golink" href="battle.html">후보 6인 보러가기 →</a></div>
     </div>
-
-    <section id="deals">
-      <div class="shead"><h2>⚡ 오늘의 발굴</h2><a href="drop.html">감정서 전체 보기 →</a></div>
-      <p class="previewnote">🔎 오픈 전 미리보기 — 기준 통과품만 진열합니다. 결제는 스토어 오픈과 함께 네이버페이로.</p>
-      <div class="pgrid" id="pgrid"><div class="pcard" data-cat="edc" data-q="무한심 티타늄 edc 펜 (ti arto) 그레이드5 티타늄 · 37g · 800종+ 리필심 호환 · 길이 조절 펜 볼펜 필기 edc 티타늄 선물 문구 리필">
-      <a class="pimg" href="item-tiarto.html">
-        <img src="assets/products/tiarto.jpg" alt="무한심 티타늄 EDC 펜 (Ti Arto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
-        <span class="pgrade gS">S급</span>
-      </a>
-      <a class="pinfo" href="item-tiarto.html">
-        <b class="pname">무한심 티타늄 EDC 펜 (Ti Arto)</b>
-        <span class="pprice">₩198,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="tiarto">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div><div class="pcard" data-cat="outdoor" data-q="야생동물 방지 식량 보관백 (ursack major) uhmwpe 원단 · 약 10.65l · 곰 저항 인증(igbc) · 215g 캠핑 백패킹 곰 식량 보관 아웃도어 등산 종주">
-      <a class="pimg" href="item-ursack.html">
-        <img src="assets/products/ursack.jpg" alt="야생동물 방지 식량 보관백 (Ursack Major) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
-        <span class="pgrade gS">S급</span>
-      </a>
-      <a class="pinfo" href="item-ursack.html">
-        <b class="pname">야생동물 방지 식량 보관백 (Ursack Major)</b>
-        <span class="pprice">₩464,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="ursack">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div><div class="pcard" data-cat="water" data-q="접이식 2l 물주머니 (cnoc vecto) fda 인증 tpu · 2l · 76g · 28mm 나사산(정수필터 호환) 물 물통 물주머니 백패킹 등산 캠핑 정수">
-      <a class="pimg" href="item-cnoc.html">
-        <img src="assets/products/cnoc.jpg" alt="접이식 2L 물주머니 (CNOC Vecto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
-        <span class="pgrade gA">A급</span>
-      </a>
-      <a class="pinfo" href="item-cnoc.html">
-        <b class="pname">접이식 2L 물주머니 (CNOC Vecto)</b>
-        <span class="pprice">₩123,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="cnoc">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div><div class="pcard" data-cat="water" data-q="스퀴즈 정수 필터 (sawyer squeeze) 0.1미크론 중공사막 · 무게 232g · 평생 보증 정수 필터 물 계곡 캠핑 등산 백패킹 여행 재난">
-      <a class="pimg" href="item-sawyer.html">
-        <img src="assets/products/sawyer.jpg" alt="스퀴즈 정수 필터 (Sawyer Squeeze) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
-        <span class="pgrade gA">A급</span>
-      </a>
-      <a class="pinfo" href="item-sawyer.html">
-        <b class="pname">스퀴즈 정수 필터 (Sawyer Squeeze)</b>
-        <span class="pprice">₩92,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="sawyer">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div><div class="pcard" data-cat="edc" data-q="무중력 볼펜 불릿 400 (fisher space pen) 가압 카트리지 · -45~120℃ · 무중력 필기 펜 볼펜 우주 선물 edc 필기 nasa">
-      <a class="pimg" href="item-fisher.html">
-        <span class="pico">🚀</span>
-        <span class="pgrade gA">A급</span>
-      </a>
-      <a class="pinfo" href="item-fisher.html">
-        <b class="pname">무중력 볼펜 불릿 400 (Fisher Space Pen)</b>
-        <span class="pprice">₩50,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="fisher">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div><div class="pcard" data-cat="water" data-q="초고속 정수 필터 (platypus quickdraw) 중공사막 0.2미크론 · 1l · 69g · 유량 3l/분 정수 필터 물 등산 캠핑 백패킹">
-      <a class="pimg" href="item-platypus.html">
-        <img src="assets/products/platypus.jpg" alt="초고속 정수 필터 (Platypus QuickDraw) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
-        <span class="pgrade gA">A급</span>
-      </a>
-      <a class="pinfo" href="item-platypus.html">
-        <b class="pname">초고속 정수 필터 (Platypus QuickDraw)</b>
-        <span class="pprice">₩76,900</span>
-        <span class="pmeta">✈️ 해외직송 7~14일 · 🇺🇸 미국</span>
-      </a>
-      <div class="pact"><button class="addbtn" data-slug="platypus">🎒 담기</button><a class="buy soon" href="#signup">🔔 오픈 알림</a></div>
-    </div></div>
-      <div class="noresult" id="noresult">앗, 그건 아직 발굴 못 했어요. <b>옥동 AI</b>(우하단 🤖)에게 물어보시면 비슷한 걸 골라드려요.</div>
-    </section>
-
-    <section id="watch">
-      <div class="shead"><h2>🎬 보다가, 담기</h2><a href="battle.html">팔아남기 →</a></div>
-      <div class="rail"><a class="rcard rlive" href="live.html">
-    <span class="rthumb"><span class="rico">📺</span><span class="livedot"></span></span>
-    <b>옥동 라이브</b><span class="rsub">매주 토 21:00 · 감정 극장</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host1.jpg" alt="준" loading="lazy"><span class="rplay">▶</span></span>
-    <b>준</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host2.jpg" alt="마테오" loading="lazy"><span class="rplay">▶</span></span>
-    <b>마테오</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host3.jpg" alt="나오미" loading="lazy"><span class="rplay">▶</span></span>
-    <b>나오미</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host4.jpg" alt="유나" loading="lazy"><span class="rplay">▶</span></span>
-    <b>유나</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host5.jpg" alt="에릭" loading="lazy"><span class="rplay">▶</span></span>
-    <b>에릭</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard" href="battle.html">
-    <span class="rthumb"><img src="assets/hosts/host6.jpg" alt="프리야" loading="lazy"><span class="rplay">▶</span></span>
-    <b>프리야</b><span class="rsub">🔥 팔아남기</span></a><a class="rcard rj" href="journal-why-titanium.html">
-    <span class="rthumb rjt"><span class="rico">📖</span></span>
-    <b>왜 자꾸 티타늄을 고르게 될까</b><span class="rsub">소재 이야기</span></a><a class="rcard rj" href="journal-hotel-kettle.html">
-    <span class="rthumb rjt"><span class="rico">📖</span></span>
-    <b>숙소 전기포트가 찜찜한 진짜 이유</b><span class="rsub">고른 이유</span></a></div>
-    </section>
-
-    <div class="editline"><span class="ck">✓</span><span><b>아무거나 안 팝니다</b> — 수요·평점·가치·이유, 4가지 기준을 통과한 것만 진열해요.</span><a href="about.html">편집 기준 →</a></div>
-
-    <section id="faq">
-      <div class="shead"><h2>자주 묻는 질문</h2></div>
-      <div class="faqs"><div class="faq"><button class="faq-q">정말 다양한 상품을 다 파나요?<span>+</span></button><div class="faq-a">분야는 가리지 않지만, 아무거나 다 올리지는 않습니다. 수요·평점·실사용 가치 기준을 통과한 것만 골라 큐레이션하는 편집샵이에요.</div></div><div class="faq"><button class="faq-q">주문하면 어떻게 배송되나요?<span>+</span></button><div class="faq-a">주문·결제 확인 후 해외 판매처에서 직접 구매해 통관까지 처리하고, EMS·DHL·FedEx 등 추적 가능한 물류로 보내드립니다. 평균 7~14영업일 소요되며, 현지 사정·통관 상황에 따라 달라질 수 있어요.</div></div><div class="faq"><button class="faq-q">관세·세금은 누가 내나요?<span>+</span></button><div class="faq-a">각국 면세 한도를 초과하면 관세·부가세가 부과될 수 있으며, 통관 시 수령인(구매자) 부담이 원칙입니다.</div></div><div class="faq"><button class="faq-q">교환·환불 되나요?<span>+</span></button><div class="faq-a">수령 후 일정 기간 내 청약철회가 가능합니다. 단순변심 시 반송비는 구매자 부담이며, 하자·오배송은 전액 환불·교환됩니다.</div></div></div>
-    </section>
-
-    <div class="signup" id="signup">
-      <h2>오픈 소식, 가장 먼저 받기 🚀</h2>
-      <p>스토어 오픈과 새 발굴 소식을 이메일로 알려드려요.</p>
-      <form onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.querySelector('input').value='';">
+  </section><section class="slide prod" id="s-cnoc" data-q="접이식 2l 물주머니 (cnoc vecto) fda 인증 tpu · 2l · 76g · 28mm 나사산(정수필터 호환) 물 물통 물주머니 백패킹 등산 캠핑 정수">
+      <img class="bg" src="assets/products/cnoc.jpg" alt="접이식 2L 물주머니 (CNOC Vecto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gA">A급 발굴</span>
+        <h2>접이식 2L 물주머니 (CNOC Vecto)</h2>
+        <p class="why">정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니.</p>
+        <div class="price">₩123,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="cnoc">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-cnoc.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide prod" id="s-sawyer" data-q="스퀴즈 정수 필터 (sawyer squeeze) 0.1미크론 중공사막 · 무게 232g · 평생 보증 정수 필터 물 계곡 캠핑 등산 백패킹 여행 재난">
+      <img class="bg" src="assets/products/sawyer.jpg" alt="스퀴즈 정수 필터 (Sawyer Squeeze) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gA">A급 발굴</span>
+        <h2>스퀴즈 정수 필터 (Sawyer Squeeze)</h2>
+        <p class="why">계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건.</p>
+        <div class="price">₩92,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="sawyer">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-sawyer.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide show livebg">
+    <div class="bg iconbg"><span>📺</span></div>
+    <div class="shade"></div>
+    <span class="aibadge">🤖 AI 호스트 · 옥동 라이브</span>
+    <div class="meta">
+      <span class="pg glive"><i></i>LIVE</span>
+      <h2>매주 토 21:00, 감정 극장</h2>
+      <p class="why">실루엣이 공개되는 순간 — 모두가 같은 장면을 봅니다.</p>
+      <div class="btns"><a class="buy golink" href="live.html">대기실 입장 →</a></div>
+    </div>
+  </section><section class="slide prod" id="s-fisher" data-q="무중력 볼펜 불릿 400 (fisher space pen) 가압 카트리지 · -45~120℃ · 무중력 필기 펜 볼펜 우주 선물 edc 필기 nasa">
+      <div class="bg iconbg"><span>🚀</span></div>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gA">A급 발굴</span>
+        <h2>무중력 볼펜 불릿 400 (Fisher Space Pen)</h2>
+        <p class="why">NASA가 우주로 가져간 그 볼펜.</p>
+        <div class="price">₩50,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="fisher">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-fisher.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide prod" id="s-platypus" data-q="초고속 정수 필터 (platypus quickdraw) 중공사막 0.2미크론 · 1l · 69g · 유량 3l/분 정수 필터 물 등산 캠핑 백패킹">
+      <img class="bg" src="assets/products/platypus.jpg" alt="초고속 정수 필터 (Platypus QuickDraw) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span>
+      <div class="shade"></div>
+      <div class="meta">
+        <span class="pg gA">A급 발굴</span>
+        <h2>초고속 정수 필터 (Platypus QuickDraw)</h2>
+        <p class="why">소여 다음으로 UL 하이커가 꼽는 정수 필터.</p>
+        <div class="price">₩76,900<small>✈️ 해외직송 7~14일 · 🇺🇸 미국</small></div>
+        <div class="btns"><button class="addbtn" data-slug="platypus">🎒 담기</button><a class="buy soon" href="#last">🔔 오픈 알림</a></div>
+        <a class="cert" href="item-platypus.html">📜 감정서 — 왜 골랐나 →</a>
+      </div>
+    </section><section class="slide end" id="last">
+    <div class="endin">
+      <div class="brandmark">옥동몰<small>oaktongmall</small></div>
+      <h2>고른 것만 팝니다.</h2>
+      <p class="endsub">수요·평점·가치·이유 — 4가지 기준을 통과한 것만 진열해요.<br>오픈하면 발굴함에 담긴 것부터 알려드릴게요.</p>
+      <form class="mail" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.querySelector('input').value='';">
         <input type="email" placeholder="이메일 주소" required>
-        <button type="submit">알림 신청</button>
+        <button type="submit">오픈 알림 받기</button>
         <div class="ok">✅ 신청 완료! 오픈하면 가장 먼저 알려드릴게요.</div>
       </form>
       <p class="promises">🛡️ 정품 직소싱 · 💳 네이버페이 안전결제 · ↩️ 7일 청약철회 · 🔍 투명한 감정서</p>
-    </div>
-  </main>
-
-  <footer><div class="wrap">
-    <div class="fgrid">
-      <div><div class="brand" style="font-size:18px">옥동몰<small>oaktongmall</small></div>
-        <p style="margin-top:8px">고른 것만 팝니다.<br>기준을 통과한 글로벌 잇템만, 큐레이션 몰 옥동몰.</p></div>
-      <div class="fcol"><h4>바로가기</h4><a href="#signup">오픈 알림</a><a href="drop.html">오늘의 발굴</a><a href="about.html">옥동 이야기</a><a href="journal-why-titanium.html">저널</a><a href="#faq">FAQ</a></div>
-      <div class="fcol"><h4>고객센터</h4><a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a><span>평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)</span></div>
-      <div class="fcol"><h4>채널</h4><a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a><a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a><a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a></div>
-    </div>
-    <div class="notice">
-      <div style="line-height:1.95;margin-bottom:9px">
-        <b>옥동샵</b> (oaktongshop) · 대표 추봉군<br>
-        사업자등록번호 493-07-03611 · 통신판매업 신고 준비중<br>
-        서울특별시 영등포구 국회대로54길 37-13, 602호 · 010-7372-5202 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a>
+      <div class="endlinks">
+        <a href="drop.html">⚡ 감정서 전체</a><a href="battle.html">🔥 팔아남기</a><a href="live.html">🔴 라이브</a><a href="about.html">이야기</a><a href="journal-why-titanium.html">저널</a>
       </div>
-      해외구매대행 브랜드 옥동몰(옥동샵). 본 쇼핑몰의 모든 상품은 해외구매대행 상품이며, 실제 매매계약은 해외 판매처와 체결됩니다. 통관을 위해 개인통관고유부호가 필요하며 관세·부가세가 별도 부과될 수 있습니다.
-      <div style="margin-top:9px"><a href="terms.html" style="color:var(--ink)"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop. All rights reserved.</div>
+      <div class="endlinks sns"><a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a><a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a><a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a></div>
+      <div class="legal">
+        <b>옥동샵</b> (oaktongshop) · 대표 추봉군 · 사업자등록번호 493-07-03611 · 통신판매업 신고 준비중<br>
+        서울특별시 영등포구 국회대로54길 37-13, 602호 · 010-7372-5202 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a> · 평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)<br>
+        해외구매대행 상품으로 실제 매매계약은 해외 판매처와 체결되며, 통관 시 개인통관고유부호가 필요하고 관세·부가세가 별도 부과될 수 있습니다.<br>
+        <a href="terms.html"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop.
+      </div>
     </div>
-  </div></footer>
-
-  <button class="ai-fab" id="ai-fab" aria-label="옥동 AI에게 물어보기" aria-expanded="false">🤖</button>
-  <div class="ai-panel" id="ai-panel" hidden>
-    <div class="ai-head"><b>옥동 AI</b><span>발굴품 중에서 골라드려요</span><button class="ai-close" id="ai-close" aria-label="닫기">✕</button></div>
-    <div class="orb-wrap">
-      <button class="orb" id="orb" aria-label="음성으로 물어보기">
-        <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-        <span class="core"></span><span class="oico" id="oico">🎤</span>
-        <span class="sat"></span><span class="sat s2"></span>
-      </button>
-    </div>
-    <div class="ai-status" id="ai-status">구체를 누르고 말해보세요</div>
-    <div class="ai-tr" id="ai-tr"></div>
-    <div class="ai-reply" id="ai-reply" hidden><p id="ai-reply-t"></p></div>
-    <a class="ai-card" id="ai-card" hidden href="#">
-      <span class="dg" id="ai-card-g"></span><span class="di" id="ai-card-i"></span><b id="ai-card-n"></b><span class="dp" id="ai-card-p"></span>
-    </a>
-    <form class="ai-form" id="ai-form">
-      <input id="ai-in" placeholder="예: 캠핑용품 추천해줘" maxlength="80" autocomplete="off">
-      <button type="submit">묻기</button>
-    </form>
-    <p class="ai-note">🤖 데모 응답(현재 발굴품 기준) · 오픈 후 실시간 추천으로 업그레이드</p>
+  </section></main>
+    <div class="idx" id="idx">1 / 9</div>
+    <div class="hint" id="hint">위로 넘겨보세요 ↑</div>
+    <button class="vpill" id="vpill"><span id="vico">🎤</span><span id="vlabel">말로 찾기</span></button>
+    <div class="vtoast" id="vtoast" hidden></div>
   </div>
 
   <script>
     const NAMES={"tiarto":{"icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)"},"ursack":{"icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)"},"cnoc":{"icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)"},"sawyer":{"icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)"},"fisher":{"icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)"},"platypus":{"icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)"}};
-    // ── 발굴함(장바구니): item 페이지와 같은 oaktong_bag 키 공유 ──
+    // ── 발굴함: item 페이지와 oaktong_bag 공유 ──
     const loadBag=()=>{try{return JSON.parse(localStorage.getItem('oaktong_bag')||'[]')}catch(e){return[]}};
     const saveBag=(b)=>localStorage.setItem('oaktong_bag',JSON.stringify(b));
     const bagBtn=document.getElementById('bagbtn'),bagN=document.getElementById('bagn'),
       bagDrop=document.getElementById('bagdrop'),bagList=document.getElementById('baglist'),bagCnt=document.getElementById('bagcnt');
     const syncBag=(bump)=>{const b=loadBag();
-      bagN.hidden=!b.length; bagN.textContent=b.length; bagCnt.textContent=b.length?b.length+'개':'';
+      bagN.hidden=!b.length;bagN.textContent=b.length;bagCnt.textContent=b.length?b.length+'개':'';
       if(bump){bagBtn.classList.remove('bump');void bagBtn.offsetWidth;bagBtn.classList.add('bump')}
-      bagList.innerHTML=b.length?'':'<div class="bagempty">아직 비었어요 — 마음에 드는 발굴품을 담아보세요.</div>';
+      bagList.innerHTML=b.length?'':'<div class="bagempty">아직 비었어요 — 🎒 담기를 눌러보세요.</div>';
       b.forEach(s=>{const it=NAMES[s];if(!it)return;
         const row=document.createElement('div');row.className='bagitem';
         row.innerHTML='<span>'+it.icon+'</span><b></b><button class="rm" aria-label="빼기">✕</button>';
@@ -437,116 +265,72 @@
       b.push(btn.dataset.slug);saveBag(b);syncBag(true);syncBtns();
       if(navigator.vibrate)navigator.vibrate(25);}));
     syncBag(false);syncBtns();
-    // ── 검색 + 카테고리 필터: 단어 단위 매칭 — "정수 필터 보여줘" 같은 자연어(음성)도 통과 ──
-    const msq=document.getElementById('msq');let cat='all';
+    // ── 피드: 진행 표시, 첫 스와이프에 힌트 제거, 영상 자동재생 ──
+    const feed=document.getElementById('feed'),slides=[...document.querySelectorAll('.slide')],
+      idx=document.getElementById('idx'),hint=document.getElementById('hint');
+    let cur=0,moved=false;
+    if('IntersectionObserver'in window){
+      const io=new IntersectionObserver((es)=>es.forEach(e=>{
+        const v=e.target.querySelector('video');
+        if(e.isIntersecting){
+          cur=slides.indexOf(e.target);idx.textContent=(cur+1)+' / '+slides.length;
+          if(v)v.play().catch(()=>{});
+          if(cur>0&&!moved){moved=true;hint.classList.add('off')}
+        } else if(v)v.pause();
+      }),{threshold:.6});
+      slides.forEach(s=>io.observe(s));
+    }
+    setTimeout(()=>hint.classList.add('off'),7000);
+    // ── 🎤 말로 찾기: 매칭 → 해당 슬라이드로 점프 / 질문·미보유 → 옥동 AI가 답 ──
+    const ITEMS=[{"slug":"tiarto","icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)","price":"₩198,900","grade":"S","tags":["펜","볼펜","필기","edc","티타늄","선물","문구","리필"],"why":"볼펜의 종착지."},{"slug":"ursack","icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)","price":"₩464,900","grade":"S","tags":["캠핑","백패킹","곰","식량","보관","아웃도어","등산","종주"],"why":"방탄조끼에 쓰는 원단으로 만든 자루."},{"slug":"cnoc","icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)","price":"₩123,900","grade":"A","tags":["물","물통","물주머니","백패킹","등산","캠핑","정수"],"why":"정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니."},{"slug":"sawyer","icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)","price":"₩92,900","grade":"A","tags":["정수","필터","물","계곡","캠핑","등산","백패킹","여행","재난"],"why":"계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건."},{"slug":"fisher","icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)","price":"₩50,900","grade":"A","tags":["펜","볼펜","우주","선물","edc","필기","nasa"],"why":"NASA가 우주로 가져간 그 볼펜."},{"slug":"platypus","icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)","price":"₩76,900","grade":"A","tags":["정수","필터","물","등산","캠핑","백패킹"],"why":"소여 다음으로 UL 하이커가 꼽는 정수 필터."}];
+    const vpill=document.getElementById('vpill'),vico=document.getElementById('vico'),
+      vlabel=document.getElementById('vlabel'),vtoast=document.getElementById('vtoast');
+    const toast=(html,ms)=>{vtoast.innerHTML=html;vtoast.hidden=false;
+      clearTimeout(toast.t);toast.t=setTimeout(()=>{vtoast.hidden=true},ms||5000);};
+    const speak=(t)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[🤖✨🎒📦🔔]/g,''));
+      u.lang='ko-KR';u.rate=1.05;speechSynthesis.speak(u);}catch(e){}};
     const STOP=['보여줘','보여','추천해줘','추천','찾아줘','찾아','알려줘','주세요','해줘','좀','거','것','같은','만한','뭐','뭐가','있어','있나요','있을까','살','쓸','때','갈'];
-    const applyFilter=()=>{const raw=msq.value.trim().toLowerCase();
-      const tokens=raw.split(/[\s,]+/).map(t=>t.replace(/[?.!~]/g,'')).filter(t=>t&&!STOP.includes(t));
-      let n=0;
-      document.querySelectorAll('.pcard').forEach(c=>{
-        const ok=(cat==='all'||c.dataset.cat===cat)&&(!tokens.length||tokens.some(t=>c.dataset.q.indexOf(t)>-1));
-        c.style.display=ok?'':'none';c.classList.toggle('hit',ok&&tokens.length>0);if(ok)n++;});
-      document.getElementById('noresult').classList.toggle('show',!n);return n;};
-    document.getElementById('msf').addEventListener('submit',(e)=>{e.preventDefault();applyFilter();
-      document.getElementById('deals').scrollIntoView({behavior:'smooth'});});
-    msq.addEventListener('input',applyFilter);
-    // ── 음성 검색: 🎤 → 실시간 필터 → 결과 있으면 상품으로, 없으면 옥동 AI가 이어받아 추천 ──
+    const jumpTo=(slug)=>{const el=document.getElementById('s-'+slug);if(!el)return false;
+      el.scrollIntoView({behavior:'smooth'});
+      el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash');
+      if(navigator.vibrate)navigator.vibrate(20);return true;};
+    const brain=(q)=>{
+      const ql=q.toLowerCase();
+      const tokens=ql.split(/[\s,]+/).map(t=>t.replace(/[?.!~]/g,'')).filter(t=>t&&!STOP.includes(t));
+      let best=null,score=0;
+      ITEMS.forEach(it=>{let s=0;it.tags.forEach(t=>{tokens.forEach(tk=>{if(tk.includes(t)||t.includes(tk))s++})});
+        if(ql.includes(it.name.toLowerCase()))s+=3;
+        if(s>score){score=s;best=it}});
+      if(best&&score>0)return{jump:best};
+      if(/배송|언제 와|도착/.test(ql))return{t:'해외 구매대행이라 평균 7~14 영업일 걸려요. 추적 가능한 물류로 안전하게 보내드립니다.'};
+      if(/오픈|언제 열|구매|살 수|사고/.test(ql))return{t:'정식 오픈 준비 중이에요. 마지막 화면에서 알림 신청하시면 가장 먼저 알려드릴게요.'};
+      if(/추천|골라|아무|선물/.test(ql))return{jump:ITEMS[0],say:'지금 최고 등급은 이겁니다. '+ITEMS[0].name};
+      return{t:'그건 아직 발굴 못 했어요. 지금은 EDC 필기구·정수·아웃도어 갈래예요 — 마지막 화면에서 오픈 알림을 받아두시면 새 발굴을 먼저 알려드려요.'};
+    };
     (function(){
       const SRC=window.SpeechRecognition||window.webkitSpeechRecognition;
-      const mic=document.getElementById('micbtn'),box=document.querySelector('.msearch');
-      if(!SRC){mic.style.display='none';return}
-      const PH=msq.placeholder;let vOn=false;
+      if(!SRC){vpill.style.display='none';return}
       const vr=new SRC();vr.lang='ko-KR';vr.interimResults=true;vr.maxAlternatives=1;
-      const stopUI=()=>{vOn=false;box.classList.remove('listening');mic.classList.remove('on');msq.placeholder=PH};
-      const finishVoice=(s)=>{if(!s)return;
-        if(applyFilter()>0){document.getElementById('deals').scrollIntoView({behavior:'smooth'})}
-        else if(window.oaktongAI){msq.value='';applyFilter();window.oaktongAI.open();window.oaktongAI.ask(s)}};
+      let on=false;
+      const stopUI=()=>{on=false;vpill.classList.remove('listening');vico.textContent='🎤';vlabel.textContent='말로 찾기'};
+      const finish=(s)=>{if(!s)return;
+        const r=brain(s);
+        if(r.jump){jumpTo(r.jump.slug);
+          toast('<b>'+r.jump.name+'</b> — '+r.jump.why,6000);
+          if(r.say)speak(r.say);}
+        else{toast(r.t,7000);speak(r.t);}};
       vr.onresult=(e)=>{let s='';for(const r of e.results)s+=r[0].transcript;
-        msq.value=s;applyFilter();
-        if(e.results[e.results.length-1].isFinal){stopUI();finishVoice(s.trim())}};
+        vlabel.textContent=s.slice(0,18)||'…';
+        if(e.results[e.results.length-1].isFinal){stopUI();finish(s.trim())}};
       vr.onerror=(e)=>{stopUI();
-        msq.placeholder=e.error==='not-allowed'?'마이크 권한이 필요해요 — 입력으로 검색해보세요':PH;};
+        if(e.error==='not-allowed')toast('마이크 권한이 필요해요 — 설정에서 허용해 주세요',5000);};
       vr.onend=()=>stopUI();
-      mic.addEventListener('click',()=>{
-        if(vOn){vr.stop();stopUI();return}
-        try{vr.start();vOn=true;box.classList.add('listening');mic.classList.add('on');
-          msq.value='';msq.placeholder='듣고 있어요… 예: "캠핑 갈 때 물 거를 거"';
+      vpill.addEventListener('click',()=>{
+        if(on){vr.stop();stopUI();return}
+        try{speechSynthesis.cancel();vr.start();on=true;vtoast.hidden=true;
+          vpill.classList.add('listening');vico.textContent='🎧';vlabel.textContent='듣고 있어요…';
           if(navigator.vibrate)navigator.vibrate(15);}catch(e){}
       });
-    })();
-    document.querySelectorAll('#cats button.chip').forEach(ch=>ch.addEventListener('click',()=>{
-      document.querySelectorAll('#cats button.chip').forEach(o=>o.classList.remove('on'));
-      ch.classList.add('on');cat=ch.dataset.cat;applyFilter();}));
-    // ── 배너 캐러셀: 5초 자동 순환, 포인터 올리면 일시정지 ──
-    const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('#dots button');let cur=0,timer=null;
-    const showSlide=(i)=>{cur=(i+slides.length)%slides.length;
-      slides.forEach((s,j)=>s.classList.toggle('on',j===cur));
-      dots.forEach((d,j)=>d.classList.toggle('on',j===cur));};
-    const startCaro=()=>{timer=setInterval(()=>showSlide(cur+1),5000)};
-    dots.forEach((d,j)=>d.addEventListener('click',(e)=>{e.preventDefault();showSlide(j)}));
-    const caro=document.getElementById('caro');
-    caro.addEventListener('pointerenter',()=>clearInterval(timer));
-    caro.addEventListener('pointerleave',startCaro);
-    startCaro();
-    // ── FAQ 아코디언 ──
-    document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
-
-    // ── 옥동 AI (자비스): 우하단 플로팅 패널 — Web Speech 음성인식 + TTS + 데모 추천
-    (function(){
-      const fab=document.getElementById('ai-fab'),panel=document.getElementById('ai-panel');
-      fab.addEventListener('click',()=>{const show=panel.hidden;panel.hidden=!show;fab.setAttribute('aria-expanded',show);});
-      document.getElementById('ai-close').addEventListener('click',()=>{panel.hidden=true;fab.setAttribute('aria-expanded',false);
-        try{speechSynthesis.cancel()}catch(e){}});
-      const ITEMS=[{"slug":"tiarto","icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)","price":"₩198,900","grade":"S","tags":["펜","볼펜","필기","edc","티타늄","선물","문구","리필"],"why":"볼펜의 종착지."},{"slug":"ursack","icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)","price":"₩464,900","grade":"S","tags":["캠핑","백패킹","곰","식량","보관","아웃도어","등산","종주"],"why":"방탄조끼에 쓰는 원단으로 만든 자루."},{"slug":"cnoc","icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)","price":"₩123,900","grade":"A","tags":["물","물통","물주머니","백패킹","등산","캠핑","정수"],"why":"정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니."},{"slug":"sawyer","icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)","price":"₩92,900","grade":"A","tags":["정수","필터","물","계곡","캠핑","등산","백패킹","여행","재난"],"why":"계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건."},{"slug":"fisher","icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)","price":"₩50,900","grade":"A","tags":["펜","볼펜","우주","선물","edc","필기","nasa"],"why":"NASA가 우주로 가져간 그 볼펜."},{"slug":"platypus","icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)","price":"₩76,900","grade":"A","tags":["정수","필터","물","등산","캠핑","백패킹"],"why":"소여 다음으로 UL 하이커가 꼽는 정수 필터."}];
-      const orb=document.getElementById('orb'),oico=document.getElementById('oico'),
-        st=document.getElementById('ai-status'),tr=document.getElementById('ai-tr'),
-        rp=document.getElementById('ai-reply'),rpt=document.getElementById('ai-reply-t'),
-        card=document.getElementById('ai-card');
-      const setState=(s,msg)=>{orb.className='orb'+(s?' '+s:'');if(msg!==undefined)st.textContent=msg;
-        oico.textContent=s==='listening'?'🎧':s==='thinking'?'✨':s==='speaking'?'💬':'🎤';};
-      const speak=(t)=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[🐵🤖✨🎒📦🔔]/g,''));
-        u.lang='ko-KR';u.rate=1.05;
-        u.onstart=()=>setState('speaking','옥동 AI가 답하는 중…');u.onend=()=>setState('','구체를 누르고 말해보세요');
-        speechSynthesis.speak(u);}catch(e){setState('','구체를 누르고 말해보세요')}};
-      const showCard=(it)=>{if(!it){card.hidden=true;return}
-        card.href='item-'+it.slug+'.html';card.className='ai-card g'+it.grade;
-        document.getElementById('ai-card-g').textContent=it.grade+'급';
-        document.getElementById('ai-card-i').textContent=it.icon;
-        document.getElementById('ai-card-n').textContent=it.name;
-        document.getElementById('ai-card-p').textContent=it.price;card.hidden=false;};
-      const brain=(q)=>{
-        const ql=q.toLowerCase();
-        let best=null,score=0;
-        ITEMS.forEach(it=>{let s=0;it.tags.forEach(t=>{if(ql.includes(t))s++});if(s>score){score=s;best=it}});
-        if(/안녕|하이|누구|뭐하는/.test(ql)&&!best)return{t:'안녕하세요, 옥동 AI입니다. 기준을 통과한 발굴품만 골라드려요. 캠핑, 필기구, 물·정수 — 어떤 상황이신가요?'};
-        if(/배송|언제 와|도착/.test(ql))return{t:'해외 구매대행이라 평균 7에서 14 영업일 걸려요. 추적 가능한 물류로 안전하게 보내드립니다.'};
-        if(/오픈|언제 열|구매|살 수|사고/.test(ql))return{t:'정식 오픈 준비 중이에요. 오픈 알림을 신청하시면 가장 먼저 알려드릴게요.'};
-        if(best)return{t:(score>1?'딱 맞는 게 있어요. ':'이건 어떠세요? ')+best.name+' — '+best.why+' 감정 '+best.grade+'급입니다.',item:best};
-        if(/추천|골라|아무|뭐 살|선물/.test(ql)){const s=ITEMS[0];return{t:'지금 무대의 최고 등급은 이겁니다. '+s.name+' — '+s.why,item:s}}
-        return{t:'지금 발굴품은 EDC 필기구, 정수·물, 아웃도어 세 갈래예요. 어떤 상황에 쓰실 물건인지 말씀해 주시면 골라드릴게요.'};
-      };
-      const answer=(q)=>{tr.textContent='"'+q+'"';setState('thinking','감정 중…');
-        setTimeout(()=>{const r=brain(q);rpt.textContent=r.t;rp.hidden=false;showCard(r.item||null);speak(r.t);},600+Math.random()*500);};
-      // 음성인식
-      const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null,listening=false;
-      if(SR){rec=new SR();rec.lang='ko-KR';rec.interimResults=true;rec.maxAlternatives=1;
-        rec.onresult=(e)=>{let s='';for(const r of e.results)s+=r[0].transcript;tr.textContent=s;
-          if(e.results[e.results.length-1].isFinal){listening=false;answer(s.trim())}};
-        rec.onerror=(e)=>{listening=false;
-          setState('', e.error==='not-allowed'?'마이크 권한이 필요해요 — 아래 입력으로도 물어볼 수 있어요':'잘 못 들었어요. 다시 눌러서 말해보세요');};
-        rec.onend=()=>{if(listening){listening=false;setState('','구체를 누르고 말해보세요')}};
-      }
-      orb.addEventListener('click',()=>{
-        if(!rec){setState('','이 브라우저는 음성인식을 지원하지 않아요 — 아래에 입력해 주세요');document.getElementById('ai-in').focus();return}
-        if(listening){rec.stop();listening=false;setState('','구체를 누르고 말해보세요');return}
-        try{speechSynthesis.cancel();rec.start();listening=true;tr.textContent='';rp.hidden=true;card.hidden=true;
-          setState('listening','듣고 있어요… 편하게 말씀하세요');if(navigator.vibrate)navigator.vibrate(15);}catch(e){}
-      });
-      document.getElementById('ai-form').addEventListener('submit',(e)=>{
-        e.preventDefault();const q=document.getElementById('ai-in').value.trim();if(!q)return;
-        document.getElementById('ai-in').value='';rp.hidden=true;card.hidden=true;answer(q);});
-      // 음성 검색이 매칭에 실패하면 여기로 이어받아 추천 (검색바 🎤 → AI 패널)
-      window.oaktongAI={open:()=>{panel.hidden=false;fab.setAttribute('aria-expanded',true)},ask:answer};
     })();
   </script>
 </body>

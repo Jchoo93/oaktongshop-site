@@ -297,6 +297,12 @@
     const syncBtns=()=>{const b=loadBag();document.querySelectorAll('.addbtn').forEach(btn=>{
       const got=b.includes(btn.dataset.slug);btn.classList.toggle('got',got);btn.textContent=got?'✓ 담김':'🎒 담기';});};
     bagBtn.addEventListener('click',()=>{bagDrop.hidden=!bagDrop.hidden});
+    // 🤫 구석 기능: 로고 빠르게 3번 탭 → 관리자 대시보드 (로컬 전용, 방문자에겐 아무 일 없음)
+    (()=>{let n=0,t0=0;document.querySelector('.brand').addEventListener('click',(e)=>{
+      const now=Date.now(); if(now-t0>1500)n=0; t0=now; n++;
+      if(n>=2)e.preventDefault(); // 연타 중엔 홈 리로드 방지
+      if(n>=3){n=0;window.open('http://localhost:4321','_blank');}
+    });})();
     document.addEventListener('click',(e)=>{if(!bagDrop.hidden&&!bagDrop.contains(e.target)&&!bagBtn.contains(e.target))bagDrop.hidden=true});
     document.querySelectorAll('.addbtn').forEach(btn=>btn.addEventListener('click',()=>{
       const b=loadBag();if(b.includes(btn.dataset.slug))return;

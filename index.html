@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
-<title>옥동몰 oaktongmall — 고른 것만, 한 장씩</title>
-<meta name="description" content="쇼핑몰 같지 않은 쇼핑. 기준을 통과한 발굴품을 한 화면에 하나씩 — 넘기고, 담고, 끝. 큐레이션 몰 옥동몰.">
-<meta property="og:title" content="옥동몰 oaktongmall — 고른 것만, 한 장씩">
+<title>옥동샵 oaktongshop — 고른 것만, 한 장씩</title>
+<meta name="description" content="쇼핑몰 같지 않은 쇼핑. 기준을 통과한 발굴품을 한 화면에 하나씩 — 넘기고, 담고, 끝. 큐레이션 몰 옥동샵.">
+<meta property="og:title" content="옥동샵 oaktongshop — 고른 것만, 한 장씩">
 <meta property="og:description" content="넘기고, 담고, 끝. 쇼핑몰 같지 않은 쇼핑.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://oaktongshop.com/assets/og/og-index.jpg">
@@ -109,13 +109,50 @@
   .endlinks.sns a{color:var(--muted)}
   .legal{margin-top:22px;font-size:11px;color:#7e8696;line-height:1.8;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
   .legal b{color:#aeb6c4}.legal a{color:#aeb6c4}
+  .navlinks{display:none}
+  /* ── 데스크톱(≥900px): 반응형 웹사이트 레이어 ── */
+  @media(min-width:900px){
+    .stage{max-width:none;border:none}
+    .feed{scroll-snap-type:y proximity}
+    .slide{scroll-snap-stop:normal}
+    .top{padding:18px 44px 14px;background:linear-gradient(180deg,rgba(7,8,12,.78),transparent)}
+    .brand{font-size:22px}
+    .navlinks{display:flex;gap:26px;margin-left:44px;margin-right:auto;font-size:14.5px;font-weight:700;color:#d6dae4}
+    .navlinks a{opacity:.85;transition:opacity .15s,color .15s}
+    .navlinks a:hover{opacity:1;color:var(--gold)}
+    .slide .meta{max-width:1160px;margin:0 auto;padding:0 48px 110px}
+    .meta h2{font-size:46px}
+    .why{font-size:17.5px;max-width:560px}
+    .price{font-size:30px}
+    .btns{max-width:470px}
+    .addbtn,.buy{font-size:16px}
+    .cert{font-size:14px}
+    .aibadge{top:86px;left:44px}
+    /* 상품 슬라이드: 좌 텍스트 / 우 이미지 스플릿 */
+    .slide.prod{display:grid;grid-template-columns:1.05fr 1fr;align-items:center;background:radial-gradient(950px 640px at 72% 42%,rgba(174,182,255,.11),transparent 62%),var(--bg)}
+    .slide.prod .bg{position:relative;inset:auto;grid-column:2;grid-row:1;width:min(44vw,600px);height:min(68vh,600px);object-fit:cover;justify-self:center;align-self:center;border-radius:30px;box-shadow:0 34px 90px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.07)}
+    .slide.prod .bg.iconbg{display:flex;background:radial-gradient(400px 400px at 50% 45%,rgba(174,182,255,.18),transparent 70%),var(--card)}
+    .slide.prod .bg.iconbg span{font-size:150px}
+    .slide.prod .shade{display:none}
+    .slide.prod .meta{grid-column:1;grid-row:1;justify-self:end;align-self:center;max-width:560px;margin:0;padding:0 36px 0 72px}
+    .slide.prod .exlabel{top:auto;bottom:30px;right:44px}
+    .idx,.hint{display:none}
+    .vpill{left:auto;right:40px;bottom:34px;transform:none}
+    .vpill:active{transform:scale(.96)}
+    .vtoast{left:auto;right:40px;bottom:100px;transform:none}
+    .endin{display:flex;flex-direction:column;justify-content:center;padding-top:120px}
+    .endin h2{font-size:36px}
+    .mail{max-width:460px}
+    .legal{max-width:760px;margin-left:auto;margin-right:auto;margin-top:26px}
+  }
   @media(prefers-reduced-motion:reduce){.hint,.pg.glive i,.vpill.listening{animation:none}}
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="top">
-      <a class="brand" href="index.html">옥동몰<small>oaktongmall</small></a>
+      <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
+      <nav class="navlinks"><a href="drop.html">⚡ 오늘의 발굴</a><a href="battle.html">🔥 팔아남기</a><a href="live.html">🔴 라이브</a><a href="journal-why-titanium.html">📖 저널</a><a href="about.html">이야기</a></nav>
       <button class="bagbtn" id="bagbtn" aria-label="발굴함 열기"><span>🎒</span><span class="n" id="bagn" hidden>0</span></button>
     </div>
     <div class="bagdrop" id="bagdrop" hidden>
@@ -211,7 +248,7 @@
       </div>
     </section><section class="slide end" id="last">
     <div class="endin">
-      <div class="brandmark">옥동몰<small>oaktongmall</small></div>
+      <div class="brandmark">옥동샵<small>oaktongshop</small></div>
       <h2>고른 것만 팝니다.</h2>
       <p class="endsub">수요·평점·가치·이유 — 4가지 기준을 통과한 것만 진열해요.<br>오픈하면 발굴함에 담긴 것부터 알려드릴게요.</p>
       <form class="mail" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.querySelector('input').value='';">

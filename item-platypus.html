@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
+<title>초고속 정수 필터 (Platypus QuickDraw) — 옥동샵 감정서</title>
+<meta name="description" content="초고속 정수 필터 (Platypus QuickDraw) — 옥동샵 감정 총점 84/100. 고른 이유까지 투명하게, 감정서로 보여드립니다.">
+<meta property="og:title" content="초고속 정수 필터 (Platypus QuickDraw) — 옥동샵 A급 발굴">
+<meta property="og:description" content="감정 총점 84/100. 고른 이유까지 투명하게, 감정서로.">
+<meta property="og:type" content="product">
+<meta property="og:image" content="https://oaktongshop.com/assets/og/og-drop.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="670">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://oaktongshop.com/assets/og/og-drop.jpg">
+<meta name="theme-color" content="#0b0d12">
+<style>
+  :root{--bg:#0b0d12;--ink:#f1f3f7;--muted:#969eac;--line:#1e222c;--card:#12151d;--gold:#ffd57a;--purp:#aeb6ff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:rgba(11,13,18,.85);border-bottom:1px solid var(--line)}
+  .nav .inner{display:flex;align-items:center;justify-content:space-between;height:62px;max-width:1040px;margin:0 auto;padding:0 22px}
+  .brand{font-weight:900;font-size:19px;letter-spacing:-.5px}.brand small{color:var(--muted);font-weight:600;font-size:12px;margin-left:6px}
+  .back{font-size:14px;color:var(--muted)}.back:hover{color:var(--ink)}
+  .bagchip{font-size:13px;font-weight:800;border:1px solid #2a3040;border-radius:999px;padding:5px 12px;color:var(--gold);transition:transform .2s}
+  .bagchip.bump{animation:bump .5s}
+  @keyframes bump{30%{transform:scale(1.35)}}
+  /* 감정서 */
+  .cert{position:relative;margin:34px 0 26px;background:var(--card);border:1px solid rgba(174,182,255,.3);border-radius:22px;padding:30px 26px;text-align:center;overflow:hidden}
+  
+  .chead{display:flex;justify-content:space-between;align-items:center}
+  .gbadge{font-size:12px;font-weight:900;letter-spacing:1px;border-radius:999px;padding:4px 12px;background:rgba(174,182,255,.16);color:var(--purp);border:1px solid rgba(174,182,255,.35)}
+  .corigin{font-size:12px;color:var(--muted)}
+  .iconbox{position:relative;display:inline-block;margin:22px 0 4px}
+  .cicon{font-size:88px;filter:drop-shadow(0 10px 26px rgba(0,0,0,.55));transition:transform .2s}
+  .cimg{width:min(100%,380px);border-radius:18px;display:block;margin:0 auto;box-shadow:0 14px 34px rgba(0,0,0,.5);border:1px solid #1e222c;transition:transform .2s}
+  h1{font-size:clamp(22px,4.6vw,30px);letter-spacing:-.5px;margin-top:4px}
+  .cspec{font-size:13px;color:var(--muted);margin:6px 0 20px}
+  .stats{display:flex;flex-direction:column;gap:9px;text-align:left;max-width:420px;margin:0 auto 14px}
+  .stat{display:flex;align-items:center;gap:10px;font-size:13px}
+  .sk{width:42px;color:var(--muted)}
+  .bar{flex:1;height:8px;border-radius:99px;background:#1a1e29;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8a93ff,#ffd57a);transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+  body.on .bar i{width:var(--w)}
+  .sv{width:26px;text-align:right}
+  .ctotal{font-size:13px;color:var(--muted);border-top:1px dashed #232836;padding-top:14px;margin-top:6px}
+  .ctotal b{font-size:30px;color:var(--ink);margin-left:8px}
+  .cwhy{font-size:14px;color:#c6cbd8;text-align:left;background:rgba(255,255,255,.03);border-left:3px solid var(--purp);border-radius:0 12px 12px 0;padding:14px 16px;margin:18px auto;max-width:480px}
+  .csig{display:block;margin-top:8px;color:var(--muted);font-size:12px}
+  .cprice{font-size:22px;font-weight:900;margin:6px 0 18px}
+  .ctas{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;border-radius:999px;padding:14px 24px;font-weight:800;font-size:15px;transition:transform .15s}
+  .btn:active{transform:scale(.95)}
+  .btn.buy{background:linear-gradient(100deg,#03c75a,#02a94b);color:#fff}
+  .btn.get{background:#1b2130;color:var(--gold);border:1px solid rgba(255,213,122,.4)}
+  .btn.get.got{background:#1b2130;color:var(--gold);border:1px solid rgba(255,213,122,.4)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid #2a3040}
+  .gethint{font-size:12px;color:var(--muted);margin-top:12px}
+  .pdesc{max-width:560px;margin:0 auto 26px;padding:22px 4px;border-top:1px solid var(--line)}
+  .pdesc h2{font-size:16px;font-weight:800;margin-bottom:12px}
+  .pdesc p{font-size:14.5px;color:#d4d9e4;line-height:1.8}
+  .pdesc-spec{font-size:13px!important;color:var(--muted)!important;margin-top:12px;padding-top:12px;border-top:1px dashed #232836}
+  .ship{text-align:left;max-width:480px;margin:20px auto 0;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .shiprow{display:flex;gap:9px;font-size:12.5px;color:#c6cbd8;line-height:1.55;margin:6px 0}
+  .shiprow b{color:var(--ink)}
+  .shipmore{display:inline-block;margin-top:8px;font-size:12px;color:var(--gold)}
+  /* GET 이펙트 */
+  .pop{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(0);font-size:34px;font-weight:900;letter-spacing:1px;color:var(--gold);text-shadow:0 4px 24px rgba(255,190,80,.5);pointer-events:none;z-index:5}
+  .pop.go{animation:popin 1s cubic-bezier(.2,1.6,.3,1) forwards}
+  @keyframes popin{35%{transform:translate(-50%,-50%) scale(1.25)}55%{transform:translate(-50%,-50%) scale(1)}100%{transform:translate(-50%,-80%) scale(1);opacity:0}}
+  .pt{position:absolute;left:50%;top:45%;font-size:20px;pointer-events:none;z-index:4;animation:fly .9s cubic-bezier(.15,.8,.3,1) forwards}
+  @keyframes fly{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+  .shake{animation:shake .45s}
+  @keyframes shake{20%{transform:scale(1.12) rotate(-4deg)}45%{transform:scale(1.08) rotate(3deg)}70%{transform:scale(1.04) rotate(-2deg)}}
+  /* 다른 발굴 */
+  .others{margin:30px 0 60px}
+  .others h2{font-size:16px;color:var(--muted);font-weight:800;margin-bottom:12px}
+  .omini{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;transition:transform .2s,border-color .2s}
+  .omini:hover{transform:translateY(-2px)}
+  .omini.gS:hover{border-color:rgba(255,213,122,.4)}.omini.gA:hover{border-color:rgba(174,182,255,.4)}
+  .oi{font-size:30px}.omini b{display:block;font-size:14px}.omini small{color:var(--muted);font-size:12px}
+  .demo{display:block;text-align:center;font-size:12px;color:var(--muted);margin-bottom:40px}
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center;padding:26px 0 40px}
+  @media(prefers-reduced-motion:reduce){.cert::after{animation:none}.bar i{transition:none}.pop.go,.pt,.shake,.bagchip.bump{animation:none}}
+</style>
+<noscript><style>.bar i{width:var(--w)!important}</style></noscript>
+</head>
+<body>
+  <nav class="nav"><div class="inner">
+    <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
+    <div style="display:flex;align-items:center;gap:14px">
+      <span class="bagchip" id="bag" hidden>🎒 <b id="bagn">0</b></span>
+      <a class="back" href="drop.html">← 오늘의 발굴</a>
+    </div>
+  </div></nav>
+
+  <main class="wrap">
+    <article class="cert">
+      <div class="chead"><span class="gbadge">A급 발굴</span><span class="corigin">🇺🇸 미국</span></div>
+      <div class="iconbox"><img class="cimg" id="icon" src="assets/products/platypus.jpg" alt="초고속 정수 필터 (Platypus QuickDraw)"><div class="pop" id="pop">GET!</div></div>
+      <h1>초고속 정수 필터 (Platypus QuickDraw)</h1>
+      <p class="cspec">중공사막 0.2미크론 · 1L · 69g · 유량 3L/분</p>
+      <div class="stats"><div class="stat"><span class="sk">수요</span><div class="bar"><i style="--w:80%"></i></div><b class="sv">80</b></div><div class="stat"><span class="sk">평점</span><div class="bar"><i style="--w:94%"></i></div><b class="sv">94</b></div><div class="stat"><span class="sk">희소</span><div class="bar"><i style="--w:82%"></i></div><b class="sv">82</b></div><div class="stat"><span class="sk">스토리</span><div class="bar"><i style="--w:80%"></i></div><b class="sv">80</b></div></div>
+      <div class="ctotal">감정 총점<b>84</b><span style="font-size:13px">/100</span></div>
+      <blockquote class="cwhy">소여 다음으로 UL 하이커가 꼽는 정수 필터. 물 흐름이 빠르고 막힘이 적습니다. 국내 시세 7만9천원을 정면으로 언더컷 — 정수 라인을 두 개로 갖추려고 함께 올렸습니다.<span class="csig">— 옥동샵 감정단</span></blockquote>
+      <div class="cprice">₩76,900</div>
+      <div class="ctas">
+        <a class="btn buy" href="index.html#signup">🔔 입고 알림 받기</a>
+        <button class="btn get" id="getbtn">🎒 발굴함에 담기</button>
+      </div>
+      <p class="gethint">오픈 준비 중 — 발굴함에 담아두면 입고 소식을 먼저 알려드려요.</p>
+      <div class="ship">
+        <div class="shiprow">🚚 <span><b>배송</b> — 해외구매대행 상품, 통상 <b>7~14영업일</b> 소요 (현지·통관 사정에 따라 변동)</span></div>
+        <div class="shiprow">🛃 <span><b>통관</b> — 개인통관고유부호가 필요하며, 면세 한도 초과 시 관세·부가세가 별도 부과될 수 있습니다</span></div>
+        <div class="shiprow">🤝 <span><b>구매대행</b> — 실제 매매계약은 해외 판매처와 체결되며, 당사는 구매·수입 대행 서비스를 제공합니다</span></div>
+        <a class="shipmore" href="terms.html">전체 이용약관·청약철회·법정고지 →</a>
+      </div>
+    </article>
+
+    <section class="pdesc"><h2>상품 안내</h2><p>0.2미크론 중공사막 필터로, 스퀴즈 시 분당 3L·중력식 1.75L의 빠른 유량을 냅니다. 69g으로 초경량이고 막힘이 적어, UL 하이커들이 소여의 대안으로 가장 많이 꼽는 정수 필터입니다. 물통·하이드레이션에 물려 바로 마실 수 있습니다.</p><p class="pdesc-spec">중공사막 0.2미크론 · 1L · 69g · 유량 3L/분</p></section>
+
+    <section class="others">
+      <h2>다른 발굴 보기</h2>
+      <a class="omini gS" href="item-tiarto.html"><span class="oi">🖊️</span><span><b>무한심 티타늄 EDC 펜 (Ti Arto)</b><small>S급 · ₩198,900</small></span></a><a class="omini gS" href="item-ursack.html"><span class="oi">🐻</span><span><b>야생동물 방지 식량 보관백 (Ursack Major)</b><small>S급 · ₩464,900</small></span></a><a class="omini gA" href="item-cnoc.html"><span class="oi">💧</span><span><b>접이식 2L 물주머니 (CNOC Vecto)</b><small>A급 · ₩123,900</small></span></a><a class="omini gA" href="item-sawyer.html"><span class="oi">🏕️</span><span><b>스퀴즈 정수 필터 (Sawyer Squeeze)</b><small>A급 · ₩92,900</small></span></a><a class="omini gA" href="item-fisher.html"><span class="oi">🚀</span><span><b>무중력 볼펜 불릿 400 (Fisher Space Pen)</b><small>A급 · ₩50,900</small></span></a>
+      <a class="omini" href="drop.html" style="justify-content:center;color:var(--muted);font-weight:800;font-size:13px">⚡ 오늘의 발굴 전체 보기</a>
+    </section>
+    <span class="demo">🧪 오픈 전 미리보기 — 실제 판매는 스토어 오픈과 함께 시작됩니다</span>
+  </main>
+
+  <footer>옥동샵 oaktongshop — 고른 것만 보여드립니다. © 2026 oaktongshop. · <a href="terms.html">이용약관·법정고지</a></footer>
+
+  <script>
+    requestAnimationFrame(()=>document.body.classList.add('on')); // 스탯바 차오름
+    const SLUG="platypus";
+    const load=()=>{try{return JSON.parse(localStorage.getItem('oaktong_bag')||'[]')}catch(e){return[]}};
+    const bagEl=document.getElementById('bag'),bagN=document.getElementById('bagn'),btn=document.getElementById('getbtn'),icon=document.getElementById('icon');
+    const sync=(bump)=>{const b=load();if(b.length){bagN.textContent=b.length;bagEl.hidden=false;if(bump){bagEl.classList.remove('bump');void bagEl.offsetWidth;bagEl.classList.add('bump')}}
+      if(b.includes(SLUG)){btn.classList.add('got');btn.textContent='✓ 발굴함에 담김'}};
+    sync(false);
+    btn.addEventListener('click',()=>{
+      const b=load(); if(b.includes(SLUG)) return;
+      b.push(SLUG); localStorage.setItem('oaktong_bag',JSON.stringify(b));
+      // GET! 이펙트: 아이콘 셰이크 + 팝 + 파티클 + 뱃지 바운스 + 진동
+      icon.classList.remove('shake');void icon.offsetWidth;icon.classList.add('shake');
+      const pop=document.getElementById('pop');pop.classList.remove('go');void pop.offsetWidth;pop.classList.add('go');
+      const box=icon.parentElement,em=['✨','⭐','💫','🎉','🪙'];
+      for(let i=0;i<16;i++){const s=document.createElement('span');s.className='pt';s.textContent=em[i%em.length];
+        const a=(i/16)*Math.PI*2,r=70+Math.random()*70;
+        s.style.setProperty('--dx',Math.cos(a)*r+'px');s.style.setProperty('--dy',(Math.sin(a)*r-40)+'px');s.style.setProperty('--r',(Math.random()*360-180)+'deg');
+        box.appendChild(s);setTimeout(()=>s.remove(),950);}
+      if(navigator.vibrate)navigator.vibrate(35);
+      sync(true);
+    });
+  </script>
+</body>
+</html>

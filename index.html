@@ -153,7 +153,7 @@
   <div class="stage">
     <div class="top">
       <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
-      <nav class="navlinks"><a href="drop.html">⚡ 오늘의 발굴</a><a href="battle.html">🔥 팔아남기</a><a href="live.html">🔴 라이브</a><a href="journal-why-titanium.html">📖 저널</a><a href="about.html">이야기</a><a class="adminlink" href="http://localhost:4321" target="_blank" rel="noreferrer" title="관리자 대시보드 (로컬)">⚙️</a></nav>
+      <nav class="navlinks"><a href="drop.html">⚡ 오늘의 발굴</a><a href="battle.html">🔥 팔아남기</a><a href="live.html">🔴 라이브</a><a href="journal-why-titanium.html">📖 저널</a><a href="about.html">이야기</a><a class="adminlink" href="admin.html" target="_blank" rel="noreferrer" title="관리자 대시보드 (로컬)">⚙️</a></nav>
       <button class="bagbtn" id="bagbtn" aria-label="발굴함 열기"><span>🎒</span><span class="n" id="bagn" hidden>0</span></button>
     </div>
     <div class="bagdrop" id="bagdrop" hidden>
@@ -266,7 +266,7 @@
         <b>옥동샵</b> (oaktongshop) · 대표 추봉군 · 사업자등록번호 493-07-03611 · 통신판매업 신고 준비중<br>
         서울특별시 영등포구 국회대로54길 37-13, 602호 · 010-7372-5202 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a> · 평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)<br>
         해외구매대행 상품으로 실제 매매계약은 해외 판매처와 체결되며, 통관 시 개인통관고유부호가 필요하고 관세·부가세가 별도 부과될 수 있습니다.<br>
-        <a href="terms.html"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop. · <a href="http://localhost:4321" target="_blank" rel="noreferrer" title="관리자 (로컬 전용)">⚙️</a>
+        <a href="terms.html"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop. · <a href="admin.html" target="_blank" rel="noreferrer" title="관리자 (로컬 전용)">⚙️</a>
       </div>
     </div>
   </section></main>
@@ -301,7 +301,7 @@
     (()=>{let n=0,t0=0;document.querySelector('.brand').addEventListener('click',(e)=>{
       const now=Date.now(); if(now-t0>1500)n=0; t0=now; n++;
       if(n>=2)e.preventDefault(); // 연타 중엔 홈 리로드 방지
-      if(n>=3){n=0;window.open('http://localhost:4321','_blank');}
+      if(n>=3){n=0;window.open('admin.html','_blank');}
     });})();
     document.addEventListener('click',(e)=>{if(!bagDrop.hidden&&!bagDrop.contains(e.target)&&!bagBtn.contains(e.target))bagDrop.hidden=true});
     document.querySelectorAll('.addbtn').forEach(btn=>btn.addEventListener('click',()=>{

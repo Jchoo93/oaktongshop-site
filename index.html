@@ -100,7 +100,7 @@
   .dust i:nth-child(8){left:94%;top:76%;animation-duration:16s;animation-delay:2.5s}
   @keyframes drift{0%{transform:translateY(0);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateY(-420px);opacity:0}}
   /* 팔아남기 배너 */
-  .bb-wrap{max-width:1040px;margin:26px auto 0;padding:0 22px}
+  .bb-wrap{max-width:1040px;margin:0 auto;padding:0 22px 64px}
   .battle-banner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
     background:linear-gradient(120deg,rgba(255,90,90,.09),rgba(255,179,92,.05) 50%,rgba(140,150,255,.07)),var(--card);
     border:1px solid rgba(255,140,90,.35);border-radius:20px;padding:24px 28px;overflow:hidden;transition:transform .25s,box-shadow .25s,border-color .25s}
@@ -203,7 +203,7 @@
 <body>
   <nav class="nav"><div class="wrap inner">
     <div class="brand">옥동샵<small>oaktongshop</small></div>
-    <div class="nav-links"><a href="battle.html" style="color:#ff9d5c">🔥 팔아남기</a><a href="live.html" style="color:#ff6b6b">🔴 라이브</a><a href="drop.html" style="color:#ffd57a">⚡ 오늘의 발굴</a><a href="#journal">📖 저널</a><a href="about.html">이야기</a><a href="#edit">편집 기준</a><a href="#how">이용안내</a><a href="#faq">FAQ</a></div>
+    <div class="nav-links"><a href="drop.html" style="color:#ffd57a">⚡ 오늘의 발굴</a><a href="battle.html" style="color:#ff9d5c">🔥 팔아남기</a><a href="live.html" style="color:#ff6b6b">🔴 라이브</a><a href="about.html">이야기</a><a href="#faq">FAQ</a></div>
     <div class="nav-right"><a class="nav-cta" href="#signup">오픈 알림</a><button class="burger" aria-label="메뉴 열기" aria-expanded="false">☰</button></div>
   </div></nav>
 
@@ -220,7 +220,20 @@
     <p class="trustline">오픈 준비 중 · 엄선 큐레이션 · 고른 이유까지</p>
   </header>
 
-  <div class="ticker"><div class="ticker-track"><span>⚡ 오늘의 발굴 <b>6종</b> 공개 중</span><span>🖊️ 🐻 💧 🚀</span><span>정발 없는 것만 골라 왔습니다</span><span><em>🔴 옥동 라이브</em> 매주 토 21:00</span><span>🚫 부풀린 광고는 안 올립니다</span><span>통과 못 하면, 안 올립니다</span><span>🎒 발굴함에 담으면 오픈 소식 먼저</span><span>⚡ 오늘의 발굴 <b>6종</b> 공개 중</span><span>🖊️ 🐻 💧 🚀</span><span>정발 없는 것만 골라 왔습니다</span><span><em>🔴 옥동 라이브</em> 매주 토 21:00</span><span>🚫 부풀린 광고는 안 올립니다</span><span>통과 못 하면, 안 올립니다</span><span>🎒 발굴함에 담으면 오픈 소식 먼저</span></div></div>
+  <section id="drops"><div class="wrap">
+    <div class="h2 reveal">⚡ 오늘의 발굴</div>
+    <p class="lead reveal">오늘 감정을 통과한 것들. 눌러서 감정서를 확인하세요.</p>
+    <p class="previewnote reveal">🔎 오픈 전 미리보기입니다 — 감정 결과와 가격은 실제 큐레이션 기준이며, 상품 사진·재고는 입고 시 공개됩니다.</p>
+    <div class="dgrid"><a class="dmini gS reveal" href="item-tiarto.html" style="transition-delay:0ms"><span class="dg">S급</span><span class="dthumb"><img src="assets/products/tiarto.jpg" alt="무한심 티타늄 EDC 펜 (Ti Arto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>무한심 티타늄 EDC 펜 (Ti Arto)</b><span class="dp">₩198,900</span></a><a class="dmini gS reveal" href="item-ursack.html" style="transition-delay:80ms"><span class="dg">S급</span><span class="dthumb"><img src="assets/products/ursack.jpg" alt="야생동물 방지 식량 보관백 (Ursack Major) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>야생동물 방지 식량 보관백 (Ursack Major)</b><span class="dp">₩464,900</span></a><a class="dmini gA reveal" href="item-cnoc.html" style="transition-delay:160ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/cnoc.jpg" alt="접이식 2L 물주머니 (CNOC Vecto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>접이식 2L 물주머니 (CNOC Vecto)</b><span class="dp">₩123,900</span></a><a class="dmini gA reveal" href="item-sawyer.html" style="transition-delay:240ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/sawyer.jpg" alt="스퀴즈 정수 필터 (Sawyer Squeeze) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>스퀴즈 정수 필터 (Sawyer Squeeze)</b><span class="dp">₩92,900</span></a><a class="dmini gA reveal" href="item-fisher.html" style="transition-delay:320ms"><span class="dg">A급</span><span class="di">🚀</span><b>무중력 볼펜 불릿 400 (Fisher Space Pen)</b><span class="dp">₩50,900</span></a><a class="dmini gA reveal" href="item-platypus.html" style="transition-delay:400ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/platypus.jpg" alt="초고속 정수 필터 (Platypus QuickDraw) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>초고속 정수 필터 (Platypus QuickDraw)</b><span class="dp">₩76,900</span></a></div>
+    <p class="dmore reveal"><a class="btn ghost" href="drop.html">발굴 전체 보기 →</a></p>
+  </div></section>
+
+  <section id="edit"><div class="wrap">
+    <div class="h2 reveal">옥동샵의 편집 기준</div>
+    <p class="lead reveal">늘어놓는 건 알고리즘이 합니다. 옥동샵은 이 네 가지를 통과한 것만 진열합니다.</p>
+    <div class="criteria"><div class="crit reveal"><span class="ck">✓</span><div><b>수요로 검증된 것만</b><p>실제 주문·검색·트렌드 반응이 있는 것만. 감(感)으로는 안 올립니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>평점·후기가 받쳐주는 것만</b><p>별점과 리뷰가 신뢰할 만한 상품만 통과시킵니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>가져올 가치가 있는 것만</b><p>한국에 잘 없거나, 직접 직구하기 번거로운 것을 우선합니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>고른 이유가 분명한 것만</b><p>왜 골랐는지, 어떻게 쓰는지 맥락까지 함께 전합니다.</p></div></div></div>
+    <p class="rejectline reveal">🚫 <b>이런 건 안 올려요</b> — 부풀린 광고, 모조품 의심, 반응 없는 재고떨이.</p>
+  </div></section>
 
   <div class="bb-wrap"><a class="battle-banner reveal" href="battle.html">
     <div>
@@ -231,49 +244,6 @@
     </div>
     <div class="bb-faces"><img src="assets/hosts/host1.jpg" alt="준" loading="lazy" style="--bd:0s"><img src="assets/hosts/host2.jpg" alt="마테오" loading="lazy" style="--bd:0.35s"><img src="assets/hosts/host3.jpg" alt="나오미" loading="lazy" style="--bd:0.7s"><img src="assets/hosts/host4.jpg" alt="유나" loading="lazy" style="--bd:1.0499999999999998s"><img src="assets/hosts/host5.jpg" alt="에릭" loading="lazy" style="--bd:1.4s"><img src="assets/hosts/host6.jpg" alt="프리야" loading="lazy" style="--bd:1.75s"></div>
   </a></div>
-
-  <section id="ai"><div class="wrap" style="text-align:center">
-    <div class="h2 reveal">무엇이든 물어보세요</div>
-    <p class="lead reveal">옥동 AI가 발굴품 중에서 골라드립니다 — "여행 갈 때 쓸 만한 거 있어?"</p>
-    <div class="orb-wrap reveal">
-      <button class="orb" id="orb" aria-label="음성으로 물어보기">
-        <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-        <span class="core"></span><span class="oico" id="oico">🎤</span>
-        <span class="sat"></span><span class="sat s2"></span>
-      </button>
-    </div>
-    <div class="ai-status" id="ai-status">구체를 누르고 말해보세요</div>
-    <div class="ai-tr" id="ai-tr"></div>
-    <div class="ai-reply" id="ai-reply" hidden><p id="ai-reply-t"></p></div>
-    <a class="dmini ai-card" id="ai-card" hidden href="#">
-      <span class="dg" id="ai-card-g"></span><span class="di" id="ai-card-i"></span><b id="ai-card-n"></b><span class="dp" id="ai-card-p"></span>
-    </a>
-    <form class="ai-form reveal" id="ai-form">
-      <input id="ai-in" placeholder="음성이 어려우면 입력해보세요 — 예: 캠핑용품 추천해줘" maxlength="80" autocomplete="off">
-      <button class="btn ghost" type="submit">묻기</button>
-    </form>
-    <p class="ai-note">🤖 데모 응답(현재 발굴품 3종 기준) · 오픈 후 Claude 실시간 추천으로 업그레이드</p>
-  </div></section>
-
-  <section id="manifesto"><div class="wrap">
-    <p class="manifesto reveal">세상 모든 물건을 늘어놓는 건 알고리즘이 합니다.<br>옥동샵은 <b>“이건 진짜 괜찮다”</b> 싶은 것만 고릅니다.
-      <span class="sig">— 옥동샵 큐레이션 팀</span></p>
-  </div></section>
-
-  <section id="edit"><div class="wrap">
-    <div class="h2 reveal">옥동샵의 편집 기준</div>
-    <p class="lead reveal">전부 늘어놓지 않아요. 이 네 가지를 통과한 것만 진열합니다.</p>
-    <div class="criteria"><div class="crit reveal"><span class="ck">✓</span><div><b>수요로 검증된 것만</b><p>실제 주문·검색·트렌드 반응이 있는 것만. 감(感)으로는 안 올립니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>평점·후기가 받쳐주는 것만</b><p>별점과 리뷰가 신뢰할 만한 상품만 통과시킵니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>가져올 가치가 있는 것만</b><p>한국에 잘 없거나, 직접 직구하기 번거로운 것을 우선합니다.</p></div></div><div class="crit reveal"><span class="ck">✓</span><div><b>고른 이유가 분명한 것만</b><p>왜 골랐는지, 어떻게 쓰는지 맥락까지 함께 전합니다.</p></div></div></div>
-    <p class="rejectline reveal">🚫 <b>이런 건 안 올려요</b> — 부풀린 광고, 모조품 의심, 반응 없는 재고떨이.</p>
-  </div></section>
-
-  <section id="drops"><div class="wrap">
-    <div class="h2 reveal">⚡ 오늘의 발굴</div>
-    <p class="lead reveal">오늘 감정을 통과한 것들. 눌러서 감정서를 확인하세요.</p>
-    <p class="previewnote reveal">🔎 오픈 전 미리보기입니다 — 감정 결과와 가격은 실제 큐레이션 기준이며, 상품 사진·재고는 입고 시 공개됩니다.</p>
-    <div class="dgrid"><a class="dmini gS reveal" href="item-tiarto.html" style="transition-delay:0ms"><span class="dg">S급</span><span class="dthumb"><img src="assets/products/tiarto.jpg" alt="무한심 티타늄 EDC 펜 (Ti Arto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>무한심 티타늄 EDC 펜 (Ti Arto)</b><span class="dp">₩198,900</span></a><a class="dmini gS reveal" href="item-ursack.html" style="transition-delay:80ms"><span class="dg">S급</span><span class="dthumb"><img src="assets/products/ursack.jpg" alt="야생동물 방지 식량 보관백 (Ursack Major) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>야생동물 방지 식량 보관백 (Ursack Major)</b><span class="dp">₩464,900</span></a><a class="dmini gA reveal" href="item-cnoc.html" style="transition-delay:160ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/cnoc.jpg" alt="접이식 2L 물주머니 (CNOC Vecto) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>접이식 2L 물주머니 (CNOC Vecto)</b><span class="dp">₩123,900</span></a><a class="dmini gA reveal" href="item-sawyer.html" style="transition-delay:240ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/sawyer.jpg" alt="스퀴즈 정수 필터 (Sawyer Squeeze) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>스퀴즈 정수 필터 (Sawyer Squeeze)</b><span class="dp">₩92,900</span></a><a class="dmini gA reveal" href="item-fisher.html" style="transition-delay:320ms"><span class="dg">A급</span><span class="di">🚀</span><b>무중력 볼펜 불릿 400 (Fisher Space Pen)</b><span class="dp">₩50,900</span></a><a class="dmini gA reveal" href="item-platypus.html" style="transition-delay:400ms"><span class="dg">A급</span><span class="dthumb"><img src="assets/products/platypus.jpg" alt="초고속 정수 필터 (Platypus QuickDraw) (예시 이미지)" loading="lazy"><span class="exlabel">예시</span></span><b>초고속 정수 필터 (Platypus QuickDraw)</b><span class="dp">₩76,900</span></a></div>
-    <p class="dmore reveal"><a class="btn ghost" href="drop.html">발굴 전체 보기 →</a></p>
-  </div></section>
 
   <section id="journal"><div class="wrap">
     <div class="h2 reveal">📖 옥동샵 저널</div>
@@ -288,52 +258,13 @@
       <b>숙소 전기포트가 찜찜한 진짜 이유</b>
       <span class="jx">말 못 하고 그냥 안 쓰는 사람이 생각보다 많습니다. 접이식 트래블 포트를 발굴 목록에 올린 건, 이게 여행템이 아니라 위생템이어서입니다.</span>
       <span class="jtag">🫖 여행 · 읽기 →</span>
-    </a><a class="jcard reveal" href="journal-what-we-rejected.html" style="transition-delay:140ms">
-      <span class="jk">거른 이유</span>
-      <b>안 올린 것들 — 우리가 거른 이유</b>
-      <span class="jx">유명하다고 다 올리진 않습니다. 팬덤 최상위 인기템도 우리 기준에선 탈락할 수 있습니다. 진열대는 올린 것만큼 안 올린 것으로 설명됩니다.</span>
-      <span class="jtag">🚫 큐레이션 · 읽기 →</span>
-    </a><a class="jcard reveal" href="journal-pack-half.html" style="transition-delay:210ms">
-      <span class="jk">발견</span>
-      <b>짐을 반으로 줄이는 사람들의 공통점</b>
-      <span class="jx">장비를 줄이는 게 아니라 '겹치는 걸 없앤다'가 핵심입니다. 초경량 패커들이 실제로 쓰는 정리의 원리.</span>
-      <span class="jtag">🎒 백패킹 · 읽기 →</span>
     </a></div>
-  </div></section>
-
-  <section id="how"><div class="wrap">
-    <div class="h2 reveal">이렇게 받아요</div>
-    <p class="lead reveal">해외구매대행, 어렵지 않아요.</p>
-    <div class="steps">
-      <div class="step reveal"><h3>주문</h3><p>큐레이션된 상품 중 마음에 드는 걸 주문하세요.</p></div>
-      <div class="step reveal"><h3>구매대행</h3><p>해외에서 직접 구매해 통관까지 처리합니다.</p></div>
-      <div class="step reveal"><h3>배송</h3><p>추적 가능한 물류로 안전하게 받아보세요 (평균 7~14영업일).</p></div>
-    </div>
-    <p class="stepnote">* EMS·DHL·FedEx 등 상품·지역에 따라 이용 물류사가 달라질 수 있습니다.</p>
-  </div></section>
-
-  <section id="channels"><div class="wrap">
-    <div class="h2 reveal">채널에서 만나요</div>
-    <p class="lead reveal">인스타·틱톡·유튜브에서 새 큐레이션을 가장 먼저.</p>
-    <div class="chans"><a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a><a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a><a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a></div>
   </div></section>
 
   <section id="faq"><div class="wrap">
     <div class="h2 reveal">자주 묻는 질문</div>
     <p class="lead reveal">궁금한 점을 모았어요.</p>
     <div class="faqs"><div class="faq"><button class="faq-q">정말 다양한 상품을 다 파나요?<span>+</span></button><div class="faq-a">분야는 가리지 않지만, 아무거나 다 올리지는 않습니다. 수요·평점·실사용 가치 기준을 통과한 것만 골라 큐레이션하는 편집샵이에요.</div></div><div class="faq"><button class="faq-q">주문하면 어떻게 배송되나요?<span>+</span></button><div class="faq-a">주문·결제 확인 후 해외 판매처에서 직접 구매해 통관까지 처리하고, EMS·DHL·FedEx 등 추적 가능한 물류로 보내드립니다. 평균 7~14영업일 소요되며, 현지 사정·통관 상황에 따라 달라질 수 있어요.</div></div><div class="faq"><button class="faq-q">관세·세금은 누가 내나요?<span>+</span></button><div class="faq-a">각국 면세 한도를 초과하면 관세·부가세가 부과될 수 있으며, 통관 시 수령인(구매자) 부담이 원칙입니다.</div></div><div class="faq"><button class="faq-q">교환·환불 되나요?<span>+</span></button><div class="faq-a">수령 후 일정 기간 내 청약철회가 가능합니다. 단순변심 시 반송비는 구매자 부담이며, 하자·오배송은 전액 환불·교환됩니다.</div></div></div>
-  </div></section>
-
-  <section id="trust"><div class="wrap">
-    <div class="h2 reveal">안심하고 담아도 됩니다</div>
-    <p class="lead reveal">오픈 전이지만, 지킬 약속은 지금 밝혀둡니다.</p>
-    <div class="trustgrid">
-      <div class="tcard reveal"><span class="ti">🛡️</span><b>정품 직소싱</b><span>브랜드 공식·정품 경로로만 가져옵니다. 가품·모조품은 진열 자체를 하지 않습니다.</span></div>
-      <div class="tcard reveal" style="transition-delay:70ms"><span class="ti">💳</span><b>네이버페이 안전결제</b><span>결제·정산·에스크로는 네이버가 처리합니다. 판매자가 대금을 직접 만지지 않습니다.</span></div>
-      <div class="tcard reveal" style="transition-delay:140ms"><span class="ti">↩️</span><b>7일 청약철회</b><span>전자상거래법 그대로. 상품 하자·오배송은 배송비까지 저희가 부담합니다.</span></div>
-      <div class="tcard reveal" style="transition-delay:210ms"><span class="ti">🔍</span><b>투명한 감정서</b><span>왜 골랐는지, 무엇을 못 하는지까지 상품마다 정직하게 적습니다.</span></div>
-    </div>
-    <p class="reviewpolicy reveal">⭐ <b>후기 정책</b> — 후기는 실제 구매자 것만, 조작 없이 노출합니다. 별점을 부풀리거나 가짜 리뷰를 쓰지 않습니다. (첫 판매 후 순차 공개)</p>
   </div></section>
 
   <section><div class="wrap"><div class="signup reveal" id="signup">
@@ -344,6 +275,7 @@
       <button class="btn primary" type="submit">알림 신청</button>
       <div class="ok">✅ 신청 완료! 오픈하면 가장 먼저 알려드릴게요.</div>
     </form>
+    <p class="promises">🛡️ 정품 직소싱 · 💳 네이버페이 안전결제 · ↩️ 7일 청약철회 · 🔍 투명한 감정서</p>
   </div></div></section>
 
   <footer><div class="wrap">
@@ -351,7 +283,8 @@
       <div><div class="brand" style="font-size:18px">옥동샵<small>oaktongshop</small></div>
         <p style="margin-top:8px">고른 것만 보여드립니다.<br>기준을 통과한 글로벌 잇템만, 큐레이션 편집샵 옥동샵.</p></div>
       <div class="fcol"><h4>바로가기</h4><a href="#signup">오픈 알림</a><a href="about.html">옥동샵 이야기</a><a href="journal-why-titanium.html">저널</a><a href="#edit">편집 기준</a><a href="#faq">FAQ</a></div>
-      <div class="fcol"><h4>고객센터</h4><a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a><a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">@oaktongshop</a><span>평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)</span></div>
+      <div class="fcol"><h4>고객센터</h4><a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a><span>평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)</span></div>
+      <div class="fcol"><h4>채널</h4><a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a><a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a><a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a></div>
     </div>
     <div class="notice">
       <div style="line-height:1.95;margin-bottom:9px">
@@ -363,6 +296,29 @@
       <div style="margin-top:9px"><a href="terms.html" style="color:var(--ink)"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop. All rights reserved.</div>
     </div>
   </div></footer>
+
+  <button class="ai-fab" id="ai-fab" aria-label="옥동 AI에게 물어보기" aria-expanded="false">🤖</button>
+  <div class="ai-panel" id="ai-panel" hidden>
+    <div class="ai-head"><b>옥동 AI</b><span>발굴품 중에서 골라드려요</span><button class="ai-close" id="ai-close" aria-label="닫기">✕</button></div>
+    <div class="orb-wrap">
+      <button class="orb" id="orb" aria-label="음성으로 물어보기">
+        <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+        <span class="core"></span><span class="oico" id="oico">🎤</span>
+        <span class="sat"></span><span class="sat s2"></span>
+      </button>
+    </div>
+    <div class="ai-status" id="ai-status">구체를 누르고 말해보세요</div>
+    <div class="ai-tr" id="ai-tr"></div>
+    <div class="ai-reply" id="ai-reply" hidden><p id="ai-reply-t"></p></div>
+    <a class="dmini ai-card" id="ai-card" hidden href="#">
+      <span class="dg" id="ai-card-g"></span><span class="di" id="ai-card-i"></span><b id="ai-card-n"></b><span class="dp" id="ai-card-p"></span>
+    </a>
+    <form class="ai-form" id="ai-form">
+      <input id="ai-in" placeholder="예: 캠핑용품 추천해줘" maxlength="80" autocomplete="off">
+      <button class="btn ghost" type="submit">묻기</button>
+    </form>
+    <p class="ai-note">🤖 데모 응답(현재 발굴품 기준) · 오픈 후 실시간 추천으로 업그레이드</p>
+  </div>
 
   <script>
     const nav=document.querySelector('.nav');
@@ -380,8 +336,12 @@
     bg.addEventListener('click',()=>{const o=nav.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
     document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 
-    // ── 옥동 AI 오브 (자비스): Web Speech 음성인식 + TTS + 데모 추천
+    // ── 옥동 AI (자비스): 우하단 플로팅 패널 — Web Speech 음성인식 + TTS + 데모 추천
     (function(){
+      const fab=document.getElementById('ai-fab'),panel=document.getElementById('ai-panel');
+      fab.addEventListener('click',()=>{const show=panel.hidden;panel.hidden=!show;fab.setAttribute('aria-expanded',show);});
+      document.getElementById('ai-close').addEventListener('click',()=>{panel.hidden=true;fab.setAttribute('aria-expanded',false);
+        try{speechSynthesis.cancel()}catch(e){}});
       const ITEMS=[{"slug":"tiarto","icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)","price":"₩198,900","grade":"S","tags":[],"why":"볼펜의 종착지."},{"slug":"ursack","icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)","price":"₩464,900","grade":"S","tags":[],"why":"방탄조끼에 쓰는 원단으로 만든 자루."},{"slug":"cnoc","icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)","price":"₩123,900","grade":"A","tags":[],"why":"정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니."},{"slug":"sawyer","icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)","price":"₩92,900","grade":"A","tags":[],"why":"계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건."},{"slug":"fisher","icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)","price":"₩50,900","grade":"A","tags":[],"why":"NASA가 우주로 가져간 그 볼펜."},{"slug":"platypus","icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)","price":"₩76,900","grade":"A","tags":[],"why":"소여 다음으로 UL 하이커가 꼽는 정수 필터."}];
       const orb=document.getElementById('orb'),oico=document.getElementById('oico'),
         st=document.getElementById('ai-status'),tr=document.getElementById('ai-tr'),

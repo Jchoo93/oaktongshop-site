@@ -47,9 +47,10 @@
   .cd b{font-size:30px;font-weight:900;display:block}
   .cd span{font-size:11px;color:var(--muted)}
   .wline{margin:26px 0 10px;font-size:13px;color:var(--muted)}
-  .lineup{display:flex;gap:12px;justify-content:center;margin:12px 0 30px}
-  .slot{width:76px;height:76px;border-radius:16px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:34px}
-  .slot .q{color:var(--muted);font-weight:900;font-size:26px}
+  .lineup{display:flex;gap:10px;justify-content:flex-start;margin:12px 0 30px;overflow-x:auto;padding:4px 2px;scrollbar-width:none;-ms-overflow-style:none}
+  .lineup::-webkit-scrollbar{display:none}
+  .slot{flex:none;width:62px;height:62px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:28px}
+  .slot .q{color:var(--muted);font-weight:900;font-size:22px}
   .slot.done{border-color:rgba(255,213,122,.45)}
   .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;border-radius:999px;padding:14px 26px;font-weight:800;font-size:15px;transition:transform .15s}
   .btn:active{transform:scale(.95)}
@@ -74,6 +75,11 @@
   .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(255,245,220,.95),transparent 60%);opacity:0;pointer-events:none;z-index:6}
   .flash.go{animation:flashgo .7s ease-out}
   @keyframes flashgo{15%{opacity:1}100%{opacity:0}}
+  .rcnt{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:88px;font-weight:900;color:var(--gold);z-index:8;pointer-events:none;text-shadow:0 8px 44px rgba(0,0,0,.65)}
+  .rcnt.on{display:flex;animation:cntpop .92s ease-out forwards}
+  @keyframes cntpop{0%{transform:scale(1.7);opacity:0}18%{opacity:1;transform:scale(1.05)}75%{opacity:1}100%{transform:scale(.86);opacity:0}}
+  .cfx{position:absolute;width:9px;height:9px;border-radius:2px;z-index:7;pointer-events:none;animation:cfall 1.5s cubic-bezier(.2,.6,.4,1) forwards}
+  @keyframes cfall{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rr));opacity:0}}
   .sname{font-size:20px;font-weight:900;letter-spacing:-.3px;min-height:28px}
   .sorigin{font-size:12px;color:var(--muted);min-height:18px}
   .stamp{position:absolute;top:16px;right:16px;transform:scale(3) rotate(20deg);opacity:0;font-size:13px;font-weight:900;letter-spacing:1px;border-radius:12px;padding:8px 12px;z-index:7;
@@ -98,13 +104,14 @@
   .btn.get{background:linear-gradient(100deg,#ffd57a,#ffb35c);color:#231a05}
   .btn.get.got{background:#1b2130;color:var(--gold);border:1px solid rgba(255,213,122,.4)}
   /* lineup mini + timer */
-  .meta-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 10px}
-  .mini-lineup{display:flex;gap:8px}
-  .ms{width:40px;height:40px;border-radius:11px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px}
+  .meta-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 10px}
+  .mini-lineup{display:flex;gap:8px;overflow-x:auto;flex:1;min-width:0;padding:2px;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+  .mini-lineup::-webkit-scrollbar{display:none}
+  .ms{flex:none;width:40px;height:40px;border-radius:11px;background:var(--card);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:19px}
   .ms .q{color:#3a4156;font-weight:900}
   .ms.now{border-color:var(--red);box-shadow:0 0 14px rgba(255,90,90,.15)}
   .ms.done{border-color:rgba(255,213,122,.4)}
-  .seg{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .seg{flex:none;white-space:nowrap;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
   .seg b{color:var(--ink)}
   /* host feed */
   .feed{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;height:210px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
@@ -117,18 +124,29 @@
   .msg.me{flex-direction:row-reverse}
   .msg.me .mbody{background:#243044;border-radius:14px 4px 14px 14px}
   .msg.me .mavatar{background:#243044}
+  .tdots{display:inline-flex;gap:4px;align-items:center;height:14px}
+  .tdots i{width:5px;height:5px;border-radius:50%;background:#5a6377;animation:tblink 1s infinite}
+  .tdots i:nth-child(2){animation-delay:.18s}.tdots i:nth-child(3){animation-delay:.36s}
+  @keyframes tblink{40%{opacity:.25;transform:translateY(-2px)}}
   /* bottom bar */
   .actions{display:flex;gap:8px;margin:12px 0 8px;align-items:center}
   .rx{flex:none;background:var(--card);border:1px solid var(--line);border-radius:999px;font-size:17px;padding:9px 14px;cursor:pointer;position:relative;transition:transform .12s}
   .rx:active{transform:scale(1.25)}
-  .qform{flex:1;display:flex;gap:8px}
+  .qform{flex:1;min-width:0;display:flex;gap:8px}
   .qform input{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:11px 16px;color:var(--ink);font-size:13px;font-family:inherit}
   .qform button{flex:none}
   .float{position:fixed;font-size:22px;pointer-events:none;z-index:80;animation:floatup 1.3s ease-out forwards}
   @keyframes floatup{to{transform:translateY(-130px) scale(1.4);opacity:0}}
+  .chips{display:flex;gap:6px;margin:0 0 8px;flex-wrap:wrap}
+  .chips button{background:transparent;border:1px solid #2a3040;color:var(--muted);border-radius:999px;font-size:12px;font-family:inherit;padding:6px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+  .chips button:active{transform:scale(.95)}
+  .chips button:hover{color:var(--ink);border-color:#3a4156}
+  .rx.snd-on{border-color:rgba(255,213,122,.55);color:var(--gold);box-shadow:0 0 12px rgba(255,213,122,.12)}
+  .sndbtn{display:none;font-size:14px;padding:5px 10px}
+  body.live .sndbtn{display:block}
   .subnote{text-align:center;font-size:11px;color:var(--muted);margin:8px 0 40px}
   footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center;padding:22px 0 36px}
-  @media(prefers-reduced-motion:reduce){.dot,.sicon.hidden-item.breathe{animation:none}}
+  @media(prefers-reduced-motion:reduce){.dot,.sicon.hidden-item.breathe,.cfx,.rcnt.on,.tdots i{animation:none}}
 </style>
 </head>
 <body>
@@ -137,6 +155,7 @@
     <div class="badges">
       <span class="live-badge"><span class="dot"></span>LIVE</span>
       <span class="ai-badge">🤖 AI 호스트 · 사전 제작 방송</span>
+      <button class="rx sndbtn" id="snd" title="옥동이 목소리 켜기/끄기" aria-label="음성 켜기/끄기">🔇</button>
     </div>
   </div></div>
 
@@ -149,8 +168,8 @@
       <p class="wsub">AI 감정사 옥동이 🐵 가 진행하는 발굴 무대.<br>실루엣이 공개되고, 등급 도장이 찍히는 순간을 함께.</p>
       <div class="cd"><div><b id="cd-d">0</b><span>일</span></div><div><b id="cd-h">00</b><span>시간</span></div><div><b id="cd-m">00</b><span>분</span></div><div><b id="cd-s">00</b><span>초</span></div></div>
       <p class="wsub" style="font-size:13px">다음 방송 · <b id="next-when"></b></p>
-      <div class="wline">EP.1 라인업 — 정체는 방송에서 공개</div>
-      <div class="lineup"><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div></div>
+      <div class="wline" id="wline">EP.1 라인업 — 정체는 방송에서 공개</div>
+      <div class="lineup" id="wlineup"><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div><div class="slot"><span class="q">?</span></div></div>
       <button class="btn red" id="demo-btn">▶ 리허설 방송 보기 (데모)</button>
       <div style="margin-top:10px"><a class="btn ghost" href="index.html#signup">🔔 방송 알림 받기</a></div>
       <p class="wnote">🧪 오픈 전 미리보기 — 정식 방송은 스토어 오픈과 함께 시작됩니다</p>
@@ -158,10 +177,11 @@
 
     <!-- 쇼 -->
     <section id="show">
-      <div class="stage">
+      <div class="stage" id="stage">
         <div class="flash" id="flash"></div>
+        <div class="rcnt" id="rcnt"></div>
         <div class="stamp" id="stamp"></div>
-        <div class="epno">EP.1 · 옥동 감정 무대</div>
+        <div class="epno" id="epno">EP.1 · 옥동 감정 무대</div>
         <div class="sicon hidden-item breathe" id="sicon"><span id="sicon-e">🎁</span><span class="qmark" id="qmark">?</span></div>
         <div class="sname" id="sname">･･････</div>
         <div class="sorigin" id="sorigin"></div>
@@ -177,6 +197,12 @@
         <div class="seg" id="seg"></div>
       </div>
       <div class="feed" id="feed"></div>
+      <div class="chips" id="chips">
+        <button type="button" data-q="배송 얼마나 걸려?">📦 배송</button>
+        <button type="button" data-q="왜 골랐어?">🧐 왜 골랐어</button>
+        <button type="button" data-q="스펙 알려줘">📐 스펙</button>
+        <button type="button" data-q="등급 기준이 뭐야?">🏅 등급</button>
+      </div>
       <div class="actions">
         <button class="rx" data-e="🔥">🔥</button>
         <button class="rx" data-e="❤️">❤️</button>
@@ -186,14 +212,14 @@
           <button class="btn ghost" type="submit" style="padding:10px 16px;font-size:13px">전송</button>
         </form>
       </div>
-      <p class="subnote">🤖 옥동이는 AI 호스트입니다 · 답변은 감정 데이터 기반 자동 응답(데모) · 실시간 Claude 응대는 오픈 후</p>
+      <p class="subnote">🤖 옥동이는 AI 호스트입니다 · 답변은 감정 데이터 기반 자동 응답(데모) · 실시간 Claude 응대는 오픈 후 · 🔊 음성은 브라우저 내장 TTS(기기마다 다를 수 있어요)</p>
     </section>
   </main>
 
   <footer>옥동샵 oaktongshop — 고른 것만 보여드립니다. © 2026 oaktongshop. <a href="drop.html" style="color:var(--gold)">⚡ 오늘의 발굴</a> · <a href="terms.html" style="color:var(--gold)">이용약관·법정고지</a></footer>
 
   <script>
-  const EP={"no":1,"items":[{"slug":"tiarto","icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)","origin":"🇺🇸 미국","price":"₩198,900","grade":"S","stats":{"수요":78,"평점":96,"희소":94,"스토리":92},"spec":"그레이드5 티타늄 · 37g · 800종+ 리필심 호환 · 길이 조절","appraisal":"볼펜의 종착지. 세상 거의 모든 리필심이 들어가서, 심 걱정에서 영영 해방됩니다. 미국 EDC 매니아들의 성배인데 국내엔 대행 리셀러 딱 한 곳이 20만원대에 팔죠. 통짜 티타늄이라 가품도 없습니다 — 그래서 S급."},{"slug":"ursack","icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)","origin":"🇺🇸 미국","price":"₩298,900","grade":"S","stats":{"수요":62,"평점":94,"희소":96,"스토리":92},"spec":"UHMWPE 원단 · 약 10.65L · 곰 저항 인증(IGBC) · 215g","appraisal":"방탄조끼에 쓰는 원단으로 만든 자루. 곰도 못 뜯습니다. 종주 하이커에겐 목숨값이라 미국선 필수품인데, 국내엔 리셀러 하나가 48만원에 팝니다. 수요는 좁아도 대안이 없는 물건이라 올렸습니다."},{"slug":"cnoc","icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)","origin":"🇺🇸 미국","price":"₩89,900","grade":"A","stats":{"수요":74,"평점":92,"희소":85,"스토리":78},"spec":"FDA 인증 TPU · 2L · 76g · 28mm 나사산(정수필터 호환)","appraisal":"정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니. 다 쓰면 납작하게 접힙니다. 국내는 12만원대 해외직구뿐이라, 정수 필터와 묶으면 배송비까지 해결되는 짝꿍템으로 골랐습니다."},{"slug":"sawyer","icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)","origin":"🇺🇸 미국","price":"₩92,900","grade":"A","stats":{"수요":82,"평점":92,"희소":78,"스토리":82},"spec":"0.1미크론 중공사막 · 무게 232g · 평생 보증","appraisal":"계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건. 역세척으로 100만 갤런을 거릅니다. 국내는 리셀러가 8만~12만원까지 붙여 파는데, 정발이 약해 우리가 정품·감정서로 파고들 자리가 있었습니다."},{"slug":"fisher","icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)","origin":"🇺🇸 미국","price":"₩50,900","grade":"A","stats":{"수요":84,"평점":94,"희소":80,"스토리":92},"spec":"가압 카트리지 · -45~120℃ · 무중력 필기","appraisal":"NASA가 우주로 가져간 그 볼펜. 거꾸로도, 영하에서도 써집니다. 국내는 병행수입이라 5만~8만원에 가품까지 섞여 팔리죠. 우린 정품만 소싱해 그 아래로 — 스토리가 이미 완성된 물건입니다."},{"slug":"platypus","icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)","origin":"🇺🇸 미국","price":"₩76,900","grade":"A","stats":{"수요":80,"평점":94,"희소":82,"스토리":80},"spec":"중공사막 0.2미크론 · 1L · 69g · 유량 3L/분","appraisal":"소여 다음으로 UL 하이커가 꼽는 정수 필터. 물 흐름이 빠르고 막힘이 적습니다. 국내 시세 7만9천원을 정면으로 언더컷 — 정수 라인을 두 개로 갖추려고 함께 올렸습니다."},{"slug":"sidekick","icon":"👜","name":"사이드 킥 크로스백 (Tom Bihn Side Kick)","origin":"🇺🇸 미국","price":"₩179,900","grade":"A","stats":{"수요":76,"평점":94,"희소":88,"스토리":86},"spec":"420 Spectron 나일론 · 3L · 220g · 미국 시애틀 생산 · 평생 보증","appraisal":"시애틀 자체 공장에서 30년 넘게 가방만 만들어온 컬트 브랜드. 광고 없이 입소문으로만 팔리는데, 한국엔 정발이 없어 구매대행이 18만원 중반에 팝니다. 공식몰 $85짜리를 우리가 정품 그대로, 그 아래 가격으로 — 그래서 통과."},{"slug":"silvershadow","icon":"☂️","name":"초경량 하이킹 우산 (SMD 실버 쉐도우 미니)","origin":"🇺🇸 미국","price":"₩126,900","grade":"A","stats":{"수요":72,"평점":88,"희소":84,"스토리":80},"spec":"193g · UPF 50+ 반사 코팅 · 접이시 25cm · 카본/알루미늄 리브 · EVA 폼 핸들","appraisal":"장거리 하이커들이 뙤약볕 구간에서 배낭에 꽂고 걷는 그 은색 우산. 반사 코팅이 체감온도를 실제로 떨어뜨립니다. 국내엔 쿠팡 구매대행 13만원뿐이라, 공식몰 $50 소싱으로 언더컷이 됩니다. CNOC와 같은 식스문디자인즈 소싱 라인이라 합배송 짝꿍템."},{"slug":"cadence","icon":"🧴","name":"마그네틱 여행 캡슐 스몰+미디엄 (Cadence Capsules)","origin":"🇺🇸 미국","price":"₩94,900","grade":"A","stats":{"수요":85,"평점":90,"희소":82,"스토리":88},"spec":"특허 마그네틱 결합 · 100% 누수 방지 · 재활용 소재 · TSA 기내반입 · 식기세척기 사용 가능","appraisal":"틱톡에서 '여행 파우치의 종결'로 불리는 특허 마그네틱 캡슐. 자석으로 벌집처럼 붙여 다니고, 거꾸로 흔들어도 안 샙니다. 미국 공식몰 $39어치 2종 구성이 국내 구매대행에선 12만원 — 갭이 커서 통과. 화장품이 아니라 '용기'라 통관도 깨끗합니다."},{"slug":"watchroll","icon":"⌚","name":"시계 침낭 (가죽 워치롤 3구)","origin":"🇨🇳 중국","price":"₩39,900","grade":"A","stats":{"수요":88,"평점":92,"희소":70,"스토리":85},"spec":"PU가죽 · 3구 · 탈착식 쿠션 · 여행/보관 겸용","appraisal":"시계 하나를 위한 일인용 침낭. 서랍에 굴러다니던 시계가 여기 눕는 순간 대접받는 물건이 됩니다. 국내엔 7,900원 하드케이스와 13만원 소가죽 사이가 텅 비어 있어서 — 그 빈자리를 골랐습니다."},{"slug":"astronaut","icon":"🧑‍🚀","name":"황동 우주인 (3cm 미니어처)","origin":"🇨🇳 중국","price":"₩19,900","grade":"A","stats":{"수요":72,"평점":90,"희소":88,"스토리":90},"spec":"통황동 주물 · 높이 30mm · 손끝 크기 미니어처 · 세월과 함께 깊어지는 색","appraisal":"엄지 한 마디만 한 우주인입니다 — 크기는 작아도 통황동이라 손끝에 올리면 밀도가 느껴집니다. 모니터 베젤 위, 키보드 옆 빈 자리 하나를 채우는 물건. 황동은 세월이 지나며 색이 깊어지는데, 그게 이 물건의 계획입니다."},{"slug":"irongarden","icon":"🧲","name":"철의 정원 (자석 모래시계)","origin":"🇨🇳 중국","price":"₩27,900","grade":"A","stats":{"수요":75,"평점":94,"희소":90,"스토리":95},"spec":"유리 + 철가루 + 자석 받침 · 약 3분 · 매번 다른 조형 · 만 14세 이상","appraisal":"뒤집을 때마다 철가루가 다른 모양의 가시 정원으로 자랍니다. 같은 장면은 두 번 나오지 않습니다 — 3분짜리 멍때림, 그게 이 물건의 전부고 그거면 충분합니다."},{"slug":"boltaction","icon":"🔩","name":"볼트 액션 펜 (BIGiDESIGN 티타늄)","origin":"🇺🇸 미국","price":"₩205,900","grade":"A","stats":{"수요":62,"평점":88,"희소":78,"스토리":72},"spec":"그레이드5 티타늄 + 황동 볼트 메커니즘 · 26g · 리필 100+종 무개조 호환 · 평생 보증(미국 본사)","appraisal":"리필 100종 이상을 개조 없이 무는 콜렛 구조에 평생 보증 — $100 티타늄 펜 중 드물게 실용 쪽으로 치우친 물건입니다. 한정판 놀음 없이 재고가 꾸준히 도는 스테디셀러라는 점이, 구매대행 상품으로서의 미덕입니다."},{"slug":"mantapro","icon":"😴","name":"100% 암막 수면 안대 (Manta Sleep PRO)","origin":"🇺🇸 미국","price":"₩179,900","grade":"A","stats":{"수요":80,"평점":94,"희소":86,"스토리":88},"spec":"C형 아이컵(눈 압박 0) · 100% 블랙아웃 · 측면 수면 최적화 · 무한 조절 스트랩 · 312g","appraisal":"안대 안쪽의 C형 아이컵이 눈 주변만 감싸서, 눈꺼풀에 닿는 압박이 0입니다 — 옆으로 자도 눌리지 않고 빛은 100% 차단. 공식몰 리뷰 1,828건에 4.7점, 96%가 추천하는 물건인데 국내엔 정발이 없어 리셀러가 18만원대에 팝니다. 우리는 공식몰 정품을 그 아래로 — 그래서 통과."},{"slug":"trtl","icon":"🧣","name":"스카프형 여행 목베개 (Trtl Pillow)","origin":"🇬🇧 영국","price":"₩134,900","grade":"A","stats":{"수요":84,"평점":94,"희소":76,"스토리":86},"spec":"133g 초경량 · 특허 내부 지지 프레임 · 스카프형 착용 · 플리스 소재 · 세탁기 세척 가능","appraisal":"목베개인데 베개처럼 안 생겼습니다. 스카프 안에 숨은 특허 지지대가 목을 옆에서 받쳐, 기내에서 고개가 꺾이지 않게 잡아줍니다. 133g — U형 목베개 3분의 1 무게라 가방에서 자리도 안 차지합니다. 국내는 직구 리셀러가 14만~17만원대에 파는데 정발이 없어, 공식몰 정품을 그 아래로 — 그래서 통과."}],"script":{"intro":["안녕하세요, 옥동샵 수석 감정사 옥동이입니다 🐵","오늘도 전 세계에서 건너온 후보들 중, 감정을 통과한 것들만 무대에 올립니다. 오늘의 라인업은 세 가지 — 정체는 하나씩 공개할게요."],"tease":{"kettle":["첫 번째. 여행 가서 이것 때문에 찜찜했던 분들, 많으실 겁니다…","힌트: 반으로 접힙니다. 그리고 위생템입니다."],"magclip":["두 번째는 아주 평범해 보이는 물건입니다. 그런데 리뷰마다 '하나 더 샀다'가 반복돼요.","힌트: 책상 위의 지옥을 정리합니다. 착— 붙는 손맛."],"spork":["마지막은 '평생템' 소리를 듣는 물건입니다. 무게가 겨우 17g.","힌트: 10년을 써도 그대로인 금속."]},"statLine":"감정 스탯 공개합니다. 편집 기준 네 가지, 하나씩 보시죠.","outro":["오늘 무대는 여기까지. 다음 발굴, 어떤 게 올라올지는 여러분 투표로 정해집니다 🗳️","발굴함에 담아두시면 오픈 때 가장 먼저 알려드릴게요. 저는 다음 방송에서, 더 깐깐하게 감정하고 올게요. 🐵"]}};
+  const EP={"no":1,"items":[{"slug":"tiarto","icon":"🖊️","name":"무한심 티타늄 EDC 펜 (Ti Arto)","origin":"🇺🇸 미국","price":"₩198,900","grade":"S","stats":{"수요":78,"평점":96,"희소":94,"스토리":92},"spec":"그레이드5 티타늄 · 37g · 800종+ 리필심 호환 · 길이 조절","appraisal":"볼펜의 종착지. 세상 거의 모든 리필심이 들어가서, 심 걱정에서 영영 해방됩니다. 미국 EDC 매니아들의 성배인데 국내엔 대행 리셀러 딱 한 곳이 20만원대에 팔죠. 통짜 티타늄이라 가품도 없습니다 — 그래서 S급."},{"slug":"ursack","icon":"🐻","name":"야생동물 방지 식량 보관백 (Ursack Major)","origin":"🇺🇸 미국","price":"₩298,900","grade":"S","stats":{"수요":62,"평점":94,"희소":96,"스토리":92},"spec":"UHMWPE 원단 · 약 10.65L · 곰 저항 인증(IGBC) · 215g","appraisal":"방탄조끼에 쓰는 원단으로 만든 자루. 곰도 못 뜯습니다. 종주 하이커에겐 목숨값이라 미국선 필수품인데, 국내엔 리셀러 하나가 48만원에 팝니다. 수요는 좁아도 대안이 없는 물건이라 올렸습니다."},{"slug":"cnoc","icon":"💧","name":"접이식 2L 물주머니 (CNOC Vecto)","origin":"🇺🇸 미국","price":"₩89,900","grade":"A","stats":{"수요":74,"평점":92,"희소":85,"스토리":78},"spec":"FDA 인증 TPU · 2L · 76g · 28mm 나사산(정수필터 호환)","appraisal":"정수 필터에 그대로 물려 쓰는 UL 하이커 표준 물주머니. 다 쓰면 납작하게 접힙니다. 국내는 12만원대 해외직구뿐이라, 정수 필터와 묶으면 배송비까지 해결되는 짝꿍템으로 골랐습니다."},{"slug":"sawyer","icon":"🏕️","name":"스퀴즈 정수 필터 (Sawyer Squeeze)","origin":"🇺🇸 미국","price":"₩92,900","grade":"A","stats":{"수요":82,"평점":92,"희소":78,"스토리":82},"spec":"0.1미크론 중공사막 · 무게 232g · 평생 보증","appraisal":"계곡물을 그냥 마신다 — 이 한 문장이 전부인 물건. 역세척으로 100만 갤런을 거릅니다. 국내는 리셀러가 8만~12만원까지 붙여 파는데, 정발이 약해 우리가 정품·감정서로 파고들 자리가 있었습니다."},{"slug":"fisher","icon":"🚀","name":"무중력 볼펜 불릿 400 (Fisher Space Pen)","origin":"🇺🇸 미국","price":"₩50,900","grade":"A","stats":{"수요":84,"평점":94,"희소":80,"스토리":92},"spec":"가압 카트리지 · -45~120℃ · 무중력 필기","appraisal":"NASA가 우주로 가져간 그 볼펜. 거꾸로도, 영하에서도 써집니다. 국내는 병행수입이라 5만~8만원에 가품까지 섞여 팔리죠. 우린 정품만 소싱해 그 아래로 — 스토리가 이미 완성된 물건입니다."},{"slug":"platypus","icon":"🚰","name":"초고속 정수 필터 (Platypus QuickDraw)","origin":"🇺🇸 미국","price":"₩76,900","grade":"A","stats":{"수요":80,"평점":94,"희소":82,"스토리":80},"spec":"중공사막 0.2미크론 · 1L · 69g · 유량 3L/분","appraisal":"소여 다음으로 UL 하이커가 꼽는 정수 필터. 물 흐름이 빠르고 막힘이 적습니다. 국내 시세 7만9천원을 정면으로 언더컷 — 정수 라인을 두 개로 갖추려고 함께 올렸습니다."},{"slug":"sidekick","icon":"👜","name":"사이드 킥 크로스백 (Tom Bihn Side Kick)","origin":"🇺🇸 미국","price":"₩179,900","grade":"A","stats":{"수요":76,"평점":94,"희소":88,"스토리":86},"spec":"420 Spectron 나일론 · 3L · 220g · 미국 시애틀 생산 · 평생 보증","appraisal":"시애틀 자체 공장에서 30년 넘게 가방만 만들어온 컬트 브랜드. 광고 없이 입소문으로만 팔리는데, 한국엔 정발이 없어 구매대행이 18만원 중반에 팝니다. 공식몰 $85짜리를 우리가 정품 그대로, 그 아래 가격으로 — 그래서 통과."},{"slug":"silvershadow","icon":"☂️","name":"초경량 하이킹 우산 (SMD 실버 쉐도우 미니)","origin":"🇺🇸 미국","price":"₩126,900","grade":"A","stats":{"수요":72,"평점":88,"희소":84,"스토리":80},"spec":"193g · UPF 50+ 반사 코팅 · 접이시 25cm · 카본/알루미늄 리브 · EVA 폼 핸들","appraisal":"장거리 하이커들이 뙤약볕 구간에서 배낭에 꽂고 걷는 그 은색 우산. 반사 코팅이 체감온도를 실제로 떨어뜨립니다. 국내엔 쿠팡 구매대행 13만원뿐이라, 공식몰 $50 소싱으로 언더컷이 됩니다. CNOC와 같은 식스문디자인즈 소싱 라인이라 합배송 짝꿍템."},{"slug":"cadence","icon":"🧴","name":"마그네틱 여행 캡슐 스몰+미디엄 (Cadence Capsules)","origin":"🇺🇸 미국","price":"₩94,900","grade":"A","stats":{"수요":85,"평점":90,"희소":82,"스토리":88},"spec":"특허 마그네틱 결합 · 100% 누수 방지 · 재활용 소재 · TSA 기내반입 · 식기세척기 사용 가능","appraisal":"틱톡에서 '여행 파우치의 종결'로 불리는 특허 마그네틱 캡슐. 자석으로 벌집처럼 붙여 다니고, 거꾸로 흔들어도 안 샙니다. 미국 공식몰 $39어치 2종 구성이 국내 구매대행에선 12만원 — 갭이 커서 통과. 화장품이 아니라 '용기'라 통관도 깨끗합니다."},{"slug":"watchroll","icon":"⌚","name":"시계 침낭 (가죽 워치롤 3구)","origin":"🇨🇳 중국","price":"₩39,900","grade":"A","stats":{"수요":88,"평점":92,"희소":70,"스토리":85},"spec":"PU가죽 · 3구 · 탈착식 쿠션 · 여행/보관 겸용","appraisal":"시계 하나를 위한 일인용 침낭. 서랍에 굴러다니던 시계가 여기 눕는 순간 대접받는 물건이 됩니다. 국내엔 7,900원 하드케이스와 13만원 소가죽 사이가 텅 비어 있어서 — 그 빈자리를 골랐습니다."},{"slug":"astronaut","icon":"🧑‍🚀","name":"황동 우주인 (3cm 미니어처)","origin":"🇨🇳 중국","price":"₩19,900","grade":"A","stats":{"수요":72,"평점":90,"희소":88,"스토리":90},"spec":"통황동 주물 · 높이 30mm · 손끝 크기 미니어처 · 세월과 함께 깊어지는 색","appraisal":"엄지 한 마디만 한 우주인입니다 — 크기는 작아도 통황동이라 손끝에 올리면 밀도가 느껴집니다. 모니터 베젤 위, 키보드 옆 빈 자리 하나를 채우는 물건. 황동은 세월이 지나며 색이 깊어지는데, 그게 이 물건의 계획입니다."},{"slug":"irongarden","icon":"🧲","name":"철의 정원 (자석 모래시계)","origin":"🇨🇳 중국","price":"₩27,900","grade":"A","stats":{"수요":75,"평점":94,"희소":90,"스토리":95},"spec":"유리 + 철가루 + 자석 받침 · 약 3분 · 매번 다른 조형 · 만 14세 이상","appraisal":"뒤집을 때마다 철가루가 다른 모양의 가시 정원으로 자랍니다. 같은 장면은 두 번 나오지 않습니다 — 3분짜리 멍때림, 그게 이 물건의 전부고 그거면 충분합니다."},{"slug":"boltaction","icon":"🔩","name":"볼트 액션 펜 (BIGiDESIGN 티타늄)","origin":"🇺🇸 미국","price":"₩205,900","grade":"A","stats":{"수요":62,"평점":88,"희소":78,"스토리":72},"spec":"그레이드5 티타늄 + 황동 볼트 메커니즘 · 26g · 리필 100+종 무개조 호환 · 평생 보증(미국 본사)","appraisal":"리필 100종 이상을 개조 없이 무는 콜렛 구조에 평생 보증 — $100 티타늄 펜 중 드물게 실용 쪽으로 치우친 물건입니다. 한정판 놀음 없이 재고가 꾸준히 도는 스테디셀러라는 점이, 구매대행 상품으로서의 미덕입니다."},{"slug":"mantapro","icon":"😴","name":"100% 암막 수면 안대 (Manta Sleep PRO)","origin":"🇺🇸 미국","price":"₩179,900","grade":"A","stats":{"수요":80,"평점":94,"희소":86,"스토리":88},"spec":"C형 아이컵(눈 압박 0) · 100% 블랙아웃 · 측면 수면 최적화 · 무한 조절 스트랩 · 312g","appraisal":"안대 안쪽의 C형 아이컵이 눈 주변만 감싸서, 눈꺼풀에 닿는 압박이 0입니다 — 옆으로 자도 눌리지 않고 빛은 100% 차단. 공식몰 리뷰 1,828건에 4.7점, 96%가 추천하는 물건인데 국내엔 정발이 없어 리셀러가 18만원대에 팝니다. 우리는 공식몰 정품을 그 아래로 — 그래서 통과."},{"slug":"trtl","icon":"🧣","name":"스카프형 여행 목베개 (Trtl Pillow)","origin":"🇬🇧 영국","price":"₩134,900","grade":"A","stats":{"수요":84,"평점":94,"희소":76,"스토리":86},"spec":"133g 초경량 · 특허 내부 지지 프레임 · 스카프형 착용 · 플리스 소재 · 세탁기 세척 가능","appraisal":"목베개인데 베개처럼 안 생겼습니다. 스카프 안에 숨은 특허 지지대가 목을 옆에서 받쳐, 기내에서 고개가 꺾이지 않게 잡아줍니다. 133g — U형 목베개 3분의 1 무게라 가방에서 자리도 안 차지합니다. 국내는 직구 리셀러가 14만~17만원대에 파는데 정발이 없어, 공식몰 정품을 그 아래로 — 그래서 통과."}],"script":{"intro":["안녕하세요, 옥동샵 수석 감정사 옥동이입니다 🐵","오늘도 전 세계에서 건너온 후보들 중, 감정을 통과한 것들만 무대에 올립니다. 오늘의 라인업은 총 15가지 — 정체는 하나씩 공개할게요."],"tease":{"tiarto":["첫 번째 — 매일 손에 쥐는 물건인데, 한번 사면 평생 간다는 소리를 듣습니다.","힌트: 심 걱정이 영영 사라집니다. 통짜 금속이에요."],"ursack":["다음 물건은… 곰과 싸워서 이깁니다. 진짜로요.","힌트: 방탄조끼에 쓰는 원단. 무게는 고작 215g."],"cnoc":["다 쓰면 납작하게 접히는 물건입니다. 배낭 무게에 민감한 분들은 벌써 눈치채셨을지도.","힌트: 2리터. 정수 필터와 짝꿍입니다."],"sawyer":["계곡물을 그냥 마시게 해주는 물건이 있다면, 믿으시겠어요?","힌트: 평생 보증. 100만 갤런을 거릅니다."],"fisher":["이번 물건은 우주에 다녀왔습니다. 정확히는 — NASA가 데려갔죠.","힌트: 거꾸로도, 영하 45도에서도 써집니다."],"platypus":["물 흐름 속도가 자랑인 물건입니다. 1분에 3리터.","힌트: 69g. 아까 그 필터의 라이벌이에요."],"sidekick":["광고 한 번 없이 30년을 버틴 브랜드가 있습니다. 그 집의 3리터짜리.","힌트: 시애틀 자체 공장 생산. 평생 보증."],"silvershadow":["뙤약볕에서 체감온도를 실제로 떨어뜨리는 은색 물건.","힌트: 193g. 배낭에 꽂고 걷습니다."],"cadence":["틱톡에서 '여행 파우치의 종결'이라 불린 물건입니다.","힌트: 자석으로 착— 붙습니다. 거꾸로 흔들어도 안 새요."],"watchroll":["시계 하나를 위한 일인용 침낭이 있다면 어떨까요.","힌트: 서랍 속 시계가 대접받기 시작합니다."],"astronaut":["엄지 한 마디만 한 우주인입니다.","힌트: 통황동. 세월이 지날수록 색이 깊어져요."],"irongarden":["뒤집을 때마다 다른 정원이 자라는 물건.","힌트: 철가루와 자석. 3분짜리 멍때림입니다."],"boltaction":["볼트를 당기는 손맛으로 파는 펜이 있습니다.","힌트: 티타늄과 황동. 리필 100종을 뭅니다."],"mantapro":["눈을 전혀 누르지 않는 100% 암막.","힌트: 옆으로 주무시는 분들이 특히 환호합니다."],"trtl":["마지막 물건 — 목베개인데, 베개처럼 안 생겼습니다.","힌트: 스카프 속에 지지대가 숨어 있어요. 133g."]},"statLine":"감정 스탯 공개합니다. 편집 기준 네 가지, 하나씩 보시죠.","outro":["오늘 무대는 여기까지. 다음 발굴, 어떤 게 올라올지는 여러분 투표로 정해집니다 🗳️","발굴함에 담아두시면 오픈 때 가장 먼저 알려드릴게요. 저는 다음 방송에서, 더 깐깐하게 감정하고 올게요. 🐵"]}};
   const ITEM_DUR=48, INTRO=14, EP_DUR=INTRO+EP.items.length*48+16;
 
   // ── 방송 시각: 매주 토요일 21:00 KST (시계 동기 → 모두 같은 장면)
@@ -210,6 +236,37 @@
   if(Date.now()-prevShow.getTime() < EP_DUR*1000) startAt=prevShow.getTime(); // 지금이 방송 중
 
   document.getElementById('next-when').textContent=show.toLocaleString('ko-KR',{month:'long',day:'numeric',weekday:'short',hour:'2-digit',minute:'2-digit'});
+
+  // 대기실 라인업 — 실제 아이템 수만큼 ? 슬롯 렌더
+  document.getElementById('wline').textContent='EP.'+EP.no+' 라인업 — 총 '+EP.items.length+'가지, 정체는 방송에서 공개';
+  document.getElementById('wlineup').innerHTML=EP.items.map(()=>'<div class="slot"><span class="q">?</span></div>').join('');
+
+  // ── 사운드: 브라우저 TTS + WebAudio 효과음 (기본 꺼짐, 토글)
+  let sndOn=false, koVoice=null, AC=null;
+  function pickVoice(){try{const vs=speechSynthesis.getVoices();
+    koVoice=vs.find(v=>/^ko/i.test(v.lang)&&/Yuna|유나|Google/i.test(v.name))||vs.find(v=>/^ko/i.test(v.lang))||null;}catch(e){}}
+  if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+  function speak(t){if(!sndOn||!('speechSynthesis' in window))return;
+    const clean=t.replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').replace(/[—·]/g,', ').trim();
+    if(!clean)return;
+    const u=new SpeechSynthesisUtterance(clean);u.lang='ko-KR';if(koVoice)u.voice=koVoice;
+    u.rate=1.07;u.pitch=1.15;speechSynthesis.speak(u);}
+  const ac=()=>{if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}return AC};
+  function tone(f0,f1,dur,type,vol,when){const c=ac();if(!c)return;
+    const t0=c.currentTime+(when||0);const o=c.createOscillator(),g=c.createGain();
+    o.type=type||'triangle';o.frequency.setValueAtTime(f0,t0);o.frequency.exponentialRampToValueAtTime(Math.max(f1,1),t0+dur);
+    g.gain.setValueAtTime(0.0001,t0);g.gain.exponentialRampToValueAtTime(vol||.12,t0+.02);g.gain.exponentialRampToValueAtTime(.0001,t0+dur);
+    o.connect(g).connect(c.destination);o.start(t0);o.stop(t0+dur+.05);}
+  function sfx(kind){if(!sndOn)return;
+    if(kind==='reveal'){tone(320,960,.4,'triangle',.14);tone(640,1400,.35,'sine',.08,.08);}
+    else if(kind==='stamp'){tone(150,42,.22,'square',.2);}
+    else if(kind==='tick'){tone(880,860,.07,'sine',.09);}
+    else if(kind==='price'){tone(660,660,.11,'sine',.1);tone(990,990,.16,'sine',.1,.12);}}
+  const sndBtn=document.getElementById('snd');
+  sndBtn.addEventListener('click',()=>{sndOn=!sndOn;
+    sndBtn.textContent=sndOn?'🔊':'🔇';sndBtn.classList.toggle('snd-on',sndOn);
+    if(sndOn){const c=ac();if(c&&c.state==='suspended')c.resume();sfx('price');speak('목소리 켰습니다. 지금부터는 제가 직접 읽어드릴게요.');}
+    else{try{speechSynthesis.cancel()}catch(e){}}});
 
   // 대기실 카운트다운
   const cdt=()=>{const s=Math.max(0,(show.getTime()-Date.now())/1000|0);
@@ -230,6 +287,7 @@
       const tz=EP.script.tease[it.slug]||[];
       T.push({t:base,a:'seg',idx});
       tz.forEach((l,j)=>T.push({t:base+j*7,a:'host',l}));
+      T.push({t:base+11,a:'count',n:3});T.push({t:base+12,a:'count',n:2});T.push({t:base+13,a:'count',n:1});
       T.push({t:base+14,a:'reveal',idx});
       T.push({t:base+17,a:'host',l:EP.script.statLine});
       Object.keys(it.stats).forEach((k,j)=>T.push({t:base+18+j*3,a:'stat',idx,k}));
@@ -248,12 +306,16 @@
   function host(l,instant){const m=document.createElement('div');m.className='msg';
     m.innerHTML='<div class="mavatar"><img src="assets/mascot/oaktong.png" alt="옥동이"></div><div><div class="mname">옥동이 · AI</div><div class="mbody"></div></div>';
     feed.appendChild(m);const b=m.querySelector('.mbody');
-    if(instant){b.textContent=l}else{let i=0;const iv=setInterval(()=>{b.textContent=l.slice(0,++i);feed.scrollTop=feed.scrollHeight;if(i>=l.length)clearInterval(iv)},22)}
+    if(instant){b.textContent=l}
+    else{b.innerHTML='<span class="tdots"><i></i><i></i><i></i></span>';feed.scrollTop=feed.scrollHeight;
+      speak(l);
+      setTimeout(()=>{let i=0;const iv=setInterval(()=>{b.textContent=l.slice(0,++i);feed.scrollTop=feed.scrollHeight;if(i>=l.length)clearInterval(iv)},22)},620);}
     feed.scrollTop=feed.scrollHeight;}
   function me(l){const m=document.createElement('div');m.className='msg me';
     m.innerHTML='<div class="mavatar">🙂</div><div><div class="mname" style="text-align:right">나</div><div class="mbody"></div></div>';
     m.querySelector('.mbody').textContent=l;feed.appendChild(m);feed.scrollTop=feed.scrollHeight;}
   function setSeg(idx,instant){curIdx=idx;revealed=false;const it=EP.items[idx];
+    $('epno').textContent='EP.'+EP.no+' · 옥동 감정 무대 · '+(idx+1)+'/'+EP.items.length;
     $('sicon-e').textContent=it.icon;$('sicon').classList.add('hidden-item','breathe');$('qmark').style.display='flex';
     $('sname').textContent='･･････';$('sorigin').textContent='감정 대기 중';
     $('sstats').innerHTML=Object.entries(it.stats).map(([k,v])=>'<div class="stat" data-k="'+k+'"><span class="sk">'+k+'</span><div class="bar"><i style="--w:'+v+'%"></i></div><b class="sv">'+v+'</b></div>').join('');
@@ -262,6 +324,8 @@
     mini();}
   function reveal(idx,instant){revealed=true;const it=EP.items[idx];
     if(!instant){$('flash').classList.remove('go');void $('flash').offsetWidth;$('flash').classList.add('go');
+      sfx('reveal');setTimeout(()=>sfx('stamp'),420);
+      if(it.grade==='S')confetti();
       if(navigator.vibrate)navigator.vibrate([30,40,30]);}
     $('sicon').classList.remove('hidden-item','breathe');$('qmark').style.display='none';
     $('sname').textContent=it.name;$('sorigin').textContent=it.origin+' · '+it.spec;
@@ -272,10 +336,20 @@
     $('live-get').textContent=b.includes(it.slug)?'✓ 담김':'🎒 발굴함에 담기';
     mini();}
   function statOn(idx,k){const el=document.querySelector('.stat[data-k="'+k+'"]');if(el)el.classList.add('on');}
-  function priceOn(idx){const it=EP.items[idx];$('sprice').textContent=it.price;$('sprice').classList.add('on');$('sctas').classList.add('on');}
+  function priceOn(idx,instant){const it=EP.items[idx];$('sprice').textContent=it.price;$('sprice').classList.add('on');$('sctas').classList.add('on');if(!instant)sfx('price');}
+  function showCount(n){const r=$('rcnt');r.textContent=n;r.classList.remove('on');void r.offsetWidth;r.classList.add('on');sfx('tick');if(navigator.vibrate)navigator.vibrate(10);}
+  function confetti(){const st=$('stage');const colors=['#ffd57a','#ffb35c','#fff3d6','#aeb6ff'];
+    for(let i=0;i<26;i++){const s=document.createElement('span');s.className='cfx';
+      s.style.background=colors[i%colors.length];s.style.left='50%';s.style.top='38%';
+      const ang=Math.random()*Math.PI*2,d=70+Math.random()*150;
+      s.style.setProperty('--dx',(Math.cos(ang)*d)+'px');s.style.setProperty('--dy',(Math.sin(ang)*d*.8+90)+'px');
+      s.style.setProperty('--rr',((Math.random()*540)-270)+'deg');
+      st.appendChild(s);setTimeout(()=>s.remove(),1600);}}
   function mini(){$('mini-lineup').innerHTML=EP.items.map((it,i)=>{
     const done=i<curIdx||(i===curIdx&&revealed);
-    return '<div class="ms'+(i===curIdx?' now':'')+(done?' done':'')+'">'+(done?it.icon:'<span class="q">?</span>')+'</div>'}).join('');}
+    return '<div class="ms'+(i===curIdx?' now':'')+(done?' done':'')+'">'+(done?it.icon:'<span class="q">?</span>')+'</div>'}).join('');
+    const ml=$('mini-lineup'),now=ml.querySelector('.ms.now');
+    if(now)ml.scrollLeft=Math.max(0,now.offsetLeft-ml.clientWidth/2+20);}
 
   // ── 재생 엔진 (시계 동기: elapsed 기준으로 과거 이벤트는 즉시, 미래는 예약)
   let booted=false;
@@ -300,7 +374,8 @@
     else if(ev.a==='seg')setSeg(ev.idx,instant);
     else if(ev.a==='reveal')reveal(ev.idx,instant);
     else if(ev.a==='stat')statOn(ev.idx,ev.k);
-    else if(ev.a==='price')priceOn(ev.idx);
+    else if(ev.a==='price')priceOn(ev.idx,instant);
+    else if(ev.a==='count'&&!instant)showCount(ev.n);
   }
 
   // 리허설(데모): 지금부터 재생
@@ -324,6 +399,11 @@
     host(it.name+' — 발굴함에 담으셨네요. 안목 있으십니다 🐵✨',false);
     if(navigator.vibrate)navigator.vibrate(35);
   });
+
+  // ── 퀵 질문 칩
+  document.querySelectorAll('#chips button').forEach(b=>b.addEventListener('click',()=>{
+    $('qinput').value=b.dataset.q;
+    if($('qform').requestSubmit)$('qform').requestSubmit();else $('qform').dispatchEvent(new Event('submit',{cancelable:true}));}));
 
   // ── Q&A: 감정 데이터 기반 자동 응답(데모) — 못 답하면 저장
   $('qform').addEventListener('submit',e=>{

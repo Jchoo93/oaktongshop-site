@@ -358,5 +358,83 @@
     // 발굴함(가방) 뱃지
     try{const bag=JSON.parse(localStorage.getItem('oaktong_bag')||'[]');if(bag.length){document.getElementById('bagn').textContent=bag.length;document.getElementById('bag').hidden=false}}catch(e){}
   </script>
-</body>
+
+<div id="okc" data-open="0">
+  <button id="okc-fab" aria-label="문의 안내봇 열기" aria-expanded="false"><span id="okc-fab-i">💬</span></button>
+  <section id="okc-panel" role="dialog" aria-label="옥동샵 안내봇" hidden>
+    <header id="okc-head"><span class="okc-av">🐵</span>
+      <span class="okc-t"><b>옥동샵 안내봇</b><small>자동응답 · 24시간</small></span>
+      <button id="okc-x" aria-label="닫기">✕</button></header>
+    <div id="okc-log" aria-live="polite"></div>
+    <div id="okc-chips">
+      <button type="button" data-q="배송 얼마나 걸려요?">🚚 배송</button>
+      <button type="button" data-q="교환 환불 되나요?">↩️ 교환·환불</button>
+      <button type="button" data-q="관세 세금 있나요?">🧾 관세·세금</button>
+      <button type="button" data-q="사람이랑 상담하고 싶어요">🙋 사람 상담</button>
+    </div>
+    <form id="okc-form" autocomplete="off">
+      <input id="okc-in" maxlength="120" placeholder="궁금한 걸 입력하세요 (배송·환불·상품…)" aria-label="문의 입력">
+      <button type="submit" aria-label="보내기">➤</button>
+    </form>
+    <footer id="okc-foot">사람 상담 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a> <a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a> <a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a> <a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a><br><span>평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)</span></footer>
+  </section>
+</div>
+<style>
+  #okc{position:fixed;right:16px;bottom:16px;z-index:2147483000;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif}
+  #okc-fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:24px;background:linear-gradient(145deg,#ffd57a,#e9b54d);color:#0b0d12;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .15s}
+  #okc-fab:hover{transform:scale(1.06)}
+  #okc-panel{position:absolute;right:0;bottom:68px;width:min(92vw,360px);max-height:min(72vh,560px);display:flex;flex-direction:column;background:#0f1219;color:#eef1f6;border:1px solid #262b36;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  #okc-panel[hidden]{display:none}
+  #okc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0b0d12;border-bottom:1px solid #20232c}
+  #okc-head .okc-av{font-size:22px}
+  #okc-head .okc-t{display:flex;flex-direction:column;line-height:1.2;flex:1}
+  #okc-head .okc-t small{color:#8f97a6;font-size:11px}
+  #okc-x{background:none;border:none;color:#8f97a6;font-size:16px;cursor:pointer}
+  #okc-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+  .okc-msg{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5;word-break:break-word}
+  .okc-bot{align-self:flex-start;background:#1b2330;border:1px solid #263041;border-top-left-radius:4px}
+  .okc-me{align-self:flex-end;background:#ffd57a;color:#0b0d12;border-top-right-radius:4px;font-weight:600}
+  .okc-msg a{color:#ffd57a}
+  #okc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+  #okc-chips button{background:#171d27;border:1px solid #2a3341;color:#cfd6e2;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer}
+  #okc-chips button:hover{border-color:#ffd57a;color:#fff}
+  #okc-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #20232c}
+  #okc-in{flex:1;background:#171d27;border:1px solid #2a3341;color:#fff;border-radius:999px;padding:10px 14px;font-size:14px}
+  #okc-form button{width:40px;border:none;border-radius:50%;background:#ffd57a;color:#0b0d12;font-size:15px;cursor:pointer;flex:none}
+  #okc-foot{padding:9px 13px;font-size:11.5px;color:#8f97a6;border-top:1px solid #20232c;line-height:1.6}
+  #okc-foot a{color:#cfd6e2;text-decoration:none;margin-right:6px}
+  @media (prefers-reduced-motion:reduce){#okc-fab{transition:none}}
+</style>
+<script>
+(function(){
+  var root=document.getElementById('okc'),fab=document.getElementById('okc-fab'),panel=document.getElementById('okc-panel'),
+      log=document.getElementById('okc-log'),form=document.getElementById('okc-form'),input=document.getElementById('okc-in'),
+      xb=document.getElementById('okc-x'),fabi=document.getElementById('okc-fab-i'),chips=document.getElementById('okc-chips'),greeted=false;
+  var EMAIL="oaktongshop@naver.com";
+  function add(txt,who){var d=document.createElement('div');d.className='okc-msg '+(who==='me'?'okc-me':'okc-bot');d.innerHTML=txt;log.appendChild(d);log.scrollTop=log.scrollHeight;}
+  function answer(q){
+    var s=(q||'').toLowerCase();
+    if(/배송|언제|도착|기간|얼마나 걸|며칠|발송/.test(s))return '해외구매대행이라 결제 확인 후 <b>평균 7~14영업일</b> 걸려요. 추적 가능한 물류(EMS·DHL·FedEx)로 보내드립니다. 통관을 위해 <b>개인통관고유부호</b>가 꼭 필요해요.';
+    if(/교환|환불|반품|취소|청약|반송/.test(s))return '수령 후 <b>7일 내 청약철회</b> 가능합니다. 단순변심은 반송비 구매자 부담, <b>하자·오배송은 전액 환불·교환</b>이에요. 통관 진행분·주문제작 상품은 예외일 수 있어요.';
+    if(/관세|세금|부가세|관부가|세관/.test(s))return '판매가에 상품가·배송비·대행수수료가 포함돼요. <b>관세·부가세는 통관 시 별도 부과</b>될 수 있고, 개인통관고유부호로 수입신고됩니다.';
+    if(/결제|네이버|페이|카드|스토어/.test(s))return '결제·정산·배송은 <b>네이버 스마트스토어</b>에서 안전하게 진행돼요. 상품 페이지의 구매 버튼으로 이동합니다.';
+    if(/가격|얼마|할인/.test(s))return '상품별 가격은 <a href="drop.html">판매 상품(감정서)</a> 페이지에서 확인하세요. 관부가세·배송 조건도 함께 안내드려요.';
+    if(/재고|오픈|언제 열|입고|품절/.test(s))return '새 발굴·재입고 소식은 SNS와 스마트스토어에서 가장 먼저 알려드려요. 아래 채널을 팔로우해 주세요.';
+    if(/추천|뭐 팔|뭐팔|무슨|상품|아이템|골라/.test(s))return '<a href="drop.html">판매 상품</a>에서 <b>감정 통과한 것만</b> 보여드려요. 다 안 팔고, 고른 것만요 🐵';
+    if(/사람|상담원|전화|통화|문의|연락|고객센터|담당/.test(s))return '사람 상담은 <a href="mailto:'+EMAIL+'">'+EMAIL+'</a> 또는 아래 SNS DM으로 남겨주세요. 운영시간에 확인해 답변드려요.';
+    if(/안녕|하이|반가/.test(s))return '안녕하세요! 옥동샵 안내봇이에요 🐵 배송·교환·상품 뭐든 물어보세요.';
+    return '제가 아직 못 배운 질문이에요. 아래 <b>빠른 버튼</b>을 눌러보거나, 자세한 문의는 <a href="mailto:'+EMAIL+'">'+EMAIL+'</a> 로 주시면 확인해 답변드릴게요.';
+  }
+  function botSay(q){setTimeout(function(){add(answer(q),'bot');},260);}
+  function open(){root.dataset.open='1';panel.hidden=false;fab.setAttribute('aria-expanded','true');fabi.textContent='✕';
+    if(!greeted){greeted=true;add('안녕하세요, 옥동샵 안내봇이에요 🐵<br>배송·교환·상품은 자동으로 답해드리고, 사람 상담은 이메일·SNS로 연결해 드려요.','bot');}
+    setTimeout(function(){input.focus();},50);}
+  function close(){root.dataset.open='0';panel.hidden=true;fab.setAttribute('aria-expanded','false');fabi.textContent='💬';}
+  fab.addEventListener('click',function(){root.dataset.open==='1'?close():open();});
+  xb.addEventListener('click',close);
+  form.addEventListener('submit',function(e){e.preventDefault();var q=input.value.trim();if(!q)return;add(q,'me');input.value='';botSay(q);});
+  chips.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;add(b.dataset.q,'me');botSay(b.dataset.q);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root.dataset.open==='1')close();});
+})();
+</script></body>
 </html>

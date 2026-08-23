@@ -15,9 +15,9 @@
 <meta property="og:image:height" content="670">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://oaktongshop.com/assets/og/og-drop.jpg">
-<meta name="theme-color" content="#0b0d12">
+<meta name="theme-color" content="#191510">
 <style>
-  :root{--bg:#0b0d12;--ink:#f1f3f7;--muted:#969eac;--line:#1e222c;--card:#12151d;--gold:#ffd57a;--purp:#aeb6ff}
+  :root{--bg:#191510;--ink:#f1f3f7;--muted:#a89f8e;--line:#332f28;--card:#221f1a;--gold:#ffd57a;--purp:#aeb6ff}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
@@ -37,7 +37,7 @@
   .corigin{font-size:12px;color:var(--muted)}
   .iconbox{position:relative;display:inline-block;margin:22px 0 4px}
   .cicon{font-size:88px;filter:drop-shadow(0 10px 26px rgba(0,0,0,.55));transition:transform .2s}
-  .cimg{width:min(100%,380px);border-radius:18px;display:block;margin:0 auto;box-shadow:0 14px 34px rgba(0,0,0,.5);border:1px solid #1e222c;transition:transform .2s}
+  .cimg{width:min(100%,380px);border-radius:18px;display:block;margin:0 auto;box-shadow:0 14px 34px rgba(0,0,0,.5);border:1px solid #332f28;transition:transform .2s}
   h1{font-size:clamp(22px,4.6vw,30px);letter-spacing:-.5px;margin-top:4px}
   .cspec{font-size:13px;color:var(--muted);margin:6px 0 20px}
   .stats{display:flex;flex-direction:column;gap:9px;text-align:left;max-width:420px;margin:0 auto 14px}
@@ -87,6 +87,23 @@
   .oi{font-size:30px}.omini b{display:block;font-size:14px}.omini small{color:var(--muted);font-size:12px}
   .demo{display:block;text-align:center;font-size:12px;color:var(--muted);margin-bottom:40px}
   footer{border-top:1px solid var(--line);color:var(--muted);font-size:12px;text-align:center;padding:26px 0 40px}
+  /* 데스크톱: 좁은 단일 컬럼 대신 이미지-좌/정보-우 2단 PDP 레이아웃 */
+  @media(min-width:960px){
+    .wrap{max-width:1040px}
+    .cert{display:grid;grid-template-columns:400px 1fr;column-gap:56px;text-align:left;padding:44px 48px}
+    .chead{grid-column:1}
+    .iconbox{grid-column:1;grid-row:2/8;align-self:start;position:sticky;top:96px;margin:22px 0 0}
+    .cimg{width:100%;max-width:400px}
+    .cicon{font-size:130px}
+    h1,.cspec,.stats,.ctotal,.cwhy,.cprice,.ctas,.gethint,.honest,.ship{grid-column:2}
+    .stats,.cwhy,.honest,.ship{max-width:560px}
+    .ctas{justify-content:flex-start}
+    .pdesc{max-width:none;padding-left:48px;padding-right:48px}
+    .others{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .others h2{grid-column:1/-1}
+    .omini{margin-bottom:0}
+    .omini-all{grid-column:1/-1}
+  }
   @media(prefers-reduced-motion:reduce){.cert::after{animation:none}.bar i{transition:none}.pop.go,.pt,.shake,.bagchip.bump{animation:none}}
 </style>
 <noscript><style>.bar i{width:var(--w)!important}</style></noscript>
@@ -129,7 +146,7 @@
     <section class="others">
       <h2>다른 발굴 보기</h2>
       <a class="omini gS" href="item-tiarto.html"><span class="oi">🖊️</span><span><b>무한심 티타늄 EDC 펜 (Ti Arto)</b><small>S급 · ₩198,900</small></span></a><a class="omini gS" href="item-ursack.html"><span class="oi">🐻</span><span><b>야생동물 방지 식량 보관백 (Ursack Major)</b><small>S급 · ₩298,900</small></span></a><a class="omini gA" href="item-cnoc.html"><span class="oi">💧</span><span><b>접이식 2L 물주머니 (CNOC Vecto)</b><small>A급 · ₩89,900</small></span></a><a class="omini gA" href="item-fisher.html"><span class="oi">🚀</span><span><b>무중력 볼펜 불릿 400 (Fisher Space Pen)</b><small>A급 · ₩50,900</small></span></a><a class="omini gA" href="item-platypus.html"><span class="oi">🚰</span><span><b>초고속 정수 필터 (Platypus QuickDraw)</b><small>A급 · ₩76,900</small></span></a><a class="omini gA" href="item-sidekick.html"><span class="oi">👜</span><span><b>사이드 킥 크로스백 (Tom Bihn Side Kick)</b><small>A급 · ₩179,900</small></span></a><a class="omini gA" href="item-silvershadow.html"><span class="oi">☂️</span><span><b>초경량 하이킹 우산 (SMD 실버 쉐도우 미니)</b><small>A급 · ₩126,900</small></span></a><a class="omini gA" href="item-cadence.html"><span class="oi">🧴</span><span><b>마그네틱 여행 캡슐 스몰+미디엄 (Cadence Capsules)</b><small>A급 · ₩94,900</small></span></a><a class="omini gA" href="item-watchroll.html"><span class="oi">⌚</span><span><b>시계 침낭 (가죽 워치롤 3구)</b><small>A급 · ₩39,900</small></span></a><a class="omini gA" href="item-astronaut.html"><span class="oi">🧑‍🚀</span><span><b>황동 우주인 (3cm 미니어처)</b><small>A급 · ₩19,900</small></span></a><a class="omini gA" href="item-irongarden.html"><span class="oi">🧲</span><span><b>철의 정원 (자석 모래시계)</b><small>A급 · ₩27,900</small></span></a><a class="omini gA" href="item-boltaction.html"><span class="oi">🔩</span><span><b>볼트 액션 펜 (BIGiDESIGN 티타늄)</b><small>A급 · ₩205,900</small></span></a><a class="omini gA" href="item-mantapro.html"><span class="oi">😴</span><span><b>100% 암막 수면 안대 (Manta Sleep PRO)</b><small>A급 · ₩179,900</small></span></a><a class="omini gA" href="item-trtl.html"><span class="oi">🧣</span><span><b>스카프형 여행 목베개 (Trtl Pillow)</b><small>A급 · ₩134,900</small></span></a><a class="omini gA" href="item-ugmonk-analog-daily-focus-kit.html"><span class="oi">🗂️</span><span><b>아날로그 데일리 포커스 키트 (Ugmonk Analog)</b><small>A급 · ₩134,900</small></span></a><a class="omini gA" href="item-cotton-linen-summer-shirt.html"><span class="oi">👕</span><span><b>코튼 린넨 반팔 셔츠 (여름 베이식)</b><small>A급 · ₩39,900</small></span></a><a class="omini gA" href="item-cotton-linen-summer-shorts.html"><span class="oi">🩳</span><span><b>코튼 린넨 반바지 (여름 베이식)</b><small>A급 · ₩34,900</small></span></a><a class="omini gA" href="item-cotton-linen-summer-pants.html"><span class="oi">👖</span><span><b>코튼 린넨 밴딩 롱팬츠 (여름 베이식)</b><small>A급 · ₩39,900</small></span></a>
-      <a class="omini" href="drop.html" style="justify-content:center;color:var(--muted);font-weight:800;font-size:13px">🛍️ 판매 상품 전체 보기</a>
+      <a class="omini omini-all" href="drop.html" style="justify-content:center;color:var(--muted);font-weight:800;font-size:13px">🛍️ 판매 상품 전체 보기</a>
     </section>
     <span class="demo">🧪 오픈 전 미리보기 — 실제 판매는 스토어 오픈과 함께 시작됩니다</span>
   </main>
@@ -182,11 +199,11 @@
 </div>
 <style>
   #okc{position:fixed;right:16px;bottom:16px;z-index:2147483000;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif}
-  #okc-fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:24px;background:linear-gradient(145deg,#ffd57a,#e9b54d);color:#0b0d12;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .15s}
+  #okc-fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:24px;background:linear-gradient(145deg,#ffd57a,#e9b54d);color:#191510;box-shadow:0 8px 24px rgba(0,0,0,.28);transition:transform .15s}
   #okc-fab:hover{transform:scale(1.06)}
   #okc-panel{position:absolute;right:0;bottom:68px;width:min(92vw,360px);max-height:min(72vh,560px);display:flex;flex-direction:column;background:#0f1219;color:#eef1f6;border:1px solid #262b36;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.45)}
   #okc-panel[hidden]{display:none}
-  #okc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0b0d12;border-bottom:1px solid #20232c}
+  #okc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#191510;border-bottom:1px solid #20232c}
   #okc-head .okc-av{font-size:22px}
   #okc-head .okc-t{display:flex;flex-direction:column;line-height:1.2;flex:1}
   #okc-head .okc-t small{color:#8f97a6;font-size:11px}
@@ -194,14 +211,14 @@
   #okc-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
   .okc-msg{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5;word-break:break-word}
   .okc-bot{align-self:flex-start;background:#1b2330;border:1px solid #263041;border-top-left-radius:4px}
-  .okc-me{align-self:flex-end;background:#ffd57a;color:#0b0d12;border-top-right-radius:4px;font-weight:600}
+  .okc-me{align-self:flex-end;background:#ffd57a;color:#191510;border-top-right-radius:4px;font-weight:600}
   .okc-msg a{color:#ffd57a}
   #okc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
   #okc-chips button{background:#171d27;border:1px solid #2a3341;color:#cfd6e2;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer}
   #okc-chips button:hover{border-color:#ffd57a;color:#fff}
   #okc-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #20232c}
   #okc-in{flex:1;background:#171d27;border:1px solid #2a3341;color:#fff;border-radius:999px;padding:10px 14px;font-size:14px}
-  #okc-form button{width:40px;border:none;border-radius:50%;background:#ffd57a;color:#0b0d12;font-size:15px;cursor:pointer;flex:none}
+  #okc-form button{width:40px;border:none;border-radius:50%;background:#ffd57a;color:#191510;font-size:15px;cursor:pointer;flex:none}
   #okc-foot{padding:9px 13px;font-size:11.5px;color:#8f97a6;border-top:1px solid #20232c;line-height:1.6}
   #okc-foot a{color:#cfd6e2;text-decoration:none;margin-right:6px}
   @media (prefers-reduced-motion:reduce){#okc-fab{transition:none}}

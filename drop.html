@@ -106,7 +106,7 @@
       <div class="mbox"><div class="n gold" id="cnt-p">0</div><div class="l">감정 통과</div></div>
       <div class="mbox"><div class="n" id="timer">--:--:--</div><div class="l">다음 발굴까지</div></div>
     </div>
-    <p class="rate">통과율 1.5% — 통과 못 하면, 안 올립니다.</p>
+    <p class="rate">통과율 1.8% — 통과 못 하면, 안 올립니다.</p>
   </header>
 
   <main class="wrap">
@@ -338,6 +338,54 @@
         <p class="cspec">코튼·린넨 혼방 · 밴딩+드로스트링 · 6컬러 솔리드 · 기장 105cm · S~XXXL</p>
         <div class="card-foot"><span class="cprice">₩39,900</span><a class="cta-arrow" href="item-cotton-linen-summer-pants.html" aria-label="감정서 보기">감정서 →</a></div>
       </div>
+    </article><article class="card gA reveal" style="transition-delay:1140ms">
+      <a class="card-media" href="item-wilderdog-harness.html" aria-label="올웨더 하네스 (와일더독 Wilderdog Harness)">
+        <span class="cicon-only">🦺</span>
+        <span class="grade-pill">A</span>
+        <span class="origin-pill">🇺🇸 미국</span>
+      </a>
+      <div class="card-body">
+        <span class="card-score">감정 79점</span>
+        <h3><a href="item-wilderdog-harness.html">올웨더 하네스 (와일더독 Wilderdog Harness)</a></h3>
+        <p class="cspec">메시 원단 · 4사이즈(S~XXL) · 금속 D링 2개 · 반사 스트랩 · 상단 핸들</p>
+        <div class="card-foot"><span class="cprice">₩105,900</span><a class="cta-arrow" href="item-wilderdog-harness.html" aria-label="감정서 보기">감정서 →</a></div>
+      </div>
+    </article><article class="card gA reveal" style="transition-delay:1200ms">
+      <a class="card-media" href="item-wilderdog-backpack.html" aria-label="트레일 백팩 (와일더독 Wilderdog Dog Backpack)">
+        <span class="cicon-only">🎒</span>
+        <span class="grade-pill">A</span>
+        <span class="origin-pill">🇺🇸 미국</span>
+      </a>
+      <div class="card-body">
+        <span class="card-score">감정 80점</span>
+        <h3><a href="item-wilderdog-backpack.html">트레일 백팩 (와일더독 Wilderdog Dog Backpack)</a></h3>
+        <p class="cspec">코튼/폴리 혼방 · 3사이즈(5L/8L/12L) · 새들백 4포켓 · 배변봉투 디스펜서 내장 · 후면 D링</p>
+        <div class="card-foot"><span class="cprice">₩157,900</span><a class="cta-arrow" href="item-wilderdog-backpack.html" aria-label="감정서 보기">감정서 →</a></div>
+      </div>
+    </article><article class="card gA reveal" style="transition-delay:1260ms">
+      <a class="card-media" href="item-wilderdog-blanket.html" aria-label="방수 셰르파 담요 (와일더독 Wilderdog Sherpa Fleece)">
+        <span class="cicon-only">🐶</span>
+        <span class="grade-pill">A</span>
+        <span class="origin-pill">🇺🇸 미국</span>
+      </a>
+      <div class="card-body">
+        <span class="card-score">감정 77점</span>
+        <h3><a href="item-wilderdog-blanket.html">방수 셰르파 담요 (와일더독 Wilderdog Sherpa Fleece)</a></h3>
+        <p class="cspec">양면 셰르파 플리스 + 방수 안감 · 2사이즈(50×40in/60×90in)</p>
+        <div class="card-foot"><span class="cprice">₩189,900</span><a class="cta-arrow" href="item-wilderdog-blanket.html" aria-label="감정서 보기">감정서 →</a></div>
+      </div>
+    </article><article class="card gA reveal" style="transition-delay:1320ms">
+      <a class="card-media" href="item-wilderdog-utilitypack.html" aria-label="산책 유틸리티 팩 (와일더독 Wilderdog Utility Pack)">
+        <span class="cicon-only">🐾</span>
+        <span class="grade-pill">A</span>
+        <span class="origin-pill">🇺🇸 미국</span>
+      </a>
+      <div class="card-body">
+        <span class="card-score">감정 76점</span>
+        <h3><a href="item-wilderdog-utilitypack.html">산책 유틸리티 팩 (와일더독 Wilderdog Utility Pack)</a></h3>
+        <p class="cspec">3구획 힙색 · 폰·지갑·배변봉투·간식 수납 · 조절 스트랩</p>
+        <div class="card-foot"><span class="cprice">₩77,900</span><a class="cta-arrow" href="item-wilderdog-utilitypack.html" aria-label="감정서 보기">감정서 →</a></div>
+      </div>
     </article></section>
 
     <section class="vsec">
@@ -377,7 +425,7 @@
     } else { reveals.forEach(el=>el.classList.add('show')); }
     // count-up
     const up=(el,to,ms)=>{const t0=performance.now();const f=(t)=>{const p=Math.min(1,(t-t0)/ms);el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString();if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
-    up(document.getElementById('cnt-r'),1247,1400); up(document.getElementById('cnt-p'),19,1400);
+    up(document.getElementById('cnt-r'),1247,1400); up(document.getElementById('cnt-p'),23,1400);
     // countdown to midnight (다음 발굴)
     const tEl=document.getElementById('timer');
     const tick=()=>{const n=new Date();const m=new Date(n);m.setHours(24,0,0,0);const s=Math.max(0,(m-n)/1000|0);

@@ -1,153 +1,38 @@
 <!doctype html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="ko"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
-<title>옥동샵 oaktongshop — 떨어지기 전에, 미리</title>
-<meta name="description" content="국내에 잘 없는 생활소모품만 고른 리필 트래커. 사용 시작일을 기록하면 소진 21일 전에 재구매를 알려드립니다.">
-<meta property="og:title" content="옥동샵 oaktongshop — 떨어지기 전에, 미리">
-<meta property="og:description" content="사용 시작일만 기록하면, 끊기기 전에 알려드립니다.">
-<meta property="og:type" content="website">
-<meta name="theme-color" content="#fbfbfd">
+<title>옥동샵 oaktongshop — 곧 만나요</title>
+<meta name="description" content="소모품이 떨어지기 전에, 미리 알려드립니다. 국내에 잘 없는 생활소모품만 고른 리필 트래커, 옥동샵. 곧 오픈합니다.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="옥동샵 oaktongshop — 곧 만나요">
 <style>
-  :root{--bg:#fbfbfd;--surface:#fff;--ink:#1d1d1f;--muted:#86868b;--line:#d2d2d7;--mint:#f5f5f7;--teal:#0071e3;--amber:#ff9500;--red:#ff3b30}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px}
-  .nav{position:sticky;top:0;z-index:50;background:rgba(250,250,249,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav .inner{display:flex;align-items:center;justify-content:space-between;height:52px}
-  .brand{font-weight:600;font-size:15px;letter-spacing:-.2px;color:var(--ink)}.brand small{color:var(--muted);font-weight:600;font-size:11px;margin-left:6px}
-  .navlinks{display:flex;gap:4px;font-size:13.5px;font-weight:700}
-  .navlinks a{padding:8px 12px;font-weight:400;color:var(--muted)}
-  .navlinks a.active,.navlinks a:hover{color:var(--ink)}
-  .hero{padding:56px 0 8px;text-align:center}
-  .greet{font-size:13px;color:var(--muted);font-weight:590;letter-spacing:.3px}
-  .hero h1{font-size:clamp(32px,9vw,48px);font-weight:600;letter-spacing:-1.2px;margin:14px 0 10px;line-height:1.1}
-  .hero p{color:var(--muted);font-size:16px;max-width:420px;margin:0 auto}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
-  .today{margin-top:22px}
-  .today h2{font-size:14px;font-weight:800;color:var(--muted);margin-bottom:12px;letter-spacing:.2px}
-  .empty{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-  .empty p{font-size:14px;color:var(--muted)}
-  .btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;border-radius:999px;padding:12px 22px;font-weight:800;font-size:14.5px;transition:transform .15s}
-  .btn:active{transform:scale(.96)}
-  .btn.primary{background:var(--teal);color:#fff}
-  .btn.ghost{background:var(--mint);color:var(--teal)}
-  .trow{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
-  .trow:first-child{border-top:none}
-  .tico{width:40px;height:40px;border-radius:10px;background:var(--mint);display:flex;align-items:center;justify-content:center;font-size:20px;flex:none;overflow:hidden}
-  .tico img{width:100%;height:100%;object-fit:cover}
-  .tinfo{flex:1;min-width:0}
-  .tinfo b{font-size:14px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .tbar{height:6px;border-radius:99px;background:var(--line);margin-top:6px;overflow:hidden}
-  .tbar i{display:block;height:100%;border-radius:99px;background:var(--teal)}
-  .tbadge{font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px;flex:none;white-space:nowrap}
-  .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
-  .catcard{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 10px;text-align:center}
-  .catcard .ci{font-size:26px}
-  .catcard b{display:block;font-size:13px;margin-top:6px}
-  .why{margin-top:30px}
-  .why h2{font-size:18px;font-weight:900;letter-spacing:-.3px;margin-bottom:6px}
-  .why p{font-size:14px;color:var(--muted);line-height:1.75}
-  .crit{display:flex;flex-direction:column;gap:10px;margin-top:16px}
-  .crit div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:13px 15px;font-size:13.5px}
-  .crit b{color:var(--teal)}
-  .mail{display:flex;gap:8px;margin-top:10px}
-  .mail input{flex:1;min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:12px 16px;color:var(--ink);font-size:13.5px}
-  .mail button{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:12px 18px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;white-space:nowrap}
-  .mail .ok{display:none;color:var(--teal);font-weight:700;margin-top:10px;font-size:13px}
-  footer{margin-top:40px;padding:24px 0 60px;border-top:1px solid var(--line)}
-  .legal{font-size:11.5px;color:var(--muted);line-height:1.8}
-  .legal b{color:var(--ink)}.legal a{color:var(--teal)}
-  .endlinks{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-  .endlinks a{font-size:12.5px;font-weight:700;color:var(--teal);background:var(--mint);border-radius:999px;padding:6px 13px}
-</style>
-</head>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;
+    background:#fbfbfd;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif}
+  .box{position:relative;max-width:540px}
+  .eyebrow{font-size:13px;letter-spacing:4px;color:#86868b;text-transform:uppercase}
+  h1{font-size:clamp(34px,7vw,54px);font-weight:900;margin:16px 0 12px;letter-spacing:-1.2px;line-height:1.12}
+  p.t{font-size:clamp(15px,2.4vw,19px);color:#86868b}
+  .badge{display:inline-block;margin-top:26px;font-size:14px;color:#0071e3;border:1px solid #d2d2d7;background:#f5f5f7;border-radius:999px;padding:8px 18px;font-weight:700}
+  form{display:flex;gap:10px;max-width:420px;margin:30px auto 0}
+  input{flex:1;background:#fff;border:1px solid #d2d2d7;border-radius:999px;padding:14px 20px;color:#1d1d1f;font-size:15px}
+  button{background:#0071e3;color:#fff;border:none;border-radius:999px;padding:14px 22px;font-weight:800;font-size:15px;cursor:pointer}
+  .ok{color:#0071e3;margin-top:14px;font-weight:700;display:none}
+  .sns{margin-top:28px;color:#86868b;font-size:14px}.sns a{color:#3d4a45;text-decoration:none;margin:0 8px}
+</style></head>
 <body>
-  <nav class="nav"><div class="wrap inner">
-    <a class="brand" href="index.html">옥동샵<small>oaktongshop</small></a>
-    <div class="navlinks"><a class="active" href="index.html">오늘</a><a href="shop.html">쇼핑</a><a href="my.html">내 물건</a><a href="about.html">소개</a></div>
-  </div></nav>
-
-  <div class="wrap">
-    <div class="hero">
-      <div class="greet" id="greet">안녕하세요</div>
-      <h1>오늘도 끊기지 않게<br>미리 챙겨드릴게요.</h1>
-      <p>사용 시작일만 기록하면, 소진 21일 전에 재구매 시점을 알려드립니다.</p>
-    </div>
-
-    <section class="today card">
-      <h2>🏠 내 물건 현황</h2>
-      <div id="todayBox"></div>
-    </section>
-
-    <section class="cats">
-      <a class="catcard" href="shop.html#세탁"><span class="ci">🧺</span><b>세탁</b></a>
-      <a class="catcard" href="shop.html#욕실"><span class="ci">🧼</span><b>욕실</b></a>
-      <a class="catcard" href="shop.html#주방"><span class="ci">🍽️</span><b>주방</b></a>
-    </section>
-
-    <section class="why">
-      <h2>왜 옥동샵인가</h2>
-      <p>국내에 잘 없는 생활소모품만 골라, 쓰기 시작한 날부터 소진 시점을 계산해드립니다. 해외구매대행이라 배송에 시간이 걸리는 만큼, 알림은 훨씬 더 일찍 옵니다.</p>
-      <div class="crit"><div><b>국내에 잘 없는 것만</b> — 정식 수입이 없거나 약해서, 굳이 해외에서 가져올 가치가 있는 포맷만 고릅니다.</div><div><b>가벼운 고농축만</b> — 부피·무게가 큰 통 제품은 배송비만 아깝습니다. 시트·정제·파우치처럼 가벼운 포맷만 통과시킵니다.</div><div><b>평점·후기가 받쳐주는 것만</b> — 별점과 리뷰가 신뢰할 만한 상품만 통과시킵니다.</div><div><b>쓰임이 분명한 것만</b> — 하루 몇 번, 며칠 쓰는지까지 확인해야 '재구매 알림'이 정확해집니다.</div></div>
-    </section>
-
-    <section class="today card" style="margin-top:26px" id="last">
-      <h2>🔔 오픈 소식 받기</h2>
-      <form class="mail" onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.querySelector('input').value='';">
-        <input type="email" placeholder="이메일 주소" required>
-        <button type="submit">알림 받기</button>
-      </form>
+  <div class="box">
+    <div class="eyebrow">OAKTONGSHOP · 리필 트래커</div>
+    <h1>떨어지기 전에<br>미리 알려드려요.</h1>
+    <p class="t">국내에 잘 없는 생활소모품만 골라, 쓰기 시작한 날부터 소진 시점을 계산해드립니다.</p>
+    <div class="badge">🚀 오픈 준비 중</div>
+    <form onsubmit="event.preventDefault();this.querySelector('.ok').style.display='block';this.querySelector('input').value='';">
+      <input type="email" placeholder="이메일 — 오픈 소식 가장 먼저 받기" required>
+      <button type="submit">알림 신청</button>
       <div class="ok">✅ 신청 완료! 오픈하면 가장 먼저 알려드릴게요.</div>
-      <div class="endlinks">
-        <a href="shop.html">🛍️ 쇼핑</a><a href="my.html">📦 내 물건</a><a href="about.html">소개</a>
-      </div>
-    </section>
-
-    <footer>
-      <div class="legal">
-        <b>옥동샵</b> (oaktongshop) · 대표 추봉군 · 사업자등록번호 493-07-03611 · 통신판매업 신고 2026-서울영등포-1686<br>
-        서울특별시 영등포구 국회대로54길 37-13, 602호 · 준비중 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a> · 평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)<br>
-        해외구매대행 상품으로 실제 매매계약은 해외 판매처와 체결되며, 통관 시 개인통관고유부호가 필요하고 관세·부가세가 별도 부과될 수 있습니다.<br>
-        <a href="terms.html"><b>이용약관 · 청약철회 · 법정고지</b></a> · © 2026 oaktongshop. · <a href="admin.html" target="_blank" rel="noreferrer" title="관리자 (로컬 전용)">⚙️</a>
-      </div>
-    </footer>
+    </form>
+    <div class="sns">@oaktongshop · <a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">Instagram</a><a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">TikTok</a><a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">YouTube</a></div>
   </div>
-
-  <script>
-  (function(){
-    var PRODUCTS = [{"slug":"sheet-laundry","name":"무포장 고농축 세탁시트 (60매)","icon":"🧺","image":"sheet-laundry.jpg","price":"₩24,900","usageDays":60},{"slug":"wool-nuts","name":"울·니트 전용 소프넛 워시 (500ml)","icon":"🌰","price":"₩19,900","usageDays":90},{"slug":"shampoo-bar","name":"고체 샴푸바 (95g)","icon":"🧼","image":"shampoo-bar.jpg","price":"₩16,900","usageDays":70},{"slug":"handwash-tab","name":"핸드워시 리필 정제 (10정)","icon":"💧","price":"₩14,900","usageDays":50},{"slug":"dish-tab","name":"식기세척기 무포장 정제 (40정)","icon":"🍽️","price":"₩21,900","usageDays":40},{"slug":"kitchen-refill","name":"주방세제 고농축 리필 파우치 (500ml)","icon":"🫧","price":"₩13,900","usageDays":45}];
-    var LEAD = 21, WARN = 10;
-    var h = new Date().getHours();
-    document.getElementById('greet').textContent = (h<12?'좋은 아침이에요':h<18?'좋은 오후예요':'좋은 저녁이에요') + ' 🐵';
-    var box = document.getElementById('todayBox');
-    var log = {};
-    try { log = JSON.parse(localStorage.getItem('oaktong_refill_log')||'{}'); } catch(e){}
-    var entries = Object.keys(log).map(function(slug){
-      var p = PRODUCTS.find(function(x){return x.slug===slug;});
-      if(!p) return null;
-      var started = new Date(log[slug].startedAt);
-      var days = log[slug].days || p.usageDays;
-      var elapsed = Math.floor((Date.now()-started.getTime())/86400000);
-      var remaining = days - elapsed;
-      return { p:p, remaining:remaining, pct:Math.max(0,Math.min(100, elapsed/days*100)) };
-    }).filter(Boolean).sort(function(a,b){return a.remaining-b.remaining;});
-    if(!entries.length){
-      box.innerHTML = '<div class="empty"><p>아직 추적 중인 물건이 없어요. 쇼핑에서 상품을 고르고 상세페이지의 "사용 시작"을 눌러보세요.</p><a class="btn primary" href="shop.html">🛍️ 쇼핑 둘러보기</a></div>';
-      return;
-    }
-    box.innerHTML = entries.slice(0,3).map(function(e){
-      var badge = e.remaining<=WARN ? '<span class="tbadge" style="background:#F8E4E2;color:var(--red)">🔴 '+Math.max(0,e.remaining)+'일 남음</span>'
-        : e.remaining<=LEAD ? '<span class="tbadge" style="background:#FBEBD8;color:var(--amber)">🟡 '+e.remaining+'일 남음 · 지금 주문하면 넉넉해요</span>'
-        : '<span class="tbadge" style="background:var(--mint);color:var(--teal)">🟢 '+e.remaining+'일 남음</span>';
-      var img = e.p.image ? '<img src="assets/products/'+e.p.image+'" alt="">' : e.p.icon;
-      return '<a class="trow" href="item-'+e.p.slug+'.html"><span class="tico">'+img+'</span><span class="tinfo"><b>'+e.p.name+'</b><span class="tbar"><i style="width:'+e.pct+'%"></i></span></span>'+badge+'</a>';
-    }).join('') + (entries.length>3 ? '<a class="btn ghost" style="margin-top:12px;width:100%;text-align:center" href="my.html">전체 '+entries.length+'개 보기 →</a>' : '<a class="btn ghost" style="margin-top:12px;width:100%;text-align:center" href="my.html">내 물건에서 자세히 보기 →</a>');
-  })();
-  </script>
-</body>
-</html>
+</body></html>

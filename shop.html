@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/favicon-180.png">
+<title>쇼핑 — 옥동샵 oaktongshop</title>
+<meta name="description" content="국내에 잘 없는 생활소모품만 고른 카탈로그. 세탁·욕실·주방 카테고리로 둘러보세요.">
+<meta name="theme-color" content="#fbfbfd">
+<style>
+  :root{--bg:#fbfbfd;--surface:#fff;--ink:#1d1d1f;--muted:#86868b;--line:#d2d2d7;--mint:#f5f5f7;--teal:#0071e3}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+  .promobar{background:var(--ink);color:#fff;text-align:center;font-size:12px;font-weight:700;padding:8px 12px}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(250,250,249,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:56px;max-width:1000px;margin:0 auto;padding:0 20px}
+  .navicon{background:none;border:none;font-size:19px;cursor:pointer;color:var(--ink);padding:6px;line-height:1}
+  .navicon-r{display:flex;justify-content:flex-end;gap:4px}
+  .brand{font-weight:800;font-size:17px;color:var(--ink);text-align:center}.brand small{display:none}
+  .catbar{display:flex;gap:0;overflow-x:auto;border-bottom:1px solid var(--line);background:var(--surface)}
+  .catbar a{flex:none;padding:12px 16px;font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+  .catbar a.active,.catbar a:hover{color:var(--ink);box-shadow:inset 0 -2px var(--ink)}
+  header{padding:34px 0 6px}
+  header h1{font-size:clamp(24px,5vw,32px);font-weight:900;letter-spacing:-.6px}
+  header p{color:var(--muted);font-size:14px;margin-top:6px}
+  .demo{display:inline-block;margin-top:10px;font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:999px;padding:4px 12px}
+  .tabs{display:flex;gap:8px;margin:22px 0 4px;flex-wrap:wrap}
+  .tab{font-size:13.5px;font-weight:700;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;font-family:inherit}
+  .tab.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+  /* 모바일: 풀블리드 이미지 카드 — 이미지가 카드 여백 없이 꽉 차고, 담기 버튼이 이미지 위에 겹쳐짐 */
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:32px 20px;padding:24px 0 60px}
+  .card{position:relative;display:flex;flex-direction:column}
+  .cmedia{position:relative;display:block;aspect-ratio:1/1;background:var(--mint);overflow:hidden;border-radius:14px}
+  .cmedia img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+  .card:hover .cmedia img{transform:scale(1.03)}
+  .cicon{font-size:80px;display:flex;align-items:center;justify-content:center;height:100%}
+  .cat-pill{position:absolute;top:12px;left:12px;font-size:11px;font-weight:800;background:#fff;color:var(--teal);border-radius:999px;padding:4px 10px;z-index:2}
+  .ig-overlay{display:none}
+  .quickadd{position:absolute;right:10px;bottom:10px;z-index:3;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:12.5px;font-weight:800;color:var(--ink);cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(31,42,40,.12);transition:background .15s,color .15s}
+  .quickadd:hover{background:var(--ink);color:#fff}
+  .quickadd.added{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .cbody{display:block;padding:12px 2px 0}
+  .cbody b{font-size:14.5px;display:block;line-height:1.35}
+  .cspec{font-size:12px;color:var(--muted);display:block;margin:4px 0 6px}
+  .cprice{display:block;font-weight:800;font-size:15.5px}
+  /* 상품 등록 예정 슬롯 — 실제 카드와 같은 틀(.card/.cmedia/.cbody)을 써서, 소싱되면 그대로 실사진·정보로 교체 가능 */
+  .card.slot{cursor:default}
+  .card.slot:hover{transform:none;box-shadow:none}
+  .slot-media{background:repeating-linear-gradient(135deg,var(--mint),var(--mint) 10px,#eee 10px,#eee 11px)}
+  .slot-media .cicon{font-size:44px;opacity:.4}
+  .slot-name{color:var(--muted)!important;font-weight:600!important}
+  /* 데스크톱(≥900px): 인스타그램 탐색 탭 스타일 모자이크 — 여백 없이 이미지가 꽉 찬 격자, 정보는 호버 오버레이 */
+  @media(min-width:900px){
+    .wrap{max-width:1240px}
+    .cards{grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:3px;padding:28px 0 70px}
+    .card{border:none;border-radius:0;background:none}
+    .card:hover{transform:none;box-shadow:none}
+    .card.big{grid-column:span 2;grid-row:span 2}
+    .cmedia{height:100%;aspect-ratio:auto;border-radius:0}
+    .cicon{font-size:96px}
+    .card.big .cicon{font-size:140px}
+    .cbody{display:none}
+    .ig-overlay{
+      display:flex;flex-direction:column;gap:3px;position:absolute;inset:auto 0 0 0;z-index:2;
+      padding:16px 16px 14px;color:#fff;
+      background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.72) 100%);
+      opacity:0;transform:translateY(6px);transition:opacity .18s,transform .18s;
+    }
+    .card:hover .ig-overlay{opacity:1;transform:translateY(0)}
+    .ig-overlay b{font-size:14px;font-weight:700;line-height:1.3}
+    .card.big .ig-overlay b{font-size:17px}
+    .ig-meta{font-size:11.5px;opacity:.85}
+    .ig-price{font-size:13.5px;font-weight:800}
+  }
+  .why{padding:10px 0 8px;border-top:1px solid var(--line)}
+  .why h2{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:10px}
+  .why p{color:#3d4a45;font-size:14.5px;line-height:1.75;max-width:640px}
+  .crit{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .crit div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13.5px}
+  .crit b{color:var(--teal)}
+  .journal-teaser{padding:36px 0 10px}
+  .journal-teaser h2{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:14px}
+  .jgrid{display:grid;grid-template-columns:1fr;gap:12px}
+  .jcard{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;transition:border-color .2s,transform .2s}
+  .jcard:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .jk{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--teal);text-transform:uppercase}
+  .jcard b{font-size:15px}
+  .jx{font-size:13px;color:var(--muted);line-height:1.6}
+  footer{margin-top:44px;padding:24px 0 60px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);text-align:center}
+  footer a{color:var(--teal)}
+  @media(min-width:620px){.jgrid{grid-template-columns:repeat(2,1fr)}}
+  .empty-shop{text-align:center;padding:70px 20px;margin:24px 0;background:var(--surface);border:1px dashed var(--line);border-radius:20px}
+  .empty-icon{font-size:36px;display:block;margin-bottom:14px}
+  .empty-shop b{font-size:16px;display:block;margin-bottom:8px}
+  .empty-shop p{color:var(--muted);font-size:13.5px;max-width:360px;margin:0 auto}
+</style>
+</head>
+<body>
+  <div class="promobar">🔔 오픈하면 첫 구매 알림 쿠폰 드려요</div>
+  <nav class="nav">
+    <div class="inner">
+      <button class="navicon" aria-label="메뉴" onclick="location.href='index.html'">☰</button>
+      <a class="brand" href="index.html">옥동샵</a>
+      <div class="navicon-r">
+        <button class="navicon" aria-label="검색">🔍</button>
+        <button class="navicon" aria-label="내 물건" onclick="location.href='my.html'">🛍️</button>
+      </div>
+    </div>
+    <div class="catbar"><a href="index.html">오늘</a><a class="active" href="shop.html">쇼핑</a><a href="shop.html#세탁">세탁</a><a href="shop.html#욕실">욕실</a><a href="shop.html#주방">주방</a><a href="my.html">내 물건</a><a href="about.html">소개</a></div>
+  </nav>
+  <div class="wrap">
+    <header>
+      <h1>쇼핑</h1>
+      <p>대형 플랫폼 최저가 경쟁에 묻히지 않은, 국내 도매 공급처의 좋은 생활소모품만 고른 카탈로그.</p>
+      <span class="demo">🔍 국내 도매 공급처 소싱 중 — 검증된 상품부터 순서대로 올라옵니다</span>
+    </header>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-cat="전체">전체</button>
+      <button class="tab" data-cat="세탁">세탁</button><button class="tab" data-cat="욕실">욕실</button><button class="tab" data-cat="주방">주방</button>
+    </div>
+    
+    <div class="empty-shop"><span class="empty-icon">🔍</span><b>지금 국내 도매 공급처를 살펴보고 있어요</b><p>대형 플랫폼에 묻히지 않은 좋은 생활소모품을 고르는 중입니다. 검증되는 대로 아래 자리에 사진과 함께 채워집니다.</p></div>
+    <section class="cards" id="cards">
+      
+      <div class="card slot" data-cat="세탁">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">세탁</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+      <div class="card slot" data-cat="세탁">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">세탁</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+      <div class="card slot" data-cat="욕실">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">욕실</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+      <div class="card slot" data-cat="욕실">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">욕실</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+      <div class="card slot" data-cat="주방">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">주방</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+      <div class="card slot" data-cat="주방">
+        <div class="cmedia slot-media"><span class="cicon">📷</span><span class="cat-pill">주방</span></div>
+        <div class="cbody"><b class="slot-name">상품 등록 예정</b><span class="cspec">사진·가격 소싱 후 채워집니다</span></div>
+      </div>
+    </section>
+
+    <section class="why">
+      <h2>왜 개수보다 검증을 우선할까</h2>
+      <p>다 파는 곳은 많습니다. 저희는 국내 도매 공급처를 하나씩 살펴보면서, 대형 플랫폼 최저가 경쟁에 묻히지 않은 진짜 좋은 것만 고릅니다. 빨리 채우려고 아무거나 올리지 않습니다 — 검증되는 대로 하나씩 늘어납니다.</p>
+      <div class="crit"><div><b>대형 플랫폼에 묻히지 않는 것만</b> — 쿠팡·네이버 최저가 경쟁에 파묻힌 게 아니라, 국내 소규모 제조사·도매처의 진짜 좋은 것만 찾아 고릅니다.</div><div><b>가벼운 고농축만</b> — 부피·무게가 큰 통 제품은 배송비·보관비만 아깝습니다. 시트·정제·파우치처럼 가벼운 포맷을 우선합니다.</div><div><b>평점·후기가 받쳐주는 것만</b> — 별점과 리뷰가 신뢰할 만한 상품만 통과시킵니다.</div><div><b>쓰임이 분명한 것만</b> — 하루 몇 번, 며칠 쓰는지까지 확인해야 '재구매 알림'이 정확해집니다.</div></div>
+    </section>
+
+    <section class="journal-teaser">
+      <h2>디스커버리 — 고른 이유</h2>
+      <div class="jgrid">
+        <a class="jcard" href="journal-why-5-days.html"><span class="jk">리필 트래커 이야기</span><b>왜 '다 떨어지면'이 아니라 '5일 전'일까</b><span class="jx">국내 도매 소싱이라 배송은 1~3일이면 충분합니다. 그래도 다 쓰고 나서 시키면 며칠은 그 물건 없이 살아야 합니다. 그래서 옥동샵의 알림은 조금 더 이릅니다.</span></a><a class="jcard" href="journal-what-we-pick.html"><span class="jk">고른 이유</span><b>세제인데 왜 큐레이션이 필요할까</b><span class="jx">세제는 원래 동네 마트·대형 플랫폼이 다 팝니다. 그런데도 옥동샵이 파는 건, 최저가 경쟁에 묻혀 있는 진짜 좋은 것만 골랐기 때문입니다.</span></a>
+      </div>
+    </section>
+  </div>
+  <footer><div class="wrap">© 2026 oaktongshop · <a href="about.html">소개</a> · <a href="terms.html">이용약관·법정고지</a></div></footer>
+  <script>
+    var tabs = document.getElementById('tabs'), cards = document.querySelectorAll('#cards .card');
+    tabs.addEventListener('click', function(e){
+      var b = e.target.closest('.tab'); if(!b) return;
+      tabs.querySelectorAll('.tab').forEach(function(x){x.classList.toggle('on', x===b)});
+      var cat = b.dataset.cat;
+      cards.forEach(function(c){ c.style.display = (cat==='전체' || c.dataset.cat===cat) ? '' : 'none'; });
+    });
+    var hash = decodeURIComponent(location.hash.replace('#',''));
+    if(hash){ var t = tabs.querySelector('[data-cat="'+hash+'"]'); if(t) t.click(); }
+    // 담기 — 실제 장바구니 아직 없음(스마트스토어에서 결제), 관심 표시만 기기에 저장
+    document.querySelectorAll('.quickadd').forEach(function(btn){
+      var slug = btn.dataset.slug;
+      var bag = [];
+      try { bag = JSON.parse(localStorage.getItem('oaktong_bag')||'[]'); } catch(e){}
+      if(bag.indexOf(slug)>-1){ btn.textContent = '✓ 담음'; btn.classList.add('added'); }
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        try { bag = JSON.parse(localStorage.getItem('oaktong_bag')||'[]'); } catch(e){}
+        if(bag.indexOf(slug)===-1){ bag.push(slug); localStorage.setItem('oaktong_bag', JSON.stringify(bag)); }
+        btn.textContent = '✓ 담음'; btn.classList.add('added');
+      });
+    });
+  </script>
+
+<div id="okc" data-open="0">
+  <button id="okc-fab" aria-label="문의 안내봇 열기" aria-expanded="false"><span id="okc-fab-i">💬</span></button>
+  <section id="okc-panel" role="dialog" aria-label="옥동샵 안내봇" hidden>
+    <header id="okc-head"><span class="okc-av">🐵</span>
+      <span class="okc-t"><b>옥동샵 안내봇</b><small>자동응답 · 24시간</small></span>
+      <button id="okc-x" aria-label="닫기">✕</button></header>
+    <div id="okc-log" aria-live="polite"></div>
+    <div id="okc-chips">
+      <button type="button" data-q="배송 얼마나 걸려요?">🚚 배송</button>
+      <button type="button" data-q="재구매 알림은 어떻게 와요?">🔔 재구매 알림</button>
+      <button type="button" data-q="교환 환불 되나요?">↩️ 교환·환불</button>
+      <button type="button" data-q="사람이랑 상담하고 싶어요">🙋 사람 상담</button>
+    </div>
+    <form id="okc-form" autocomplete="off">
+      <input id="okc-in" maxlength="120" placeholder="궁금한 걸 입력하세요 (배송·환불·상품…)" aria-label="문의 입력">
+      <button type="submit" aria-label="보내기">➤</button>
+    </form>
+    <footer id="okc-foot">사람 상담 · <a href="mailto:oaktongshop@naver.com">oaktongshop@naver.com</a> <a href="https://instagram.com/oaktongshop" target="_blank" rel="noreferrer">📸 Instagram</a> <a href="https://tiktok.com/@oaktongshop" target="_blank" rel="noreferrer">🎵 TikTok</a> <a href="https://youtube.com/@oaktongshop" target="_blank" rel="noreferrer">▶️ YouTube</a><br><span>평일 10:00–17:00 (점심 12:00–13:00, 주말·공휴일 휴무)</span></footer>
+  </section>
+</div>
+<style>
+  #okc{position:fixed;right:16px;bottom:16px;z-index:2147483000;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif}
+  #okc-fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;font-size:24px;background:#0071e3;color:#fff;box-shadow:0 8px 24px rgba(18,107,98,.35);transition:transform .15s}
+  #okc-fab:hover{transform:scale(1.06)}
+  #okc-panel{position:absolute;right:0;bottom:68px;width:min(92vw,360px);max-height:min(72vh,560px);display:flex;flex-direction:column;background:#fff;color:#1d1d1f;border:1px solid #d2d2d7;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(31,42,40,.18)}
+  #okc-panel[hidden]{display:none}
+  #okc-head{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fbfbfd;border-bottom:1px solid #d2d2d7}
+  #okc-head .okc-av{font-size:22px}
+  #okc-head .okc-t{display:flex;flex-direction:column;line-height:1.2;flex:1}
+  #okc-head .okc-t small{color:#86868b;font-size:11px}
+  #okc-x{background:none;border:none;color:#86868b;font-size:16px;cursor:pointer}
+  #okc-log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+  .okc-msg{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.5;word-break:break-word}
+  .okc-bot{align-self:flex-start;background:#F3F7F5;border:1px solid #d2d2d7;border-top-left-radius:4px}
+  .okc-me{align-self:flex-end;background:#0071e3;color:#fff;border-top-right-radius:4px;font-weight:600}
+  .okc-msg a{color:#0071e3}
+  .okc-bot a{color:#0071e3}
+  #okc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 12px 8px}
+  #okc-chips button{background:#F3F7F5;border:1px solid #d2d2d7;color:#3d4a45;border-radius:999px;padding:7px 11px;font-size:12.5px;cursor:pointer}
+  #okc-chips button:hover{border-color:#0071e3;color:#0071e3}
+  #okc-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #d2d2d7}
+  #okc-in{flex:1;background:#F3F7F5;border:1px solid #d2d2d7;color:#1d1d1f;border-radius:999px;padding:10px 14px;font-size:14px}
+  #okc-form button{width:40px;border:none;border-radius:50%;background:#0071e3;color:#fff;font-size:15px;cursor:pointer;flex:none}
+  #okc-foot{padding:9px 13px;font-size:11.5px;color:#86868b;border-top:1px solid #d2d2d7;line-height:1.6}
+  #okc-foot a{color:#3d4a45;text-decoration:none;margin-right:6px}
+  @media (prefers-reduced-motion:reduce){#okc-fab{transition:none}}
+</style>
+<script>
+(function(){
+  var root=document.getElementById('okc'),fab=document.getElementById('okc-fab'),panel=document.getElementById('okc-panel'),
+      log=document.getElementById('okc-log'),form=document.getElementById('okc-form'),input=document.getElementById('okc-in'),
+      xb=document.getElementById('okc-x'),fabi=document.getElementById('okc-fab-i'),chips=document.getElementById('okc-chips'),greeted=false;
+  var EMAIL="oaktongshop@naver.com";
+  function add(txt,who){var d=document.createElement('div');d.className='okc-msg '+(who==='me'?'okc-me':'okc-bot');d.innerHTML=txt;log.appendChild(d);log.scrollTop=log.scrollHeight;}
+  function answer(q){
+    var s=(q||'').toLowerCase();
+    if(/배송|언제|도착|기간|얼마나 걸|며칠|발송/.test(s))return '국내 도매 소싱이라 결제 확인 후 <b>1~3영업일</b>이면 발송돼요. 그래서 <b>소진 예정일 5일 전</b>에 재구매 알림을 드려요.';
+    if(/재구매|알림|추적|소진|내 ?물건/.test(s))return '상품 상세에서 <b>사용 시작</b>을 누르면 남은 사용기간을 계산해서 <a href="my.html">내 물건</a>에서 진행률로 보여드려요. 소진 5일 전엔 노랑, 2일 전엔 빨강 배지로 알려드립니다.';
+    if(/교환|환불|반품|취소|청약|반송/.test(s))return '수령 후 <b>7일 내 청약철회</b> 가능합니다. 단순변심은 반송비 구매자 부담, <b>하자·오배송은 전액 환불·교환</b>이에요.';
+    if(/결제|네이버|페이|카드|스토어/.test(s))return '결제·정산·배송은 <b>네이버 스마트스토어</b>에서 안전하게 진행돼요. 상품 페이지의 구매 버튼으로 이동합니다.';
+    if(/재고|오픈|언제 열|입고|품절/.test(s))return '새 발굴·재입고 소식은 SNS와 스마트스토어에서 가장 먼저 알려드려요. 아래 채널을 팔로우해 주세요.';
+    if(/추천|뭐 팔|뭐팔|무슨|상품|아이템|골라/.test(s))return '<a href="shop.html">쇼핑</a>에서 세탁·욕실·주방 소모품을 <b>카테고리별</b>로 보여드려요. 다 안 팔고, 고른 것만요 🐵';
+    if(/사람|상담원|전화|통화|문의|연락|고객센터|담당/.test(s))return '사람 상담은 <a href="mailto:'+EMAIL+'">'+EMAIL+'</a> 또는 아래 SNS DM으로 남겨주세요. 운영시간에 확인해 답변드려요.';
+    if(/안녕|하이|반가/.test(s))return '안녕하세요! 옥동샵 안내봇이에요 🐵 배송·재구매 알림·상품 뭐든 물어보세요.';
+    return '제가 아직 못 배운 질문이에요. 아래 <b>빠른 버튼</b>을 눌러보거나, 자세한 문의는 <a href="mailto:'+EMAIL+'">'+EMAIL+'</a> 로 주시면 확인해 답변드릴게요.';
+  }
+  function botSay(q){setTimeout(function(){add(answer(q),'bot');},260);}
+  function open(){root.dataset.open='1';panel.hidden=false;fab.setAttribute('aria-expanded','true');fabi.textContent='✕';
+    if(!greeted){greeted=true;add('안녕하세요, 옥동샵 안내봇이에요 🐵<br>배송·재구매 알림·상품은 자동으로 답해드리고, 사람 상담은 이메일·SNS로 연결해 드려요.','bot');}
+    setTimeout(function(){input.focus();},50);}
+  function close(){root.dataset.open='0';panel.hidden=true;fab.setAttribute('aria-expanded','false');fabi.textContent='💬';}
+  fab.addEventListener('click',function(){root.dataset.open==='1'?close():open();});
+  xb.addEventListener('click',close);
+  form.addEventListener('submit',function(e){e.preventDefault();var q=input.value.trim();if(!q)return;add(q,'me');input.value='';botSay(q);});
+  chips.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;add(b.dataset.q,'me');botSay(b.dataset.q);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&root.dataset.open==='1')close();});
+})();
+</script></body>
+</html>
